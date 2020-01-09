@@ -17,6 +17,7 @@ public class CORSConfiguration {
             "localhost",
             "172.19.144.143",
             "172.19.144.143:8000"
+
     };
 
     @Bean

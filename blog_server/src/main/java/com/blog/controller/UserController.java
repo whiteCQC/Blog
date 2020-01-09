@@ -6,6 +6,7 @@ import com.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -17,13 +18,13 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/register")
-    public Result register(){
-        User user= new com.blog.model.User();
-        user.setUname("aaa");
-        user.setPassword("123456");
-        user.setEmail("dxy@12345.com");
-        user.setBirth(new Date());
-        user.setGender("M");
+    public Result register(@RequestBody User user){
+//        User user= new com.blog.model.User();
+//        user.setUname("aaa");
+//        user.setPassword("123456");
+//        user.setEmail("dxy@12345.com");
+//        user.setBirth(new Date());
+//        user.setGender("M");
         if(userService.createUser(user))
         {
             return Result.success();
@@ -47,7 +48,7 @@ public class UserController {
         {
             if(user.getPassword().equals(password))
             {
-                HashMap<String , Object> map = new HashMap<>();
+                HashMap < String, Object > map = new HashMap<>();
                 map.put("uid", user.getUid());
                 map.put("uname",user.getUname());
                 return Result.success(map);

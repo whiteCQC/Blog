@@ -42,4 +42,11 @@ public class ArticleServiceImpl implements ArticleService {
     public void updateViewNum(Integer aid) {
         articleMapper.updateViewNum(aid);
     }
+
+    @Override
+    //后面要分页
+    public List<Article> getArticleByKeyword(String keyword) {
+        List<Article> list = articleMapper.selectByKeyword(keyword);
+        return list;
+    }
 }

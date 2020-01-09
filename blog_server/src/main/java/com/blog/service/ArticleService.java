@@ -13,6 +13,7 @@ public interface ArticleService {
     void updateArticle(Article article);
     void deleteArticle(Integer aid);
     void updateViewNum(Integer aid);
+    List<Article> getArticleByKeyword (String keyword);
 
 
 
