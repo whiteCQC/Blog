@@ -1,8 +1,11 @@
 package com.blog.service;
 
-import com.blog.model.UserInfo;
+import com.blog.mapper.UserMapper;
+import com.blog.model.User;
 
-public interface UserService {
+public interface UserService  {
 
-    UserInfo getUserById(int id);
+    Boolean createUser(User user);
+    User getUserById(Integer uid);
+    User getUserByEmail(String email);
 }
