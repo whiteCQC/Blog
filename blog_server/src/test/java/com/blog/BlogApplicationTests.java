@@ -4,6 +4,7 @@ import com.blog.mapper.ArticleMapper;
 import com.blog.mapper.UserMapper;
 import com.blog.model.Article;
 import com.blog.model.User;
+import com.blog.service.ArticleService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +19,8 @@ class BlogApplicationTests {
     UserMapper userMapper;
     @Autowired
     ArticleMapper articleMapper;
+    @Autowired
+    ArticleService articleService;
 
     @Test
     void createUser() {
@@ -28,12 +31,13 @@ class BlogApplicationTests {
 //        user.setBirth(new Date());
 //        user.setGender("M");
 //        userMapper.insert(user);
-        User u1 = userMapper.selectByEmail("1234@dxy.com");
-        List<Article> list = articleMapper.selectByUid(1);
+//        User u1 = userMapper.selectByEmail("1234@dxy.com");
+        List<Article> list = articleMapper.selectByKeyword("测试");
         for (Article a:list) {
             System.out.println(a.getArticleTitle());
         }
-        System.out.println(u1.getPassword());
+          articleMapper.updateViewNum(1);
+          articleService.updateViewNum(1);
     }
 
 }

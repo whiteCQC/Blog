@@ -8,4 +8,5 @@ public interface UserService  {
     Boolean createUser(User user);
     User getUserById(Integer uid);
     User getUserByEmail(String email);
+    void updateUser(User user);
 }

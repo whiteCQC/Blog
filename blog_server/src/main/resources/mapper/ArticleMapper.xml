@@ -41,6 +41,14 @@
     from article
     where uid = #{uid}
   </select>
+  <select id="selectByKeyword" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    where article_title like CONCAT ("%",#{keyword},"%") or article_content like CONCAT ("%",#{keyword},"%")
+  </select>
   <insert id="insert" parameterType="com.blog.model.Article">
     insert into myblog.article (aid, uid, article_title,
       date, type, mode, 
@@ -51,6 +59,11 @@
       #{viewNum,jdbcType=INTEGER}, #{spColId,jdbcType=INTEGER}, #{articleContent,jdbcType=LONGVARCHAR}
       )
   </insert>
+  <update id="updateViewNum" parameterType="java.lang.Integer">
+    update article
+    set view_num = view_num + 1
+    where aid = #{aid}
+  </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.blog.model.Article">
     update myblog.article
     set uid = #{uid,jdbcType=INTEGER},

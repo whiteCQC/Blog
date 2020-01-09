@@ -15,6 +15,7 @@ import java.util.HashMap;
 public class UserController {
     @Autowired
     UserService userService;
+
     @GetMapping("/register")
     public Result register(){
         User user= new com.blog.model.User();

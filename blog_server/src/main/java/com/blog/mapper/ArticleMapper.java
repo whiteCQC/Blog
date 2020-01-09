@@ -16,7 +16,11 @@ public interface ArticleMapper {
 
     List<Article> selectByUid(Integer uid);
 
+    int updateViewNum(Integer aid);
+
     int updateByPrimaryKeyWithBLOBs(Article record);
 
     int updateByPrimaryKey(Article record);
+
+    List<Article> selectByKeyword(String keyword);
 }
