@@ -6,11 +6,7 @@ spring:
     username: root
     password: dxy123
     driver-class-name: com.mysql.jdbc.Driver
-    druid:
-      initial-size: 1
-      min-idle: 1
-      max-active: 20
-      test-on-borrow: true
+
 
 mybatis:
   type-aliases-package: com.blog.model
