@@ -19,6 +19,7 @@ public class ArticleController {
     @PostMapping("/article")
     public Result createArticle(@RequestBody Article article)
     {
+
         article.setDate(new Date());
         articleService.createArticle(article);
         return Result.success(article);
