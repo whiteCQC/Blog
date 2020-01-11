@@ -3,6 +3,8 @@ package com.blog.service.impl;
 import com.blog.mapper.ArticleMapper;
 import com.blog.model.Article;
 import com.blog.service.ArticleService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ import java.util.List;
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     ArticleMapper articleMapper;
+
     @Override
     public void createArticle(Article article) {
         articleMapper.insert(article);
@@ -22,11 +25,6 @@ public class ArticleServiceImpl implements ArticleService {
         return article;
     }
 
-    @Override
-    public List<Article> getArticleByUser(Integer uid) {
-        List<Article> list = articleMapper.selectByUid(uid);
-        return list;
-    }
 
     @Override
     public void updateArticle(Article article) {
@@ -44,9 +42,19 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    //后面要分页
-    public List<Article> getArticleByKeyword(String keyword) {
-        List<Article> list = articleMapper.selectByKeyword(keyword);
+    public List<Article> getArticleByUser(Integer uid, int pageNum) {
+        PageHelper.startPage(pageNum, 1);
+        PageInfo<Article> pageInfo = new PageInfo<>(articleMapper.selectByUid(uid));
+        List<Article> list = pageInfo.getList();
+        return list;
+    }
+
+    @Override
+    public List<Article> getArticleByKeyword(String keyword, int pageNum) {
+        PageHelper.startPage(pageNum, 1);
+        PageInfo<Article> pageInfo = new PageInfo<>(articleMapper.selectByKeyword(keyword));
+        List<Article> list = pageInfo.getList();
         return list;
     }
 }
+
