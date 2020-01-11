@@ -1,7 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import {Provider} from 'react-redux';
+import store from './store/store';
+import IndexHome from "./component/home/body";
+import Login from "./component/user/login/login";
+import Todo from "./component/user/login/result";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={store}>
+        <IndexHome />
+        <Login />
+        <Todo />
+    </Provider>
+    , document.getElementById('root'));
