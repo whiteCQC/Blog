@@ -38,6 +38,8 @@ class BlogApplicationTests {
         }
           articleMapper.updateViewNum(1);
           articleService.updateViewNum(1);
+
+        System.out.println("--------------");
     }
 
 }

@@ -19,7 +19,7 @@ public class TestController {
         return Result.success(new User());
     }
 
-    @PostMapping("/login")
+    @PostMapping("/loginTest")
     public Result GetsTest(@RequestBody User user){
         System.out.println(user.getUname());
         User u = new User();
