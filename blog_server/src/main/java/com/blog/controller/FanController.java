@@ -1,7 +1,7 @@
 package com.blog.controller;
 
 import com.blog.bean.Result;
-import com.blog.model.UserInfo;
+//import com.blog.model.UserInfo;
 import com.blog.vo.Fan;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
