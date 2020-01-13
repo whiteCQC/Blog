@@ -27,12 +27,30 @@
                 targetPackage="com.blog.mapper"
                 targetProject="src/main/java"
                 type="XMLMAPPER"/>
-        <table catalog="myblog" tableName="%"
+        <table  tableName="follower"
         enableCountByExample="false"
         enableDeleteByExample="false"
         enableSelectByExample="false"
         enableUpdateByExample="false"
         selectByExampleQueryId="false"
+        >
+
+        </table>
+        <table  tableName="marked"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"
+               selectByExampleQueryId="false"
+        >
+
+        </table>
+        <table  tableName="marked_article"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"
+               selectByExampleQueryId="false"
         >
 
         </table>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.mapper.FollowerMapper">
+  <resultMap id="BaseResultMap" type="com.blog.model.FollowerKey">
+    <id column="uid" jdbcType="INTEGER" property="uid" />
+    <id column="follower_id" jdbcType="INTEGER" property="followerId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.blog.model.FollowerKey">
+    delete from follower
+    where uid = #{uid,jdbcType=INTEGER}
+      and follower_id = #{followerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.blog.model.FollowerKey">
+    insert into follower (uid, follower_id)
+    values (#{uid,jdbcType=INTEGER}, #{followerId,jdbcType=INTEGER})
+  </insert>
+</mapper>
