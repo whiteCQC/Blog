@@ -1,6 +1,6 @@
 import Axios from "../../axios/axios";
 import {openNotificationWithIcon} from '../../component/notification/index';
-//import {logger} from "redux-logger/src";
+import qs from 'qs'
 
 const Login = (data) =>({type: "LOGIN",data:data});
 
@@ -13,13 +13,13 @@ export const ToLogin = (data) => {
 }
 
 function UserLogin(data,dispatch) {
-    console.log(data)
-    const user = JSON.parse(data);
-    console.log(user.userid)
-    Axios.post("/login",{
-            userid:user.userid,
-            name:user.name
-    })
+    const user= JSON.parse(data)
+    //let user = qs.stringify()
+    console.log(user)
+    Axios.get('/loginTest',
+        {params:user
+        }
+    )
         .then(({data}) => {
             console.log("here1:",data.detail)
             dispatch(Login(data.detail));

@@ -8,16 +8,16 @@ class IndexHome extends Component{
     constructor (props) {
         super(props);
         this.state = {
-            userid:"",
-            name:""
+            uid:"",
+            uname:""
         }
     }
     componentDidMount (){
         Axios.get("/user").then(({data}) => {
             if(data.code === 200){
                 this.setState({
-                    userid: data.detail.userid,
-                    name: data.detail.name
+                    uid: data.detail.uid,
+                    uname: data.detail.uname
                 });
             }else{
                 {openNotificationWithIcon("error","Error",data.description)}
@@ -29,7 +29,7 @@ class IndexHome extends Component{
     render(){
         return(
             <div>
-                {this.state.name}
+                {this.state.uname}
             </div>
         )
     }

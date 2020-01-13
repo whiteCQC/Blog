@@ -1,18 +1,12 @@
 import {connect} from "react-redux";
 import React from "react";
-import Login from "./login"
 
-const Todo = ( {text}) => (
-    <li>
-        {text}
-    </li>
-)
 
 const TodoList = ({users}) => (
     <ul>
         {
             users.map((user,index) =>
-                <li key={index}>{user.user.name}</li>
+                <li key={index}>{user.user.uname}</li>
             )
         }
     </ul>

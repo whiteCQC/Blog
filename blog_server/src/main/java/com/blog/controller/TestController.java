@@ -2,10 +2,7 @@ package com.blog.controller;
 
 import com.blog.bean.Result;
 import com.blog.model.User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 前端测试Controller，不用管
@@ -16,12 +13,16 @@ public class TestController {
 
     @GetMapping("/user")
     public Result Start(){
-        return Result.success(new User());
+        User u=new User();
+        u.setUname("666a");
+        u.setUid(41);
+        return Result.success(u);
     }
 
-    @PostMapping("/loginTest")
-    public Result GetsTest(@RequestBody User user){
-        System.out.println(user.getUname());
+    @GetMapping("/loginTest")
+    public Result GetsTest(@RequestParam(value = "uid")int uid,@RequestParam(value="uname")String uname){
+        System.out.println(uname);
+
         User u = new User();
         u.setUid(12);
         u.setUname("aaa");
@@ -29,7 +30,11 @@ public class TestController {
     }
 
     @PostMapping("/send")
-    public void Send(@RequestBody User user){
+    public Result Send(@RequestBody User user){
         System.out.println(user.getUname());
+        User u = new User();
+        u.setUid(12);
+        u.setUname("aaa");
+        return Result.success(u);
     }
 }

@@ -17,9 +17,14 @@ import java.util.HashMap;
 @RestController
 public class UserController {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
-    @GetMapping("/register")
+    /**
+     *
+     * @param user 包含user的{注册邮箱email，用户名name，密码password}
+     * @return 成功则返回新生成的user信息，要包括{用户ID，用户名}以及token信息（参考tell项目），否则返回错误的描述description
+     */
+    @PostMapping("/register")
     public Result register(@RequestBody User user){
 //        User user= new com.blog.model.User();
 //        user.setUname("aaa");
@@ -38,19 +43,22 @@ public class UserController {
 
     }
 
+    /**
+     *
+     * @param userInfo  登录的信息，包括登录邮箱以及密码
+     * @return  返回相应结果，成功则返回包括{用户名，用户ID},以及token信息
+     */
     @PostMapping("/login")
-    public Result userLogin(HttpServletRequest request)
+    public Result userLogin(@RequestBody User userInfo)
     {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        com.blog.model.User user = userService.getUserByEmail(email);
+        User user = userService.getUserByEmail(userInfo.getEmail());
         if(user == null)
         {
             return Result.error("用户不存在");
         }
         else
         {
-            if(user.getPassword().equals(password))
+            if(user.getPassword().equals(userInfo.getEmail()))
             {
                 HashMap < String, Object > map = new HashMap<>();
                 map.put("uid", user.getUid());
@@ -63,4 +71,5 @@ public class UserController {
             }
         }
     }
+
 }

@@ -3,17 +3,14 @@ package com.blog.controller;
 import com.blog.bean.Result;
 import com.blog.model.User;
 import com.blog.vo.Fan;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class FanController {
 
     /**
-     *
-     * @return 关注博主
+     * 关注博主,传入{用户ID和被关注博主的ID}
+     * @return 成功与否
      */
     @PostMapping("/FanAdd")
     public Result FanFollow(@RequestBody Fan fan){
@@ -22,9 +19,9 @@ public class FanController {
     }
 
     /**
-     *
+     * 取消关注,传入{用户ID和被关注博主的ID}
      * @param fan
-     * @return 取消关注
+     * @return 成功与否
      */
     @PostMapping("/FanCancel")
     public Result CancelFollow(@RequestBody Fan fan){
@@ -35,10 +32,10 @@ public class FanController {
 
     /**
      *
-     * @return 对应用户的粉丝基本信息
+     * @return 对应用户的所拥有的粉丝基本信息{每个粉丝的ID，用户名}，list对应key：fans
      */
-    @PostMapping("/viewFans")
-    public Result ViewFans(@RequestParam int userId){
+    @GetMapping("/viewFans")
+    public Result ViewFans(@RequestParam(value = "uid") int userId){
         //TODO
         return null;
     }
