@@ -1,6 +1,7 @@
 package com.blog.service.impl;
 
 import com.blog.mapper.MarkedMapper;
+import com.blog.model.Article;
 import com.blog.model.Marked;
 import com.blog.service.MarkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,10 @@ public class MarkServiceImpl implements MarkService {
     @Override
     public void addMarked(Marked marked) {
         markedMapper.insert(marked);
+    }
+
+    @Override
+    public List<Article> getMarkedArticles(Integer uid, Integer markId) {
+        return markedMapper.getMarkedArticles(uid, markId).getArticleList();
     }
 }

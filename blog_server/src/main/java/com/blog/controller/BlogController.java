@@ -60,8 +60,7 @@ public class BlogController {
      */
     @GetMapping("/blog/personal/marked/article")
     public Result viewMarkedArticle(@RequestParam(value = "uid")int uid,@RequestParam("markid")int markid){
-        //TODO
-        return null;
+        return Result.success(markService.getMarkedArticles(uid, markid));
     }
 
     /**
@@ -71,8 +70,8 @@ public class BlogController {
      */
     @PostMapping("/blog/personal/marked/addMarked")
     public Result AddMarked(@RequestBody Marked marked){
-        //TODO
-        return null;
+        markService.addMarked(marked);
+        return Result.success();
     }
 
     /**

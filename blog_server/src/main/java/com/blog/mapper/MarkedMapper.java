@@ -14,4 +14,6 @@ public interface MarkedMapper {
 
     List <Marked> selectByUid(Integer uid);
 
+    Marked getMarkedArticles(Integer uid, Integer markId);
+
 }
