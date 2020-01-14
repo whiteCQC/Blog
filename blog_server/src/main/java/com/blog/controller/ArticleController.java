@@ -3,6 +3,7 @@ package com.blog.controller;
 import com.blog.bean.Result;
 import com.blog.model.Article;
 import com.blog.service.ArticleService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,6 @@ public class ArticleController {
     @PostMapping("/article/create")
     public Result createArticle(@RequestBody Article article)
     {
-
         article.setDate(new Date());
         articleService.createArticle(article);
         return Result.success(article);
@@ -34,16 +34,18 @@ public class ArticleController {
      * 搜索文章
      * @param keyword
      * @param pageNum
-     * @return 返回除了文章具体内容的文章list信息
+     * @return 返回除了文章具体内容的文章list信息 list的总页数
      */
     @GetMapping("/article/search")
     public Result searchArticle(@RequestParam(value = "keyword") String keyword
             ,@RequestParam(value = "pageNum",defaultValue = "1")int pageNum)
     {
-        List<Article> list = articleService.getArticleByKeyword(keyword, pageNum);
+        PageInfo<Article> pageInfo = articleService.getArticleByKeyword(keyword, pageNum);
         HashMap< String, Object > map = new HashMap<>();
-        map.put("list",list);
-        map.put("total",5);
+        List<Article> list = pageInfo.getList();
+        Long total= pageInfo.getTotal();//结果的总页数
+        map.put("total", total);
+        map.put("list", list);
         return Result.success(map);
     }
 
@@ -63,9 +65,8 @@ public class ArticleController {
      */
     @GetMapping("/article/detail")
     public Result ArticleDetail(@RequestParam(value = "aid")int aid){
-        //TODO
-
-        return null;
+        Article article = articleService.getArticleById(aid);
+        return Result.success(article);
     }
 
     /**
@@ -75,7 +76,7 @@ public class ArticleController {
      */
     @PostMapping("/article/modify")
     public Result ArticleModify(@RequestBody Article article){
-        //TODO
-        return null;
+        articleService.updateArticle(article);
+        return Result.success();
     }
 }

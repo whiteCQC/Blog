@@ -43,18 +43,17 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> getArticleByUser(Integer uid, int pageNum) {
-        PageHelper.startPage(pageNum, 1);
+        PageHelper.startPage(pageNum, 10);
         PageInfo<Article> pageInfo = new PageInfo<>(articleMapper.selectByUid(uid));
         List<Article> list = pageInfo.getList();
         return list;
     }
 
     @Override
-    public List<Article> getArticleByKeyword(String keyword, int pageNum) {
-        PageHelper.startPage(pageNum, 1);
+    public PageInfo<Article> getArticleByKeyword(String keyword, int pageNum) {
+        PageHelper.startPage(pageNum, 5);
         PageInfo<Article> pageInfo = new PageInfo<>(articleMapper.selectByKeyword(keyword));
-        List<Article> list = pageInfo.getList();
-        return list;
+        return pageInfo;
     }
 }
 

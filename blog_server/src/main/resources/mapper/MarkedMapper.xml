@@ -6,15 +6,36 @@
     <id column="mark_id" jdbcType="INTEGER" property="markId" />
     <result column="mark_name" jdbcType="VARCHAR" property="markName" />
   </resultMap>
+  <resultMap id="ResultWithArticle" type="com.blog.model.Marked">
+    <id column="uid" jdbcType="INTEGER" property="uid" />
+    <id column="mark_id" jdbcType="INTEGER" property="markId" />
+    <result column="mark_name" jdbcType="VARCHAR" property="markName" />
+    <collection property="articleList" ofType="com.blog.model.Article" column="{uid=uid, mark_id=mark_id}"
+                select="getArticleInMarked"/>
+  </resultMap>
+  <resultMap id="ArticleMap" type="com.blog.model.Article">
+    <id column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="mode" jdbcType="INTEGER" property="mode" />
+    <result column="view_num" jdbcType="INTEGER" property="viewNum" />
+    <result column="sp_col_id" jdbcType="INTEGER" property="spColId" />
+  </resultMap>
   <sql id="Base_Column_List">
     uid, mark_id, mark_name
   </sql>
-  <select id="selectByPrimaryKey" parameterType="com.blog.model.MarkedKey" resultMap="BaseResultMap">
+  <select id="getArticleInMarked" resultMap="com.blog.mapper.ArticleMapper.BaseResultMap" parameterType="java.util.Map">
+    select a.*
+    from article a,marked_article ma
+    where a.aid = ma.aid and ma.uid=#{uid} and ma.mark_id=#{mark_id}
+  </select>
+  <select id="selectByUid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from marked
     where uid = #{uid,jdbcType=INTEGER}
-      and mark_id = #{markId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.blog.model.MarkedKey">
     delete from marked

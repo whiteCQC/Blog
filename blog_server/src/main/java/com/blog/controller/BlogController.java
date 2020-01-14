@@ -1,12 +1,28 @@
 package com.blog.controller;
 
 import com.blog.bean.Result;
+import com.blog.model.Article;
 import com.blog.model.Marked;
 import com.blog.model.MarkedArticle;
+import com.blog.model.User;
+import com.blog.service.ArticleService;
+import com.blog.service.MarkService;
+import com.blog.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
 
 @RestController
 public class BlogController {
+    @Autowired
+    UserService userService;
+    @Autowired
+    ArticleService articleService;
+    @Autowired
+    MarkService markService;
+
 
     /**
      *
@@ -15,8 +31,14 @@ public class BlogController {
      */
     @GetMapping("/blog/personal")
     public Result viewPersonalBlog(@RequestParam(value = "uid")int uid){
-        //TODO
-        return null;
+        User userInfo = userService.getUserById(uid);
+        List<Article> articleInfo = articleService.getArticleByUser(uid, 1);
+        List<Marked> markInfo = markService.getMarkedListByUid(uid);
+        HashMap< String, Object > map = new HashMap<>();
+        map.put("userInfo", userInfo);
+        map.put("articleInfo", articleInfo);
+        map.put("markInfo", markInfo);
+        return Result.success(map);
     }
 
     /**
@@ -26,8 +48,8 @@ public class BlogController {
      */
     @GetMapping("/blog/personal/marked")
     public Result viewMarked(@RequestParam(value = "uid")int uid){
-        //TODO
-        return null;
+        List<Marked> markList = markService.getMarkedListByUid(uid);
+        return Result.success(markList);
     }
 
     /**

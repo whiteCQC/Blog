@@ -6,6 +6,7 @@
     <id column="uid" jdbcType="INTEGER" property="uid" />
     <id column="aid" jdbcType="INTEGER" property="aid" />
   </resultMap>
+
   <delete id="deleteByPrimaryKey" parameterType="com.blog.model.MarkedArticleKey">
     delete from marked_article
     where mark_id = #{markId,jdbcType=INTEGER}
