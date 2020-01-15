@@ -10,32 +10,28 @@
     <id column="uid" jdbcType="INTEGER" property="uid" />
     <id column="mark_id" jdbcType="INTEGER" property="markId" />
     <result column="mark_name" jdbcType="VARCHAR" property="markName" />
-    <collection property="articleList" ofType="com.blog.model.Article" column="{uid = uid, mark_id=mark_id}"
+    <collection property="articleList" ofType="com.blog.model.Article" column="{uid = uid, markId=mark_id}"
                 select="getArticleInMarked"/>
   </resultMap>
-  <resultMap id="ArticleMap" type="com.blog.model.Article">
-    <id column="aid" jdbcType="INTEGER" property="aid" />
-    <result column="uid" jdbcType="INTEGER" property="uid" />
-    <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
-    <result column="date" jdbcType="TIMESTAMP" property="date" />
-    <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="mode" jdbcType="INTEGER" property="mode" />
-    <result column="view_num" jdbcType="INTEGER" property="viewNum" />
-    <result column="sp_col_id" jdbcType="INTEGER" property="spColId" />
-  </resultMap>
+
   <sql id="Base_Column_List">
     uid, mark_id, mark_name
   </sql>
   <select id="getArticleInMarked" resultMap="com.blog.mapper.ArticleMapper.BaseResultMap" parameterType="java.util.Map">
     select a.*
     from article a,marked_article ma
-    where a.aid = ma.aid and ma.uid=#{uid} and ma.mark_id=#{mark_id}
+    where a.aid = ma.aid and ma.uid=#{uid} and ma.mark_id=#{markId}
   </select>
-  <select id="getMarkedArticles" resultMap="ResultMapWithArticle">
+  <select id="getMaxMarkId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    select max(mark_id)
+    from marked
+    where uid = #{uid}
+  </select>
+  <select id="getMarkedArticles" resultMap="ResultWithArticle">
     select
     <include refid="Base_Column_List" />
     from marked
-    where uid = #{uid} and mark_id = #{mark_id}
+    where uid = #{uid} and mark_id = #{markId}
   </select>
   <select id="selectByUid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

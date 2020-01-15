@@ -8,7 +8,10 @@ import java.util.List;
 public interface MarkService {
     List<Marked> getMarkedListByUid(Integer uid);
 
-    void  addMarked(Marked marked);
+    boolean  addMarked(Marked marked);
 
     List<Article> getMarkedArticles(Integer uid, Integer markId);
+
+    void deleteMarked(Integer uid, String markName);
+
 }

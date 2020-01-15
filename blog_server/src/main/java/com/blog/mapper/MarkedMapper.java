@@ -8,6 +8,8 @@ import java.util.List;
 public interface MarkedMapper {
     int deleteByPrimaryKey(MarkedKey key);
 
+    int deleteByName(Integer uid, String markName);
+
     int insert(Marked record);
 
     int updateByPrimaryKey(Marked record);
@@ -15,5 +17,7 @@ public interface MarkedMapper {
     List <Marked> selectByUid(Integer uid);
 
     Marked getMarkedArticles(Integer uid, Integer markId);
+
+    int getMaxMarkId(Integer uid);
 
 }

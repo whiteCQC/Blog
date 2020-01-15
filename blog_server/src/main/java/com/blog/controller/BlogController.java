@@ -56,7 +56,7 @@ public class BlogController {
      *
      * @param uid
      * @param markid
-     * @return 获得指定用户的收藏夹下的文章信息（不包括文章正文）
+     * @return 获得指定用户的某个收藏夹下的文章信息（不包括文章正文）
      */
     @GetMapping("/blog/personal/marked/article")
     public Result viewMarkedArticle(@RequestParam(value = "uid")int uid,@RequestParam("markid")int markid){
@@ -70,8 +70,15 @@ public class BlogController {
      */
     @PostMapping("/blog/personal/marked/addMarked")
     public Result AddMarked(@RequestBody Marked marked){
-        markService.addMarked(marked);
-        return Result.success();
+
+        if(markService.addMarked(marked))
+        {
+            return Result.success();
+        }
+        else
+        {
+            return Result.error("收藏夹名字重复");
+        }
     }
 
     /**
@@ -81,8 +88,8 @@ public class BlogController {
      */
     @PostMapping("/blog/personal/marked/deleteMarked")
     public Result DeleteMarked(@RequestBody Marked marked){
-        //TODO
-        return null;
+        markService.deleteMarked(marked.getUid(),marked.getMarkName());
+        return Result.success();
     }
 
     /**
