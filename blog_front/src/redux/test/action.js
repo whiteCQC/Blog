@@ -5,7 +5,7 @@ import qs from 'qs'
 const Login = (data) =>({type: "LOGIN",data:data});
 
 
-export const ToLogin = (data) => {
+const ToLogin = (data) => {
     //console.log(data);
     return dispatch => {
         UserLogin(data,dispatch);

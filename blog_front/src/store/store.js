@@ -6,5 +6,5 @@ import thunk from 'redux-thunk';
 import reduce from '../redux/combineReducers';
 
 const middleware = applyMiddleware(thunk,createLogger());
-
-export default createStore(reduce,middleware);
+const store =createStore(reduce,middleware);
+export default store;

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { connect } from 'react-redux'
-import {ToLogin} from "../../../redux/index/action";
+import {ToLogin} from "../../../redux/test/action";
 
 const Login = ({ dispatch }) => {
     let uid,uname
@@ -30,4 +30,4 @@ const Login = ({ dispatch }) => {
     )
 
 }
-export default connect()(Login)
+//export default connect()(Login)

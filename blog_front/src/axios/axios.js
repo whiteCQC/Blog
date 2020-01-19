@@ -4,7 +4,7 @@ import axios from 'axios';
 const Axios = axios.create({
     baseURL: 'http://localhost:8081' //设置访问路径
 });
-Axios.defaults.headers.common['Authorization'] = "";
+Axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
 Axios.defaults.headers['Content-Type'] = 'application/json; charset=UTF-8';
 
 Axios.interceptors.response.use(
