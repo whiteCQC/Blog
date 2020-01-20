@@ -79,8 +79,14 @@ public class UserController {
      */
     @PostMapping("/userInfo")
     public Result GetUserInfo(@RequestBody User userInfo){
-        //TODO
 
-        return null;
+        User user=userService.getUserById(userInfo.getUid());
+        if(user==null){
+            return Result.error("用户不存在");
+        }else{
+            return Result.success(user);
+        }
+
+
     }
 }
