@@ -81,4 +81,13 @@ public class TestController {
     {
         return Result.error("密码错误");
     }
+
+    @PostMapping("/registerTest")
+    public Result register(@RequestBody User user){
+        HashMap < String, Object > map = new HashMap<>();
+        map.put("uid", "11");
+        map.put("uname","十一");
+        map.put("token",null);
+        return Result.success(map);
+    }
 }

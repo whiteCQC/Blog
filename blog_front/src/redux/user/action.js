@@ -25,6 +25,12 @@ export const UserLogin = (data) => {
     }
 }
 
+export const UserRegister = (data) =>{
+    return dispatch => {
+        fetchRegister(data,dispatch);
+    }
+}
+
 // 登录
 export function fetchLogin (data,dispatch){
     const user = JSON.parse(data)
@@ -48,3 +54,29 @@ export function fetchLogin (data,dispatch){
     })
 
 }
+
+export function fetchRegister (data,dispatch){
+    const user = JSON.parse(data)
+    Axios.post('/registerTest', {
+        email: user.email,
+        uname:user.name,
+        password: user.password
+    }).then(({data}) => {
+        if (data.code === 200) {
+            localStorage.setItem("token", data.detail.token);
+            localStorage.setItem("uid", data.detail.uid);
+            localStorage.setItem("uname", data.detail.uname);
+            Axios.defaults.headers.common['Authorization'] = data.detail.token
+            dispatch(register(data.detail))
+
+            window.location.reload()
+        } else {
+            openNotificationWithIcon("error", "Error", data.description)
+        }
+    }).catch(error => {
+        openNotificationWithIcon("error", "Error", error.message)
+    })
+
+}
+
+

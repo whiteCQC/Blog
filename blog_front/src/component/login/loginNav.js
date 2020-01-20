@@ -9,12 +9,12 @@ const ToLogin = ({dispatch}) => {
         window.location.reload()
     }
     return localStorage.getItem("token")==null?
-        <div>
+        <div className="logNav">
             <a href="/login">登录/注册</a>
         </div>
         :
 
-        <div>
+        <div className="logNav">
             欢迎您:{localStorage.getItem("uname")}
             <a href="#" onClick={handleLogout}>
                 登出

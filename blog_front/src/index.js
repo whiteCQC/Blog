@@ -5,6 +5,7 @@ import {Provider} from 'react-redux';
 import store from './store/store';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
+import Register from "./component/register/register";
 import Login from "./component/login/login";
 import IndexHome from "./component/home/IndexHome";
 
@@ -13,6 +14,7 @@ ReactDOM.render(
         <Router>
             <Route exact path='/' component={IndexHome} />
             <Route path='/login' component={Login}/>
+            <Route path='/register' component={Register} />
         </Router>
 
     </Provider>

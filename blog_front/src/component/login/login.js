@@ -37,6 +37,8 @@ const Login = ({ dispatch }) => {
                     </span>
                 </div>
                 <button type="submit">登录</button>
+                <p>没有账号？点击这里</p>
+                <a href="/register">注册</a>
             </form>
         </div>
         :
