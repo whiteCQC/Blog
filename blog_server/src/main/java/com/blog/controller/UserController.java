@@ -34,7 +34,10 @@ public class UserController {
 //        user.setGender("M");
         if(userService.createUser(user))
         {
-            return Result.success();
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("uid",user.getUid());
+            map.put("uname",user.getUname());
+            return Result.success(map);
         }
         else
         {
@@ -86,7 +89,6 @@ public class UserController {
         }else{
             return Result.success(user);
         }
-
 
     }
 }
