@@ -46,7 +46,7 @@ const SingleHot = ({article},index)=>(
             </h2>
             <p><span>{article.articleContent}</span></p>
             <div className="viewNum">
-                <img src="image/eye.jpg"/>{article.viewNum}
+                <img src="image/eye.jpg" alt="浏览人数"/>{article.viewNum}
             </div>
         </div>
 

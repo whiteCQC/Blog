@@ -16,27 +16,31 @@ export const logout = () => {
     return {type: "LOGOUT"}
 }
 
+export const UserLogin = (data) => {
+    //console.log(data);
+    return dispatch => {
+        fetchLogin(data,dispatch);
+    }
+}
 
 // 登录
-export function UserLogin (data){
+export function fetchLogin (data,dispatch){
     const user = JSON.parse(data)
-    return dispatch => {
-        console.log(user.email)
-        Axios.post('/loginTest', {
-            email: user.email,
-            password: user.password
-        }).then(({res}) => {
-            if (res.code === 200) {
-                localStorage.setItem("token", res.detail.token);
-                localStorage.setItem("uid", res.detail.uid);
-                localStorage.setItem("uname", res.detail.uname);
-                Axios.defaults.headers.common['Authorization'] = res.detail.token
-                dispatch(login(res.detail))
-            } else {
-                openNotificationWithIcon("error", "Error", res.description)
-            }
-        }).catch(error => {
-            openNotificationWithIcon("error", "Error", error.message)
-        })
-    }
+    Axios.post('/loginTest', {
+        email: user.email,
+        password: user.password
+    }).then(({data}) => {
+        if (data.code === 200) {
+            localStorage.setItem("token", data.detail.token);
+            localStorage.setItem("uid", data.detail.uid);
+            localStorage.setItem("uname", data.detail.uname);
+            Axios.defaults.headers.common['Authorization'] = data.detail.token
+            dispatch(login(data.detail))
+        } else {
+            openNotificationWithIcon("error", "Error", data.description)
+        }
+    }).catch(error => {
+        openNotificationWithIcon("error", "Error", error.message)
+    })
+
 }

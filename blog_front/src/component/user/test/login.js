@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { connect } from 'react-redux'
 import {ToLogin} from "../../../redux/test/action";
 
-const Login = ({ dispatch }) => {
+const LoginA = ({ dispatch }) => {
     let uid,uname
 
     return (
@@ -30,4 +30,4 @@ const Login = ({ dispatch }) => {
     )
 
 }
-//export default connect()(Login)
+export default connect()(LoginA)

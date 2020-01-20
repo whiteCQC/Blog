@@ -1,5 +1,6 @@
-import * as React from "react";
-import {connect} from "react-redux";
+import React from "react";
+import connect from "react-redux/lib/connect/connect";
+import {UserLogin} from "../../redux/user/action";
 
 const ToLogin = () => {
 
@@ -16,6 +17,7 @@ const ToLogin = () => {
 
 
 }
+
 
 
 export default ToLogin
