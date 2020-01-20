@@ -1,10 +1,12 @@
 import * as React from "react";
 import {connect} from "react-redux";
 import {UserLogin} from "../../redux/user/action";
+import {Redirect} from "react-router-dom";
 
 const Login = ({ dispatch }) => {
     let email,password
     return(
+     localStorage.getItem("token")==null?
         <div>
             <form onSubmit={e => {
                 e.preventDefault()
@@ -16,6 +18,7 @@ const Login = ({ dispatch }) => {
                     password:password.value
                 })
                 dispatch(UserLogin(userInfo))
+
 
             }}>
                 <h3>用户登录</h3>
@@ -36,7 +39,8 @@ const Login = ({ dispatch }) => {
                 <button type="submit">登录</button>
             </form>
         </div>
-
+        :
+         <Redirect push to="/"/>
     )
 
 

@@ -1,5 +1,4 @@
 import { notification } from 'antd';
-//import React, { Component } from 'react';
 
 /**
  * 全局通知提醒框
@@ -13,3 +12,5 @@ export const openNotificationWithIcon = (type,message,description) => {
         description: description,
     });
 };
+
+

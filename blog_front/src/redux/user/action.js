@@ -20,7 +20,6 @@ export const logout = () => {
 }
 
 export const UserLogin = (data) => {
-    //console.log(data);
     return dispatch => {
         fetchLogin(data,dispatch);
     }
@@ -39,6 +38,8 @@ export function fetchLogin (data,dispatch){
             localStorage.setItem("uname", data.detail.uname);
             Axios.defaults.headers.common['Authorization'] = data.detail.token
             dispatch(login(data.detail))
+
+            window.location.reload()
         } else {
             openNotificationWithIcon("error", "Error", data.description)
         }
