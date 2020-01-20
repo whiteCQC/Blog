@@ -40,6 +40,7 @@ const Login = ({ dispatch }) => {
                 <p>没有账号？点击这里</p>
                 <a href="/register">注册</a>
             </form>
+            <a href='/'>返回</a>
         </div>
         :
          <Redirect push to="/"/>

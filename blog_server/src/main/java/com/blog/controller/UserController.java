@@ -72,4 +72,15 @@ public class UserController {
         }
     }
 
+    /**
+     *
+     * @param userInfo 包含一个用户的id
+     * @return 返回用户的信息
+     */
+    @PostMapping("/userInfo")
+    public Result GetUserInfo(@RequestBody User userInfo){
+        //TODO
+
+        return null;
+    }
 }

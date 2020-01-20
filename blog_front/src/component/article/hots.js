@@ -10,6 +10,7 @@ class Hots extends Component{
         this.state = {
             articles:[]
         }
+        this.selectHot = this.selectHot.bind(this);
     }
     componentDidMount (){
         Axios.get("/article/hotTest").then(({data}) => {
@@ -24,12 +25,15 @@ class Hots extends Component{
             openNotificationWithIcon("error","Error",error.message)
         })
     }
+    selectHot(articleId){
+
+    }
     render(){
         return(
             <div id="hotArticle">
                 <ul>
                     {this.state.articles.map((article,index) =>
-                        <SingleHot article={article} key={article.aid}/>
+                        <SingleHot article={article} key={article.aid} onClick={this.selectHot(article.aid)}/>
                     )}
                 </ul>
             </div>

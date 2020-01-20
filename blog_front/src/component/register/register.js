@@ -59,6 +59,7 @@ const Register= ({ dispatch }) => {
                     </div>
                     <button type="submit">注册</button>
                 </form>
+                <a href='/'>返回</a>
             </div>
             :
             <Redirect push to="/"/>
