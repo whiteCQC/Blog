@@ -1,5 +1,5 @@
 import * as React from "react";
-import ToLogin from "../login/tologin";
+import ToLogin from "../login/loginNav";
 
 
 export const Nav = () => {

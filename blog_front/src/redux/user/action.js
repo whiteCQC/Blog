@@ -13,6 +13,9 @@ const login = (data) => {
 
 // 登出
 export const logout = () => {
+    localStorage.removeItem("token")
+    localStorage.removeItem("uid")
+    localStorage.removeItem("uname")
     return {type: "LOGOUT"}
 }
 

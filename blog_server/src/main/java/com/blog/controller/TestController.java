@@ -75,8 +75,10 @@ public class TestController {
         map.put("uname","十");
         map.put("token",null);
         return Result.success(map);
-
-
-
+    }
+    @PostMapping("/loginTest2")
+    public Result userLogin2(@RequestBody User userInfo)
+    {
+        return Result.error("密码错误");
     }
 }
