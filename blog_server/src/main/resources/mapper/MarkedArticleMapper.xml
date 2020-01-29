@@ -7,16 +7,21 @@
     <id column="aid" jdbcType="INTEGER" property="aid" />
   </resultMap>
 
-  <delete id="deleteByPrimaryKey" parameterType="com.blog.model.MarkedArticleKey">
+  <delete id="deleteByPrimaryKey" parameterType="com.blog.model.MarkedArticle">
     delete from marked_article
     where mark_id = #{markId,jdbcType=INTEGER}
       and uid = #{uid,jdbcType=INTEGER}
       and aid = #{aid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.blog.model.MarkedArticleKey">
-    insert into marked_article (mark_id, uid, aid
+  <delete id="deleteByMarked" parameterType="com.blog.model.MarkedKey">
+    delete from marked_article
+    where mark_id = #{markId,jdbcType=INTEGER}
+    and uid = #{uid,jdbcType=INTEGER}
+  </delete>
+  <update id="insert" parameterType="com.blog.model.MarkedArticle">
+    insert ignore into marked_article (mark_id, uid, aid
       )
     values (#{markId,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{aid,jdbcType=INTEGER}
       )
-  </insert>
+  </update>
 </mapper>

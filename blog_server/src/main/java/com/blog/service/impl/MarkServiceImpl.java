@@ -1,8 +1,11 @@
 package com.blog.service.impl;
 
+import com.blog.mapper.MarkedArticleMapper;
 import com.blog.mapper.MarkedMapper;
 import com.blog.model.Article;
 import com.blog.model.Marked;
+import com.blog.model.MarkedArticle;
+import com.blog.model.MarkedKey;
 import com.blog.service.MarkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,9 @@ public class MarkServiceImpl implements MarkService {
 
     @Autowired
     MarkedMapper markedMapper;
+
+    @Autowired
+    MarkedArticleMapper markedArticleMapper;
 
     @Override
     public List<Marked> getMarkedListByUid(Integer uid) {
@@ -39,7 +45,9 @@ public class MarkServiceImpl implements MarkService {
 
     @Override
     public void deleteMarked(Integer uid, String markName) {
-
+        Integer markId = markedMapper.getMarkId(uid, markName);
+        markedArticleMapper.deleteByMarked(new MarkedKey(uid, markId));
+        markedMapper.deleteByName(uid, markName);
 
     }
 
@@ -48,7 +56,21 @@ public class MarkServiceImpl implements MarkService {
         return markedMapper.getMarkedArticles(uid, markId).getArticleList();
     }
 
-    private boolean notContainMarkedName(List<Marked> markedList,Marked marked)
+    @Override
+    public boolean addMarkedArticle(MarkedArticle markedArticle) {
+        int row = markedArticleMapper.insert(markedArticle);
+        if(row == 0)
+            return false;
+        else
+            return true;
+    }
+
+    @Override
+    public void deleteMarkedArticle(MarkedArticle markedArticle) {
+        markedArticleMapper.deleteByPrimaryKey(markedArticle);
+    }
+
+    private boolean notContainMarkedName(List<Marked> markedList, Marked marked)
     {
         for (Marked m: markedList)
         {

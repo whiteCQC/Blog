@@ -99,8 +99,10 @@ public class BlogController {
      */
     @PostMapping("/blog/personal/marked/addArticle")
     public Result AddMarkedArticle(@RequestBody MarkedArticle marked_article){
-        //TODO
-        return null;
+        if(markService.addMarkedArticle(marked_article))
+            return Result.success("收藏成功");
+        else
+            return Result.error("该文章已被收藏");
     }
 
     /**
@@ -110,7 +112,7 @@ public class BlogController {
      */
     @PostMapping("/blog/personal/marked/deleteArticle")
     public Result DeleteMarkedArticle(@RequestBody MarkedArticle marked_article){
-        //TODO
-        return null;
+        markService.deleteMarkedArticle(marked_article);
+        return Result.success("删除成功");
     }
 }

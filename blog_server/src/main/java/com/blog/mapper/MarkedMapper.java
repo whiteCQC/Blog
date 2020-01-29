@@ -20,4 +20,6 @@ public interface MarkedMapper {
 
     int getMaxMarkId(Integer uid);
 
+    int getMarkId(Integer uid, String markName);
+
 }

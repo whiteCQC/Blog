@@ -5,6 +5,11 @@ public class MarkedKey {
 
     private Integer markId;
 
+    public MarkedKey(Integer uid, Integer markId) {
+        this.uid = uid;
+        this.markId = markId;
+    }
+
     public Integer getUid() {
         return uid;
     }

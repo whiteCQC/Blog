@@ -8,6 +8,10 @@ public class Marked extends MarkedKey {
 
     private List<Article> articleList;
 
+    public Marked(Integer uid, Integer markId) {
+        super(uid, markId);
+    }
+
     public List<Article> getArticleList() {
         return articleList;
     }

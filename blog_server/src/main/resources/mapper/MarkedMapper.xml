@@ -39,11 +39,22 @@
     from marked
     where uid = #{uid,jdbcType=INTEGER}
   </select>
+  <select id="getMarkId" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select mark_id
+    from marked
+    where uid = #{uid,jdbcType=INTEGER} and mark_name = #{markName}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.blog.model.MarkedKey">
     delete from marked
     where uid = #{uid,jdbcType=INTEGER}
       and mark_id = #{markId,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByName" parameterType="java.util.Map">
+    delete from marked
+    where uid = #{uid}
+    and mark_name = #{markName}
+  </delete>
+
   <insert id="insert" parameterType="com.blog.model.Marked">
     insert into marked (uid, mark_id, mark_name
       )
