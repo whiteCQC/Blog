@@ -20,6 +20,11 @@
   <sql id="Blob_Column_List">
     article_content
   </sql>
+  <select id="getAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from aritcle
+  </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 

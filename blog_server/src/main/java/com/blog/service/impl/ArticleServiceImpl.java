@@ -8,7 +8,8 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
+
 @Service
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
@@ -25,6 +26,12 @@ public class ArticleServiceImpl implements ArticleService {
         return article;
     }
 
+    @Override
+    public List<Article> getHotArticle() {
+        List<Article> list = articleMapper.getAll();
+        sortHot(list);
+        return list;
+    }
 
     @Override
     public void updateArticle(Article article) {
@@ -54,6 +61,31 @@ public class ArticleServiceImpl implements ArticleService {
         PageHelper.startPage(pageNum, 5);
         PageInfo<Article> pageInfo = new PageInfo<>(articleMapper.selectByKeyword(keyword));
         return pageInfo;
+    }
+
+    private List<Article> sortHot(List<Article> list)
+    {
+        Collections.sort(list, new Comparator<Article>() {
+            @Override
+            public int compare(Article o1, Article o2) {
+                if (getScore(o1) > getScore(o2))
+                    return -1;
+                else if(getScore(o1) == getScore(o2))
+                    return 0;
+                else
+                    return 1;
+
+
+            }
+        });
+        return list;
+    }
+
+    private int getScore(Article a)
+    {
+        Date date = a.getDate();
+        int view = a.getViewNum();
+        return view/((int)(new Date().getTime()-date.getTime()) / (1000 * 60 * 60 * 24)+1);
     }
 }
 
