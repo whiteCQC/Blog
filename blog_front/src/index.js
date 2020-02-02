@@ -8,7 +8,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Register from "./component/register/register";
 import Login from "./component/login/login";
 import IndexHome from "./component/home/IndexHome";
-import Article from "./component/article/article";
+import ArticleBody from "./component/article/article";
 
 ReactDOM.render(
     <Provider store={store}>
@@ -16,7 +16,7 @@ ReactDOM.render(
             <Route exact path='/' component={IndexHome} />
             <Route exact path='/login' component={Login}/>
             <Route exact path='/register' component={Register} />
-            <Route path='/article' component={Article}/>
+            <Route path='/article' component={ArticleBody}/>
         </Router>
 
     </Provider>
