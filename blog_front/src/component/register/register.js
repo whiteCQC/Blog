@@ -15,7 +15,7 @@ const Register= ({ dispatch }) => {
                         openNotificationWithIcon("error", "不能为空", "")
                         return
                     }
-                    if(pw1.value.trim()!=pw2.value.trim()){
+                    if(pw1.value.trim()!==pw2.value.trim()){
                         openNotificationWithIcon("error", "密码不一致", "")
                         return
                     }

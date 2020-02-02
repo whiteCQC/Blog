@@ -1,0 +1,29 @@
+a{
+    text-decoration: none;
+    color: #000000;
+}
+
+.loginFrame{
+    text-align: center;
+    position: relative;
+}
+.labelForLogin{
+    font-size: 20px;
+    letter-spacing: 0;
+    text-align: right;
+    width: 82px;
+    height: 40px;
+    line-height: 40px;
+    margin-right: 15px;
+    font-weight: 200;
+}
+.inputForLogin{
+    padding: 11px 10px;
+    max-height: 40px;
+    background: #fff;
+    border: 1px solid ;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 321px;
+    color: #000;
+}

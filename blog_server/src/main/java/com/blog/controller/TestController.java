@@ -90,4 +90,48 @@ public class TestController {
         map.put("token",null);
         return Result.success(map);
     }
+
+    @GetMapping("/Test")
+    public Result Test(){
+        return Result.success();
+    }
+
+    @GetMapping("/article/detailTest")
+    public Result ArticleDetailTest(@RequestParam(value="aid")int aid){
+        //System.out.println(aid);
+        HashMap < String, Object > map = new HashMap<>();
+        Article article=new Article();
+        article.setViewNum(200);
+        article.setAid(1);
+        article.setDate(new Date());
+        article.setArticleTitle("百度新闻——海量中文资讯平台");
+        article.setArticleContent("百度新闻是包含海量资讯的新闻服务平台,真实反映每时每刻的新闻热点。" +
+                "您可以搜索新闻事件、热点话题、人物动态、产品资讯等,快速了解它们的最新进展。");
+        article.setUid(1);
+        map.put("article",article);
+
+        User u = new User();
+        u.setUid(12);
+        u.setUname("一二三");
+
+        map.put("fanNum",2341);
+        map.put("author",u);
+
+        map.put("articleNum",10);
+
+        map.put("totalView",30000);
+
+        List<Article> newArticles=new ArrayList<>();
+        for(int i=0;i<5;i++){
+            Article a=new Article();
+            a.setUid(12);
+            a.setAid(i+100);
+            a.setArticleTitle("当前最新的文章"+i);
+        }
+        map.put("newArticles",newArticles);
+
+
+        return Result.success(map);
+    }
+
 }

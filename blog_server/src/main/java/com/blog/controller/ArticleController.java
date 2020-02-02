@@ -61,7 +61,12 @@ public class ArticleController {
 
     /**
      *
-     * @return 获得该文章全部的详细信息
+     * @return 获得该文章全部的详细信息，包括 该文章的所有内容article
+     *                                     作者的基本信息（作者id，名称，粉丝数）author
+     *                                     总文章数量 articleNum
+     *                                     关注数量 fanNum
+     *                                     总访问量（作者所有文章点击量总和）totalView
+     *                                     最新的前五篇文章名以及aid  newArticles
      */
     @GetMapping("/article/detail")
     public Result ArticleDetail(@RequestParam(value = "aid")int aid){

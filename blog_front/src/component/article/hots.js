@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Axios from "../../axios/axios";
 import {openNotificationWithIcon} from "../notification";
+import {withRouter} from "react-router-dom";
 
 import './hots.css';
 
@@ -26,6 +27,8 @@ class Hots extends Component{
         })
     }
     selectHot(articleId){
+        //console.log(articleId){ pathname: "/about", state: { id } }
+        this.props.history.push({pathname:"/article",state:{articleId}})
 
     }
     render(){
@@ -33,7 +36,9 @@ class Hots extends Component{
             <div id="hotArticle">
                 <ul>
                     {this.state.articles.map((article,index) =>
-                        <SingleHot article={article} key={article.aid} onClick={this.selectHot(article.aid)}/>
+                        <li key={article.aid} onClick={this.selectHot.bind(this,article.aid)}>
+                            <SingleHot article={article}  />
+                        </li>
                     )}
                 </ul>
             </div>
@@ -42,7 +47,6 @@ class Hots extends Component{
 }
 
 const SingleHot = ({article},index)=>(
-    <li>
         <div className="hotList">
             <h2>
                 <span className="hotLogo">HOT</span>
@@ -53,9 +57,6 @@ const SingleHot = ({article},index)=>(
                 <img src="image/eye.jpg" alt="浏览人数"/>{article.viewNum}
             </div>
         </div>
-
-
-    </li>
 )
 
-export default Hots;
+export default withRouter(Hots);

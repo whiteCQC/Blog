@@ -5,8 +5,8 @@ class Search extends Component{
     render(){
         return(
             <div className="search">
-                <input type="text" placeholder="请输入..." name="" id="" value=""/>
-                <button><i>搜索</i></button>
+                    <input type="text" placeholder="请输入..."/>
+                    <button><i>搜索</i></button>
             </div>
         )
 

@@ -16,7 +16,7 @@ const ToLogin = ({dispatch}) => {
 
         <div className="logNav">
             欢迎您:{localStorage.getItem("uname")}
-            <a href="#" onClick={handleLogout}>
+            <a href="/" onClick={handleLogout}>
                 登出
             </a>
         </div>
