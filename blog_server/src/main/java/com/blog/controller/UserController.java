@@ -83,10 +83,11 @@ public class UserController {
     @PostMapping("/userInfo")
     public Result GetUserInfo(@RequestBody User userInfo){
 
-        User user=userService.getUserById(userInfo.getUid());
-        if(user==null){
+        User user = userService.getUserById(userInfo.getUid());
+        if(user == null){
             return Result.error("用户不存在");
-        }else{
+        }
+        else{
             return Result.success(user);
         }
 
