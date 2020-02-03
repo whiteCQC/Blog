@@ -2,20 +2,28 @@ package com.blog.controller;
 
 import com.blog.bean.Result;
 import com.blog.model.Article;
+import com.blog.model.User;
 import com.blog.service.ArticleService;
+import com.blog.service.UserService;
+import com.blog.vo.Author;
 import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.PageRowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ArticleController {
 
     @Autowired
     private ArticleService articleService;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * 发表文章
@@ -27,7 +35,7 @@ public class ArticleController {
     {
         article.setDate(new Date());
         articleService.createArticle(article);
-        return Result.success(article);
+        return Result.success();
     }
 
     /**
@@ -55,8 +63,8 @@ public class ArticleController {
      */
     @GetMapping("/article/hot")
     public Result HotArticle(){
-        //TODO
-        return null;
+        List<Article> list = articleService.getHotArticle();
+        return Result.success(list);
     }
 
     /**
@@ -71,7 +79,22 @@ public class ArticleController {
     @GetMapping("/article/detail")
     public Result ArticleDetail(@RequestParam(value = "aid")int aid){
         Article article = articleService.getArticleById(aid);
-        return Result.success(article);
+        Author author = new Author();
+        int uid = article.getUid();
+        Map<String, Integer> authorArticleInfo = articleService.getArticleInfoByUser(uid);
+        User user = userService.getAuthor(aid);
+
+        author.setArticleNum(authorArticleInfo.get("article_num"));
+        author.setTotalView(authorArticleInfo.get("total_view"));
+        author.setFanNum(userService.getFanNum(uid));
+        author.setUid(user.getUid());
+        author.setName(user.getUname());
+        author.setNewArticles(articleService.getNewArticleByUser(uid));
+
+        HashMap< String, Object > map = new HashMap<>();
+        map.put("article", article);
+        map.put("author", author);
+        return Result.success(map);
     }
 
     /**

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ArticleService {
 
@@ -13,6 +14,8 @@ public interface ArticleService {
     Article getArticleById(Integer aid);
 
     List<Article> getArticleByUser(Integer uid, int pageNum);
+
+    List<Article> getNewArticleByUser(Integer uid);
 
     void updateArticle(Article article);
 
@@ -23,6 +26,8 @@ public interface ArticleService {
     List<Article> getHotArticle();
 
     PageInfo<Article> getArticleByKeyword (String keyword, int pageNum);  //搜索返回不含具体内容的文章
+
+    Map<String,Integer> getArticleInfoByUser(Integer uid);
 
 
 

@@ -10,4 +10,6 @@ public interface FollowerMapper {
 
     Follower selectByUid(Integer uid);
 
+    int getFanNum(Integer uid);
+
 }

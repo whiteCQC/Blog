@@ -30,7 +30,7 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> getHotArticle() {
         List<Article> list = articleMapper.getAll();
         sortHot(list);
-        return list;
+        return list.subList(0,10);
     }
 
     @Override
@@ -57,13 +57,23 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public List<Article> getNewArticleByUser(Integer uid) {
+        return articleMapper.getNewArticle(uid);
+    }
+
+    @Override
     public PageInfo<Article> getArticleByKeyword(String keyword, int pageNum) {
         PageHelper.startPage(pageNum, 5);
         PageInfo<Article> pageInfo = new PageInfo<>(articleMapper.selectByKeyword(keyword));
         return pageInfo;
     }
 
-    private List<Article> sortHot(List<Article> list)
+    @Override
+    public Map<String, Integer> getArticleInfoByUser(Integer uid) {
+        return articleMapper.getArticleInfoByUid(uid);
+    }
+
+    private void sortHot(List<Article> list)
     {
         Collections.sort(list, new Comparator<Article>() {
             @Override
@@ -74,11 +84,8 @@ public class ArticleServiceImpl implements ArticleService {
                     return 0;
                 else
                     return 1;
-
-
             }
         });
-        return list;
     }
 
     private int getScore(Article a)

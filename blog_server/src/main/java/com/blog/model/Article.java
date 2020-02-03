@@ -21,6 +21,16 @@ public class Article {
 
     private String articleContent;
 
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Integer getAid() {
         return aid;
     }

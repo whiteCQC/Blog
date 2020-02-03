@@ -31,12 +31,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByEmail(String email) {
-        User user= userMapper.selectByEmail(email);
+        User user = userMapper.selectByEmail(email);
         return user;
     }
 
     @Override
     public void updateUser(User user) {
         userMapper.updateByPrimaryKey(user);
+    }
+
+    @Override
+    public User getAuthor(Integer aid) {
+        return userMapper.getAuthor(aid);
+    }
+
+    @Override
+    public Integer getFanNum(Integer uid) {
+        return null;
     }
 }

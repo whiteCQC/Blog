@@ -9,4 +9,6 @@ public interface UserService  {
     User getUserById(Integer uid);
     User getUserByEmail(String email);
     void updateUser(User user);
+    User getAuthor(Integer aid);
+    Integer getFanNum(Integer uid);
 }

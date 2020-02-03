@@ -23,8 +23,16 @@
   <select id="getAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from aritcle
+    from article
+    where view_num > 100
   </select>
+
+  <select id="getArticleInfoByUid" parameterType="java.lang.Integer" resultType="java.util.Map">
+    select count(*) as article_num,sum(view_num) as total_view
+    from article
+    where uid = {#uid}
+  </select>
+
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
@@ -34,17 +42,27 @@
     from myblog.article
     where aid = #{aid,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from myblog.article
     where aid = #{aid,jdbcType=INTEGER}
   </delete>
-  <select id="selectByUid" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+
+  <select id="selectByUid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from article
     where uid = #{uid}
   </select>
-  <select id="selectByKeyword" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="getNewArticle" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from article
+    where uid = {#uid}
+    order by date desc
+    limit 5
+  </select>
+  <select id="selectByKeyword" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from article
@@ -87,7 +105,7 @@
         sp_col_id = #{spColId,jdbcType=INTEGER},
       </if>
 
-      <if test="!=null and !=''">
+      <if test="article_content!=null and article_content!=''">
         article_content = #{articleContent,jdbcType=LONGVARCHAR}
       </if>
     </set>

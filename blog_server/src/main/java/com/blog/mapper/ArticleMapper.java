@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface ArticleMapper {
@@ -16,6 +17,8 @@ public interface ArticleMapper {
 
     List<Article> selectByUid(Integer uid);
 
+    List<Article> getNewArticle(Integer uid);
+
     List<Article> getAll();
 
     int updateViewNum(Integer aid);
@@ -25,4 +28,6 @@ public interface ArticleMapper {
     int updateByPrimaryKey(Article record);
 
     List<Article> selectByKeyword(String keyword);
+
+    Map<String, Integer> getArticleInfoByUid(Integer uid);
 }

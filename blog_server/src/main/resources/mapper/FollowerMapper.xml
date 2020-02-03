@@ -14,4 +14,9 @@
     insert into follower (uid, follower_id)
     values (#{uid,jdbcType=INTEGER}, #{followerId,jdbcType=INTEGER})
   </insert>
+  <select id="getFanNum" parameterType="java.lang.Integer" resultType="Integer">
+    select count(*)
+    from follower
+    where uid = {#uid}
+  </select>
 </mapper>
