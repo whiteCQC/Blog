@@ -32,7 +32,7 @@ export const UserRegister = (data) =>{
 }
 
 // 登录
-export function fetchLogin (data,dispatch){
+function fetchLogin (data,dispatch){
     const user = JSON.parse(data)
     Axios.post('/loginTest', {
         email: user.email,

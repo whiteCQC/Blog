@@ -4,8 +4,11 @@ import {logout} from "../../redux/user/action";
 
 const ToLogin = ({dispatch}) => {
     function handleLogout(e) {
-        e.preventDefault();
         dispatch(logout());
+        window.location.reload()
+    }
+    function handleProfile(e){
+
         window.location.reload()
     }
     return localStorage.getItem("token")==null?
@@ -16,6 +19,7 @@ const ToLogin = ({dispatch}) => {
 
         <div className="logNav">
             欢迎您:{localStorage.getItem("uname")}
+            <a href="/personProfile" onClick={handleProfile}/>
             <a href="/" onClick={handleLogout}>
                 登出
             </a>

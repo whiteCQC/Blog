@@ -3,6 +3,7 @@ package com.blog.controller;
 import com.blog.bean.Result;
 import com.blog.model.Article;
 import com.blog.model.User;
+import com.blog.vo.Fan;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -19,16 +20,6 @@ public class TestController {
         User u=new User();
         u.setUname("666a");
         u.setUid(41);
-        return Result.success(u);
-    }
-
-    @GetMapping("/loginTest")
-    public Result GetsTest(@RequestParam(value = "uid")int uid,@RequestParam(value="uname")String uname){
-        System.out.println(uname);
-
-        User u = new User();
-        u.setUid(12);
-        u.setUname("aaa");
         return Result.success(u);
     }
 
@@ -132,6 +123,12 @@ public class TestController {
 
 
         return Result.success(map);
+    }
+
+    @PostMapping("/FanAddTest")
+    public Result FanFollow(@RequestBody Fan fan){
+        System.out.println(fan.getFollowId()+","+fan.getFollowedId());
+        return Result.success();
     }
 
 }

@@ -1,5 +1,5 @@
 import { notification } from 'antd';
-
+import './style.css'
 /**
  * 全局通知提醒框
  * @param type:success info warning error

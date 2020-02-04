@@ -3,6 +3,8 @@ import Axios from "../../axios/axios";
 import {openNotificationWithIcon} from "../notification";
 import './article.css'
 import {Nav} from "../header/header";
+import {followExecute} from "../../redux/interaction/action";
+import {connect} from "react-redux";
 
 class ArticleBody extends Component{
     constructor (props) {
@@ -15,9 +17,10 @@ class ArticleBody extends Component{
             newArticles:"",
             fanNum:""
         }
+        this.handleFollow=this.handleFollow.bind(this)
     }
     componentDidMount (){
-        console.log(this.props)
+        //console.log(this.props)
         let aid=this.props.location.state.articleId
         //console.log("aid:"+aid);
         Axios.get("/article/detailTest", {
@@ -39,6 +42,19 @@ class ArticleBody extends Component{
             openNotificationWithIcon("error","Error",error.message)
         })
     }
+    handleFollow(){
+        //console.log("follow:"+this.state.article.aid)
+        if(localStorage.getItem("token")==null){
+            alert("请先登录");
+        }
+        else{
+            let followInfo = JSON.stringify({
+                followId:localStorage.getItem("uid"),
+                followedId:this.state.author.uid
+            })
+            this.props.dispatch(followExecute(followInfo))
+        }
+    }
 
     dateTransfer(strDate) {
         var date = new Date(strDate);
@@ -50,7 +66,7 @@ class ArticleBody extends Component{
             <div>
                 <Nav/>
                 <div className="articleBody">
-
+                    {/* 文章作者基本信息 */}
                     <div className="authorInfo">
                         <h3>作者:{this.state.author.uname}</h3>
                         <table border="0">
@@ -68,33 +84,32 @@ class ArticleBody extends Component{
                             </tbody>
 
                         </table>
-                        <button className="follow">
+                        <button className="follow" onClick={this.handleFollow}>
                             关注
                         </button>
                     </div>
 
                     <div className="articleRight">
+                        {/* 文章区域 */}
                         <div className="articlePart">
                             <span className="title">{this.state.article.articleTitle}</span>
+                            <button>收藏</button>
                             <div>
                                 <span>最后修改于:{this.dateTransfer(this.state.article.date)}</span>
                                 <span  className="viewNum">阅读{this.state.article.viewNum}</span>
                             </div>
                             <div className="articleContent">{this.state.article.articleContent}</div>
                         </div>
-                        <button>收藏</button>
-                        <div className="authorBottom">
-                            <span>作者:{this.state.author.uname}</span>
-                            <span>文章访问量{this.state.article.viewNum}</span>
-                            <button>关注</button>
-                        </div>
 
-                        <div>
+                        {/* 评论区域 */}
+                        <div id="Comments">
                             <form>
                                 <textarea id="CommentTextArea"/>
                                 <button id="submitComment">提交</button>
                             </form>
+                            <div className="articleComments">
 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -104,4 +119,4 @@ class ArticleBody extends Component{
     }
 }
 
-export default ArticleBody
+export default connect()(ArticleBody)

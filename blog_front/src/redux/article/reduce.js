@@ -1,9 +1,8 @@
 const todos = (state = [], action) => {
     switch (action.type) {
-        case 'VIEW_ARTICLE':
+        case '':
             return {
                 ...state,
-                articleID:action.data.aid
             }
         case '':
         default:
