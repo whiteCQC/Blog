@@ -4,6 +4,7 @@
     margin-left: 50px;
 }
 .authorInfo{
+    position:fixed;
     margin-left: 50px;
     padding: 20px;
     width: 200px;
