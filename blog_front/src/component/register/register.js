@@ -4,6 +4,8 @@ import {connect} from "react-redux";
 import {UserRegister} from "../../redux/user/action";
 import {openNotificationWithIcon} from "../notification";
 
+import './register.css'
+
 const Register= ({ dispatch }) => {
     let email,pw1,pw2,name
     return(

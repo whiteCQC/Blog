@@ -9,6 +9,8 @@ import Register from "./component/register/register";
 import Login from "./component/login/login";
 import IndexHome from "./component/home/IndexHome";
 import ArticleBody from "./component/article/article";
+import SearchResult from "./component/search/index";
+
 
 ReactDOM.render(
     <Provider store={store}>
@@ -17,6 +19,7 @@ ReactDOM.render(
             <Route exact path='/login' component={Login}/>
             <Route exact path='/register' component={Register} />
             <Route path='/article' component={ArticleBody}/>
+            <Route path='/search' component={SearchResult}/>
         </Router>
 
     </Provider>
