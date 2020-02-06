@@ -39,4 +39,14 @@ public class FanController {
         //TODO
         return null;
     }
+
+    /**
+     *
+     * @return 对应用户的所关注的用户信息{每个用户的ID，用户名}，list对应key：fans
+     */
+    @GetMapping("/viewConcerns")
+    public Result ViewConcerns(@RequestParam(value = "uid") int userId){
+        //TODO
+        return null;
+    }
 }
