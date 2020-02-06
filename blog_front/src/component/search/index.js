@@ -2,12 +2,19 @@
 
 import React, {Component} from "react";
 import {Nav} from "../header/header";
+import {connect} from "react-redux";
 
 import './index.css'
 
 class SearchResult extends Component{
     constructor (props) {
         super(props);
+
+    }
+    componentDidMount (){
+        let keywords=this.props.location.state.keywords
+        let pageNum = this.props.location.state.pageNum
+        ///console.log(keywords+","+pageNum)
 
     }
 
@@ -20,4 +27,4 @@ class SearchResult extends Component{
     }
 }
 
-export default SearchResult
+export default connect()(SearchResult)

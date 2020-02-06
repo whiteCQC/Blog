@@ -6,6 +6,8 @@ import {Nav} from "../header/header";
 import {followExecute} from "../../redux/interaction/action";
 import {connect} from "react-redux";
 
+import {dateTransfer} from '../../tools/tansfer'
+
 class ArticleBody extends Component{
     constructor (props) {
         super(props);
@@ -56,11 +58,6 @@ class ArticleBody extends Component{
         }
     }
 
-    dateTransfer(strDate) {
-        var date = new Date(strDate);
-        return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()+" "+date.getHours()+":"+
-            date.getMinutes()+":"+date.getSeconds()
-    }
     render() {
         return(
             <div>
@@ -95,7 +92,7 @@ class ArticleBody extends Component{
                             <span className="title">{this.state.article.articleTitle}</span>
                             <button>收藏</button>
                             <div>
-                                <span>最后修改于:{this.dateTransfer(this.state.article.date)}</span>
+                                <span>最后修改于:{dateTransfer(this.state.article.date)}</span>
                                 <span  className="viewNum">阅读{this.state.article.viewNum}</span>
                             </div>
                             <div className="articleContent">{this.state.article.articleContent}</div>

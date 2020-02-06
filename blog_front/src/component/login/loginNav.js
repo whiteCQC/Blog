@@ -9,10 +9,6 @@ const ToLogin = ({dispatch}) => {
         dispatch(logout());
         window.location.reload()
     }
-    function handleProfile(e){
-
-        window.location.reload()
-    }
     return localStorage.getItem("token")==null?
         <div className="logNav">
             <a href="/login">登录/注册</a>
@@ -21,7 +17,7 @@ const ToLogin = ({dispatch}) => {
 
         <div className="logNav">
             <span>欢迎您:{localStorage.getItem("uname")}</span>
-            <a href="/personProfile" onClick={handleProfile}>
+            <a href="/person/profile" >
                 个人中心
             </a>
             <a href="/" onClick={handleLogout}>

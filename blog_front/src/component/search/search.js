@@ -11,8 +11,8 @@ class Search extends Component{
         this.handleSearch=this.handleSearch.bind(this)
     }
     handleSearch(){
-        let context = cutstr(this.state.searchText.value,30)
-        this.props.history.push({pathname:"/search",state:{context}})
+        let keywords = cutstr(this.state.searchText.value,30)
+        this.props.history.push({pathname:"/search",state:{keywords:keywords,pageNum:1}})
     }
 
     render(){

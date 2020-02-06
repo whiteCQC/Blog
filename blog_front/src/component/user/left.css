@@ -1,0 +1,12 @@
+.UserLeftNav{
+    position: absolute;
+    top:150px;
+    width: 150px;
+
+}
+
+.UserLeftNav>ul>li{
+    font-size: 26px;
+    margin-top: 10px;
+    border: 2px #ca0c16 solid;
+}

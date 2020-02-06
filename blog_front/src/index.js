@@ -10,7 +10,7 @@ import Login from "./component/login/login";
 import IndexHome from "./component/home/IndexHome";
 import ArticleBody from "./component/article/article";
 import SearchResult from "./component/search/index";
-
+import Profile from "./component/user/profile";
 
 ReactDOM.render(
     <Provider store={store}>
@@ -20,6 +20,9 @@ ReactDOM.render(
             <Route exact path='/register' component={Register} />
             <Route path='/article' component={ArticleBody}/>
             <Route path='/search' component={SearchResult}/>
+
+            <Route path='/person/profile' component={Profile}/>
+
         </Router>
 
     </Provider>

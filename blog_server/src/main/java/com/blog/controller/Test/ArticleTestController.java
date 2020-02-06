@@ -1,36 +1,19 @@
-package com.blog.controller;
+package com.blog.controller.Test;
 
 import com.blog.bean.Result;
 import com.blog.model.Article;
 import com.blog.model.User;
-import com.blog.vo.Fan;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
-
-/**
- * 前端测试Controller，不用管
- */
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 @RestController
-public class TestController {
-
-    @GetMapping("/user")
-    public Result Start(){
-        User u=new User();
-        u.setUname("666a");
-        u.setUid(41);
-        return Result.success(u);
-    }
-
-    @PostMapping("/send")
-    public Result Send(@RequestBody User user){
-        System.out.println(user.getUname());
-        User u = new User();
-        u.setUid(12);
-        u.setUname("aaa");
-        return Result.success(u);
-    }
+public class ArticleTestController {
 
     @GetMapping("/article/hotTest")
     public Result HotArticle(){
@@ -55,42 +38,10 @@ public class TestController {
         return Result.success(list);
     }
 
-    @PostMapping("/loginTest")
-    public Result userLogin(@RequestBody User userInfo)
-    {
-        System.out.println(userInfo.getEmail());
-        System.out.println(userInfo.getPassword());
-
-        HashMap < String, Object > map = new HashMap<>();
-        map.put("uid", "10");
-        map.put("uname","十");
-        map.put("token",null);
-        return Result.success(map);
-    }
-    @PostMapping("/loginTest2")
-    public Result userLogin2(@RequestBody User userInfo)
-    {
-        return Result.error("密码错误");
-    }
-
-    @PostMapping("/registerTest")
-    public Result register(@RequestBody User user){
-        HashMap < String, Object > map = new HashMap<>();
-        map.put("uid", "11");
-        map.put("uname","十一");
-        map.put("token",null);
-        return Result.success(map);
-    }
-
-    @GetMapping("/Test")
-    public Result Test(){
-        return Result.success();
-    }
-
     @GetMapping("/article/detailTest")
     public Result ArticleDetailTest(@RequestParam(value="aid")int aid){
         //System.out.println(aid);
-        HashMap < String, Object > map = new HashMap<>();
+        HashMap< String, Object > map = new HashMap<>();
         Article article=new Article();
         article.setViewNum(200);
         article.setAid(1);
@@ -124,11 +75,4 @@ public class TestController {
 
         return Result.success(map);
     }
-
-    @PostMapping("/FanAddTest")
-    public Result FanFollow(@RequestBody Fan fan){
-        System.out.println(fan.getFollowId()+","+fan.getFollowedId());
-        return Result.success();
-    }
-
 }
