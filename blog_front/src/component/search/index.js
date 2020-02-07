@@ -17,19 +17,22 @@ class SearchResult extends Component{
             current: 1, //当前页码
             pageSize:5, //每页显示的条数5条
             goValue:'',
-            totalPage:''//总页数
+            totalPage:'',//总页数
+            keywords:''
         }
         this.selectArticle = this.selectArticle.bind(this);
     }
     componentDidMount (){
-        let keywords=this.props.location.state.keywords
-        let pageNum = this.props.location.state.pageNum
-        this.pageClick(keywords,pageNum)
+        let keywords=this.props.match.params.keywords
+        this.setState({
+            keywords:keywords
+        })
+        console.log(keywords)
+        this.pageClickWithKeywords(keywords,1)
 
     }
-    //点击翻页
-    pageClick(keywords,pageNum) {
-        alert(pageNum)
+    pageClickWithKeywords(keywords,pageNum){
+        console.log("pageClick:"+pageNum)
         Axios.get("/article/searchTest3",{
             params:{
                 keywords:keywords,
@@ -52,8 +55,31 @@ class SearchResult extends Component{
         }
     }
 
+    //点击翻页
+    pageClick(pageNum) {
+        console.log("pageClick:"+pageNum)
+        Axios.get("/article/searchTest3",{
+            params:{
+                keywords:this.state.keywords,
+                pageNum:pageNum
+            }
+        }).then(({data}) => {
+            if(data.code === 200){
+                this.setState({
+                    indexList: data.detail.list,
+                });
+            }else{
+                alert(data.description)
+            }
+        }).catch( error => {
+            alert(error.message)
+        })
+        if (pageNum !== this.state.current) {
+            this.setState({current : pageNum})
+        }
+    }
+
     goNext() {
-        alert("here")
         let _this = this;
         let cur = this.state.current;
         //alert(cur+"==="+_this.state.totalPage)
@@ -69,8 +95,8 @@ class SearchResult extends Component{
         }
     }
     selectArticle(articleId){
-        //this.props.history.push({pathname:"/article",state:{articleId}})
-
+        let res = "/article/" + articleId
+        this.props.history.push(res)
     }
 
     render() {

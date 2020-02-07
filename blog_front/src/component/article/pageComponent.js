@@ -40,11 +40,15 @@ class PageComponent extends  Component{
                     <span>
                           {
                               pageNum.map(function(curPageNum){
-                                  return(<a onClick = {_this.props.pageClick.bind(_this,curPageNum.num)}
-                                            className={curPageNum.cur ? 'num            current'    :  'num'}
-                                            key={curPageNum.num}
-                                            >
-                                      {curPageNum.num}</a>)      })
+                                  return(
+                                      <div className="pageButton">
+                                          <a onClick = {_this.props.pageClick.bind(_this,curPageNum.num)}
+                                             key={curPageNum.num}
+                                          >
+                                              {curPageNum.num}</a>
+                                      </div>
+                                  )
+                              })
                           }
                     </span>
                     <a className={this.props.current === this.props.total? 'next disable' : 'next'}

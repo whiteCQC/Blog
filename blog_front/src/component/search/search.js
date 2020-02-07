@@ -14,7 +14,8 @@ class Search extends Component{
     }
     handleSearch(){
         let keywords = cutstr(this.state.searchText.value,30)
-        this.props.history.push({pathname:"/search",state:{keywords:keywords,pageNum:1}})
+        let res= "/search/" + keywords
+        this.props.history.push(res)
     }
 
     render(){

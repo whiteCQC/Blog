@@ -19,7 +19,7 @@ ReactDOM.render(
             <Route exact path='/login' component={Login}/>
             <Route exact path='/register' component={Register} />
             <Route path='/article/:aid' component={ArticleBody}/>
-            <Route path='/search' component={SearchResult}/>
+            <Route path='/search/:keywords' component={SearchResult}/>
 
             <Route path='/person/profile' component={Profile}/>
 

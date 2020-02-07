@@ -126,7 +126,8 @@ public class ArticleTestController {
         System.out.println(keywords);
         HashMap< String, Object > map = new HashMap<>();
         List<Article> list=new ArrayList<>();
-        for(int i=pageNum;i<pageNum+5;i++){
+        int start = (pageNum-1)*5+1;
+        for(int i=start;i<start+5;i++){
             Article a=new Article();
             a.setAid(i);
             a.setUid(i+100);
