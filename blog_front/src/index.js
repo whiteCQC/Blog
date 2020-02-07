@@ -11,6 +11,8 @@ import IndexHome from "./component/home/IndexHome";
 import ArticleBody from "./component/article/article";
 import SearchResult from "./component/search/index";
 import Profile from "./component/user/profile";
+import Concern from "./component/user/concern";
+import Fans from "./component/user/fan";
 
 ReactDOM.render(
     <Provider store={store}>
@@ -22,7 +24,8 @@ ReactDOM.render(
             <Route path='/search/:keywords' component={SearchResult}/>
 
             <Route path='/person/profile' component={Profile}/>
-
+            <Route path='/person/concern' component={Concern}/>
+            <Route path='/person/fan' component={Fans}/>
         </Router>
 
     </Provider>

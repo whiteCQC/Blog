@@ -4,9 +4,9 @@ import UserLeftNav from "./left";
 import {connect} from "react-redux";
 import Axios from "../../axios/axios";
 
-import './cocern.css'
+import './fan.css'
 
-class Concern extends Component {
+class Fans extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,7 +15,7 @@ class Concern extends Component {
     }
     componentDidMount () {
         let uid = localStorage.getItem("uid");
-        Axios.get("/viewConcernsTest",{
+        Axios.get("/viewFansTest",{
             params:{
                 uid:uid
             }
@@ -34,15 +34,14 @@ class Concern extends Component {
     render() {
         let tip=''
         if(this.state.fans.length===0){
-            tip='暂无关注'
+            tip='暂无粉丝'
         }
-
         return (
             <div>
                 <Nav/>
                 <UserLeftNav/>
                 <div className="UserRight">
-                    <h1 className="UserTitle">我的关注</h1>
+                    <h1 className="UserTitle">我的粉丝</h1>
                     <hr/>
                     <div className="fans">
                         <span>{tip}</span>
@@ -51,7 +50,6 @@ class Concern extends Component {
                                 <li key={fan.uid}>
                                     <img src="../image/avatar0.jpg" />
                                     <span className="fanName">{fan.uname}</span>
-                                    <button className="cancelFollow">取消关注</button>
                                 </li>
                             )}
                         </ul>
@@ -62,4 +60,4 @@ class Concern extends Component {
     }
 }
 
-export default connect()(Concern)
+export default connect()(Fans)

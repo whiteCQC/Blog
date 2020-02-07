@@ -1,0 +1,23 @@
+.fans{
+    font-size: 26px;
+}
+.fans>ul>li{
+    padding-top: 30px;
+    height: 90px;
+    width: 1320px;
+    border-bottom: #909090 dashed 1px;
+}
+.fans>ul{
+    height: 450px;
+    overflow-y:scroll
+}
+
+.cancelFollow{
+    float: right;
+    margin-top: 30px;
+    margin-right: 50px;
+}
+.fanName{
+    margin-left: 26px;
+    margin-bottom: 50px;
+}
