@@ -3,18 +3,73 @@
 import React, {Component} from "react";
 import {Nav} from "../header/header";
 import {connect} from "react-redux";
+import Axios from "../../axios/axios";
+import {withRouter} from "react-router-dom";
 
 import './index.css'
+import PageComponent from "../article/pageComponent";
 
 class SearchResult extends Component{
     constructor (props) {
         super(props);
-
+        this.state = {
+            indexList : [], //获取数据的存放数组
+            current: 1, //当前页码
+            pageSize:5, //每页显示的条数5条
+            goValue:'',
+            totalPage:''//总页数
+        }
+        this.selectArticle = this.selectArticle.bind(this);
     }
     componentDidMount (){
         let keywords=this.props.location.state.keywords
         let pageNum = this.props.location.state.pageNum
-        ///console.log(keywords+","+pageNum)
+        this.pageClick(keywords,pageNum)
+
+    }
+    //点击翻页
+    pageClick(keywords,pageNum) {
+        alert(pageNum)
+        Axios.get("/article/searchTest3",{
+            params:{
+                keywords:keywords,
+                pageNum:pageNum
+            }
+        }).then(({data}) => {
+            if(data.code === 200){
+                this.setState({
+                    indexList: data.detail.list,
+                    totalPage:data.detail.total
+                });
+            }else{
+                alert(data.description)
+            }
+        }).catch( error => {
+            alert(error.message)
+        })
+        if (pageNum !== this.state.current) {
+            this.setState({current : pageNum})
+        }
+    }
+
+    goNext() {
+        alert("here")
+        let _this = this;
+        let cur = this.state.current;
+        //alert(cur+"==="+_this.state.totalPage)
+        if (cur < this.state.totalPage) {
+            _this.pageClick(cur + 1);
+        }
+    }
+    goPrevClick(){
+        let _this = this;
+        let cur = this.state.current;
+        if(cur > 1){
+            _this.pageClick(cur - 1);
+        }
+    }
+    selectArticle(articleId){
+        //this.props.history.push({pathname:"/article",state:{articleId}})
 
     }
 
@@ -22,9 +77,40 @@ class SearchResult extends Component{
         return(
             <div>
                 <Nav/>
+
+                <div id="searchArticle">
+                    <ul>
+                        {this.state.indexList.map((article,index) =>
+                            <li key={article.aid} onClick={this.selectArticle.bind(this,article.aid)}>
+                                <SingleSearch article={article}  />
+                            </li>
+                        )}
+                    </ul>
+                </div>
+                <div className="pages">
+                    <PageComponent  current={this.state.current}
+                                    totalPage={this.state.totalPage}
+                                    goValue={this.state.goValue}
+                                    pageClick={this.pageClick.bind(this)}
+                                    goPrev={this.goPrevClick.bind(this)}
+                                    goNext={this.goNext.bind(this)}/>
+                </div>
+
             </div>
         )
     }
 }
 
-export default connect()(SearchResult)
+const SingleSearch = ({article},index)=>(
+    <div className="searchList">
+        <h2>
+            {article.articleTitle}
+        </h2>
+        <p><span>{article.articleContent}</span></p>
+        <div className="viewNum">
+            <img src="../image/eye.jpg" alt="浏览人数"/>{article.viewNum}
+        </div>
+    </div>
+)
+
+export default connect()(withRouter(SearchResult))

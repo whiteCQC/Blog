@@ -28,3 +28,63 @@
 .search button:hover{
     font-size: 16px;
 }
+
+#searchArticle{
+    left: 450px;
+    position: absolute;
+    top:150px;
+    width: 800px;
+}
+
+#searchArticle>ul>li{
+    padding: 18px 24px 13px 24px;
+    background: #fff;
+    border: 1px solid #C8C8C8;
+    position: relative;
+    height: 100px;
+    margin-top: 10px;
+}
+
+.searchList{
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+.searchList>h2{
+    margin-top: 0;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.searchList>p{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.viewNum{
+    float:right
+}
+.viewNum>img{
+    width: 20px;
+    height: auto;
+}
+.pages{
+    font-size: 22px;
+    position: absolute;
+    float: left;
+    top: 950px;
+    left: 700px;
+}
+.paginationDiv{
+    float: left;
+}
+.rightDiv{
+    margin-left: 20px;
+    float: right;
+}
+.prev disable{
+    disabled:"disabled"
+}
+.paginationDiv>span>a{
+    margin-left: 4px;
+}

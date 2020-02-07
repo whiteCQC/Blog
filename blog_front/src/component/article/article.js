@@ -23,7 +23,7 @@ class ArticleBody extends Component{
     }
     componentDidMount (){
         //console.log(this.props)
-        let aid=this.props.location.state.articleId
+        let aid=this.props.match.params.aid
         //console.log("aid:"+aid);
         Axios.get("/article/detailTest", {
             params: { 'aid': aid }

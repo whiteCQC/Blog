@@ -3,6 +3,7 @@ package com.blog.controller.Test;
 import com.blog.bean.Result;
 import com.blog.model.Article;
 import com.blog.model.User;
+import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -73,6 +74,71 @@ public class ArticleTestController {
         map.put("newArticles",newArticles);
 
 
+        return Result.success(map);
+    }
+
+    @GetMapping("/article/searchTest1")
+    public Result searchArticle1(@RequestParam(value = "keyword") String keyword
+            ,@RequestParam(value = "pageNum",defaultValue = "1")int pageNum)
+    {
+        HashMap< String, Object > map = new HashMap<>();
+        List<Article> list=new ArrayList<>();
+        for(int i=1;i<=1;i++){
+            Article a=new Article();
+            a.setAid(i);
+            a.setUid(i+100);
+            a.setArticleTitle("标题"+i);
+            a.setArticleContent("文章的内容"+i);
+            a.setDate(new Date());
+            a.setViewNum(i*1000);
+        }
+
+        map.put("total", 1);
+        map.put("list", list);
+        return Result.success(map);
+    }
+
+    @GetMapping("/article/searchTest2")
+    public Result searchArticle2(@RequestParam(value = "keyword") String keyword
+            ,@RequestParam(value = "pageNum",defaultValue = "1")int pageNum)
+    {
+        HashMap< String, Object > map = new HashMap<>();
+        List<Article> list=new ArrayList<>();
+        for(int i=1;i<=11;i++){
+            Article a=new Article();
+            a.setAid(i);
+            a.setUid(i+100);
+            a.setArticleTitle("标题"+i);
+            a.setArticleContent("文章的内容"+i);
+            a.setDate(new Date());
+            a.setViewNum(i*1000);
+        }
+
+        map.put("total", 11);
+        map.put("list", list);
+        return Result.success(map);
+    }
+
+    @GetMapping("/article/searchTest3")
+    public Result searchArticle3(@RequestParam(value = "keywords") String keywords
+            ,@RequestParam(value = "pageNum",defaultValue = "1")int pageNum)
+    {
+        System.out.println(keywords);
+        HashMap< String, Object > map = new HashMap<>();
+        List<Article> list=new ArrayList<>();
+        for(int i=pageNum;i<pageNum+5;i++){
+            Article a=new Article();
+            a.setAid(i);
+            a.setUid(i+100);
+            a.setArticleTitle("标题"+i);
+            a.setArticleContent("文章的内容"+i);
+            a.setDate(new Date());
+            a.setViewNum(i*1000);
+            list.add(a);
+        }
+
+        map.put("total", 76);
+        map.put("list", list);
         return Result.success(map);
     }
 }

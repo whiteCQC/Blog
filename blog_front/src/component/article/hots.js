@@ -28,7 +28,8 @@ class Hots extends Component{
     }
     selectHot(articleId){
         //console.log(articleId){ pathname: "/about", state: { id } }
-        this.props.history.push({pathname:"/article",state:{articleId}})
+        let res = "/article/" + articleId
+        this.props.history.push(res)
 
     }
     render(){
@@ -39,6 +40,7 @@ class Hots extends Component{
                         <li key={article.aid} onClick={this.selectHot.bind(this,article.aid)}>
                             <SingleHot article={article}  />
                         </li>
+
                     )}
                 </ul>
             </div>

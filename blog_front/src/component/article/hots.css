@@ -3,10 +3,10 @@ ul li{
     cursor: pointer;
 }
 #hotArticle{
-    left: 24%;
+    left: 450px;
     position: absolute;
     top:150px;
-    width: 40vw;
+    width: 800px;
 }
 
 #hotArticle>ul>li{

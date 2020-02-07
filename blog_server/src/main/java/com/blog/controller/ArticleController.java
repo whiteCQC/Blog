@@ -45,7 +45,7 @@ public class ArticleController {
      * @return 返回除了文章具体内容的文章list信息 list的总页数
      */
     @GetMapping("/article/search")
-    public Result searchArticle(@RequestParam(value = "keyword") String keyword
+    public Result searchArticle(@RequestParam(value = "keywords") String keyword
             ,@RequestParam(value = "pageNum",defaultValue = "1")int pageNum)
     {
         PageInfo<Article> pageInfo = articleService.getArticleByKeyword(keyword, pageNum);
