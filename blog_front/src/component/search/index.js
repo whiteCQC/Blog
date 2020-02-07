@@ -33,7 +33,7 @@ class SearchResult extends Component{
     }
     pageClickWithKeywords(keywords,pageNum){
         console.log("pageClick:"+pageNum)
-        Axios.get("/article/searchTest3",{
+        Axios.get("/article/searchTest2",{
             params:{
                 keywords:keywords,
                 pageNum:pageNum
@@ -57,26 +57,7 @@ class SearchResult extends Component{
 
     //点击翻页
     pageClick(pageNum) {
-        console.log("pageClick:"+pageNum)
-        Axios.get("/article/searchTest3",{
-            params:{
-                keywords:this.state.keywords,
-                pageNum:pageNum
-            }
-        }).then(({data}) => {
-            if(data.code === 200){
-                this.setState({
-                    indexList: data.detail.list,
-                });
-            }else{
-                alert(data.description)
-            }
-        }).catch( error => {
-            alert(error.message)
-        })
-        if (pageNum !== this.state.current) {
-            this.setState({current : pageNum})
-        }
+        this.pageClickWithKeywords(this.state.keywords,pageNum)
     }
 
     goNext() {

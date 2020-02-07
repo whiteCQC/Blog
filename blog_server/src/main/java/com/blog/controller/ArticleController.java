@@ -59,10 +59,11 @@ public class ArticleController {
 
     /**
      * 返回热门文章list，包含除文章具体内容的信息
+     *     总页数total
      * @return
      */
     @GetMapping("/article/hot")
-    public Result HotArticle(){
+    public Result HotArticle(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum){
         List<Article> list = articleService.getHotArticle();
         return Result.success(list);
     }

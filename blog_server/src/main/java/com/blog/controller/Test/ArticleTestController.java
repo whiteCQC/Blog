@@ -17,7 +17,7 @@ import java.util.List;
 public class ArticleTestController {
 
     @GetMapping("/article/hotTest")
-    public Result HotArticle(){
+    public Result HotArticle(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum){
         Article a1=new Article();
         a1.setAid(1);
         a1.setArticleContent("百度新闻是包含海量资讯的新闻服务平台,真实反映每时每刻的新闻热点。您可以搜索新闻事件、热点话题、人物动态、产品资讯等,快速了解它们的最新进展。");
@@ -36,7 +36,10 @@ public class ArticleTestController {
         list.add(a2);
         //Map<String,Object> map =new HashMap<>();
         //map.put("hots",list);
-        return Result.success(list);
+        HashMap< String, Object > map = new HashMap<>();
+        map.put("total", 1);
+        map.put("list", list);
+        return Result.success(map);
     }
 
     @GetMapping("/article/detailTest")
@@ -78,7 +81,7 @@ public class ArticleTestController {
     }
 
     @GetMapping("/article/searchTest1")
-    public Result searchArticle1(@RequestParam(value = "keyword") String keyword
+    public Result searchArticle1(@RequestParam(value = "keywords") String keyword
             ,@RequestParam(value = "pageNum",defaultValue = "1")int pageNum)
     {
         HashMap< String, Object > map = new HashMap<>();
@@ -91,6 +94,7 @@ public class ArticleTestController {
             a.setArticleContent("文章的内容"+i);
             a.setDate(new Date());
             a.setViewNum(i*1000);
+
         }
 
         map.put("total", 1);
@@ -99,12 +103,12 @@ public class ArticleTestController {
     }
 
     @GetMapping("/article/searchTest2")
-    public Result searchArticle2(@RequestParam(value = "keyword") String keyword
+    public Result searchArticle2(@RequestParam(value = "keywords") String keyword
             ,@RequestParam(value = "pageNum",defaultValue = "1")int pageNum)
     {
         HashMap< String, Object > map = new HashMap<>();
         List<Article> list=new ArrayList<>();
-        for(int i=1;i<=11;i++){
+        for(int i=1;i<=3;i++){
             Article a=new Article();
             a.setAid(i);
             a.setUid(i+100);
@@ -112,9 +116,10 @@ public class ArticleTestController {
             a.setArticleContent("文章的内容"+i);
             a.setDate(new Date());
             a.setViewNum(i*1000);
+            list.add(a);
         }
 
-        map.put("total", 11);
+        map.put("total", 1);
         map.put("list", list);
         return Result.success(map);
     }
