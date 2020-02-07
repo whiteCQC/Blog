@@ -16,6 +16,7 @@ class Search extends Component{
         let keywords = cutstr(this.state.searchText.value,30)
         let res= "/search/" + keywords
         this.props.history.push(res)
+        window.location.reload()
     }
 
     render(){

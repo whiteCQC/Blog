@@ -68,37 +68,5 @@
     width: 20px;
     height: auto;
 }
-.pages{
-    width: 1000px;
-    font-size: 22px;
-    position: absolute;
-    float: left;
-    top: 950px;
-    left: 700px;
-}
-.paginationDiv{
-    float: left;
-    width: 400px;
-}
-.rightDiv{
-    margin-left: 20px;
-    float: right;
-}
-.prev disable{
-    disabled:"disabled"
-}
-.next disable{
-    disabled:"disabled"
-}
-.paginationDiv>a{
-    border: #ca0c16 solid 2px;
-    float: left;
-    cursor:pointer;
-}
-.pageButton{
-    text-align: center;
-    float: left;
-    width: 25px;
-    border: #ca0c16 solid 2px;
-    cursor:pointer;
-}
+
+

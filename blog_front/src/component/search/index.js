@@ -7,7 +7,7 @@ import Axios from "../../axios/axios";
 import {withRouter} from "react-router-dom";
 
 import './index.css'
-import PageComponent from "../article/pageComponent";
+import PageComponent from "../page/pageComponent";
 
 class SearchResult extends Component{
     constructor (props) {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './pageComponent.css'
 
 class PageComponent extends  Component{
     render(){
@@ -41,10 +42,8 @@ class PageComponent extends  Component{
                           {
                               pageNum.map(function(curPageNum){
                                   return(
-                                      <div className="pageButton">
-                                          <a onClick = {_this.props.pageClick.bind(_this,curPageNum.num)}
-                                             key={curPageNum.num}
-                                          >
+                                      <div className="pageButton" key={curPageNum.num}>
+                                          <a onClick = {_this.props.pageClick.bind(_this,curPageNum.num)}>
                                               {curPageNum.num}</a>
                                       </div>
                                   )

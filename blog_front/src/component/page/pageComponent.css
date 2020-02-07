@@ -1,0 +1,26 @@
+.prev disable{
+    disabled:"disabled"
+}
+.next disable{
+    disabled:"disabled"
+}
+.paginationDiv>a{
+    border: #ca0c16 solid 2px;
+    float: left;
+    cursor:pointer;
+}
+.pageButton{
+    text-align: center;
+    float: left;
+    width: 25px;
+    border: #ca0c16 solid 2px;
+    cursor:pointer;
+}
+.paginationDiv{
+    float: left;
+    width: 400px;
+}
+.rightDiv{
+    margin-left: 20px;
+    float: right;
+}
