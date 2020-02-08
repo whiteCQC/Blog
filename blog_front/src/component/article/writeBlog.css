@@ -1,0 +1,35 @@
+#textTitle{
+    width: 900px;
+    height: 40px;
+    box-sizing: border-box;
+    padding-left: 16px;
+
+    border: none;
+    background-color: #efefef;
+    color: #4d4d4d;
+}
+#text{
+    margin-left: 400px;
+    width: 900px;
+    font-size: 18px;
+    position: absolute;
+    top: 130px;
+}
+#textContent>textarea{
+    font-size: 18px;
+    margin-top: 40px;
+    width: 895px;
+    min-height: 400px;
+}
+.textSelect{
+    margin-top: 10px;
+}
+.textSelect>select{
+    margin-left: 5px;
+    font-size: 20px;
+}
+#submitText{
+    float: right;
+    margin-top: 20px;
+    font-size: 18px;
+}

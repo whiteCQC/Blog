@@ -1,0 +1,8 @@
+.toWrite{
+    margin-left: 1500px;
+    position: absolute;
+    cursor: pointer;
+}
+.toWrite>a{
+    color: #ca0c16;
+}

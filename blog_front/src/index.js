@@ -13,6 +13,7 @@ import SearchResult from "./component/search/index";
 import Profile from "./component/user/profile";
 import Concern from "./component/user/concern";
 import Fans from "./component/user/fan";
+import WriteBlog from "./component/article/writeBlog";
 
 ReactDOM.render(
     <Provider store={store}>
@@ -26,6 +27,8 @@ ReactDOM.render(
             <Route path='/person/profile' component={Profile}/>
             <Route path='/person/concern' component={Concern}/>
             <Route path='/person/fan' component={Fans}/>
+
+            <Route path='/write' component={WriteBlog}/>
         </Router>
 
     </Provider>

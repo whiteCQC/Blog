@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Axios from "../../axios/axios";
-import {openNotificationWithIcon} from "../notification";
 import {withRouter} from "react-router-dom";
 
 import './hots.css';
