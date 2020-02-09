@@ -4,9 +4,7 @@ import com.blog.bean.Result;
 import com.blog.model.Article;
 import com.blog.model.User;
 import com.github.pagehelper.PageInfo;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -146,5 +144,21 @@ public class ArticleTestController {
         map.put("total", 76);
         map.put("list", list);
         return Result.success(map);
+    }
+
+    /**
+     * 发表文章
+     * @param a{包含用户ID，标题，type，mode，专栏，正文}
+     * @return
+     */
+    @PostMapping("/article/createTest")
+    public Result createArticle(@RequestBody Article a)
+    {
+        System.out.println(a.getArticleContent());
+        System.out.println(a.getArticleTitle());
+        System.out.println(a.getMode());
+        System.out.println(a.getType());
+        System.out.println(a.getUid());
+        return Result.success();
     }
 }
