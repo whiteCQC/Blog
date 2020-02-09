@@ -1,7 +1,6 @@
 package com.blog.mapper;
 
 import com.blog.model.Article;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

@@ -2,8 +2,6 @@ package com.blog.service;
 
 import com.blog.model.Article;
 import com.github.pagehelper.PageInfo;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +21,7 @@ public interface ArticleService {
 
     void updateViewNum(Integer aid);
 
-    List<Article> getHotArticle();
+    PageInfo<Article> getHotArticle(Integer pageNum);
 
     PageInfo<Article> getArticleByKeyword (String keyword, int pageNum);  //搜索返回不含具体内容的文章
 

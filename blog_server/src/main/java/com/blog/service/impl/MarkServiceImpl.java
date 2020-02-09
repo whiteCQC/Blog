@@ -59,10 +59,7 @@ public class MarkServiceImpl implements MarkService {
     @Override
     public boolean addMarkedArticle(MarkedArticle markedArticle) {
         int row = markedArticleMapper.insert(markedArticle);
-        if(row == 0)
-            return false;
-        else
-            return true;
+        return row != 0;
     }
 
     @Override
@@ -75,7 +72,7 @@ public class MarkServiceImpl implements MarkService {
         for (Marked m: markedList)
         {
             if(m.getMarkName().trim().equals(marked.getMarkName().trim()))
-            return false;
+                return false;
         }
         return true;
     }

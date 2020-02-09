@@ -7,7 +7,6 @@ import com.blog.service.ArticleService;
 import com.blog.service.UserService;
 import com.blog.vo.Author;
 import com.github.pagehelper.PageInfo;
-import com.github.pagehelper.PageRowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,13 +58,19 @@ public class ArticleController {
 
     /**
      * 返回热门文章list，包含除文章具体内容的信息
-     *     总页数total
+     *     总页数 total
      * @return
      */
     @GetMapping("/article/hot")
     public Result HotArticle(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum){
-        List<Article> list = articleService.getHotArticle();
-        return Result.success(list);
+        PageInfo<Article> pageInfo = articleService.getHotArticle(pageNum);
+        List<Article> list = pageInfo.getList();
+        Long total= pageInfo.getTotal();//结果的总页数
+        HashMap< String, Object > map = new HashMap<>();
+        map.put("total", total);
+        map.put("list", list);
+        return Result.success(map);
+
     }
 
     /**
@@ -79,6 +84,7 @@ public class ArticleController {
      */
     @GetMapping("/article/detail")
     public Result ArticleDetail(@RequestParam(value = "aid")int aid){
+        //未测试
         Article article = articleService.getArticleById(aid);
         Author author = new Author();
         int uid = article.getUid();

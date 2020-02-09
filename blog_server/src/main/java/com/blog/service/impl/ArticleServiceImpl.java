@@ -5,6 +5,7 @@ import com.blog.model.Article;
 import com.blog.service.ArticleService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.page.PageMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,10 +28,13 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> getHotArticle() {
+    public PageInfo<Article> getHotArticle(Integer pageNum) {
         List<Article> list = articleMapper.getAll();
         sortHot(list);
-        return list.subList(0,10);
+        PageMethod.startPage(pageNum, 5);
+        PageInfo<Article> pageInfo = new PageInfo<>(list);
+        return pageInfo;
+
     }
 
     @Override
@@ -50,7 +54,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> getArticleByUser(Integer uid, int pageNum) {
-        PageHelper.startPage(pageNum, 10);
+        PageMethod.startPage(pageNum, 5);
         PageInfo<Article> pageInfo = new PageInfo<>(articleMapper.selectByUid(uid));
         List<Article> list = pageInfo.getList();
         return list;
@@ -63,7 +67,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public PageInfo<Article> getArticleByKeyword(String keyword, int pageNum) {
-        PageHelper.startPage(pageNum, 5);
+        PageMethod.startPage(pageNum, 5);
         PageInfo<Article> pageInfo = new PageInfo<>(articleMapper.selectByKeyword(keyword));
         return pageInfo;
     }
