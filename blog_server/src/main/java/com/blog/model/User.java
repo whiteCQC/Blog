@@ -72,4 +72,17 @@ public class User {
     public void setImg(String img) {
         this.img = img;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid=" + uid +
+                ", uname='" + uname + '\'' +
+                ", password='" + password + '\'' +
+                ", gender='" + gender + '\'' +
+                ", email='" + email + '\'' +
+                ", birth=" + birth +
+                ", img='" + img + '\'' +
+                '}';
+    }
 }

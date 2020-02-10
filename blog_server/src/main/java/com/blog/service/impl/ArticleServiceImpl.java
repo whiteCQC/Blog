@@ -23,8 +23,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article getArticleById(Integer aid) {
-        Article article = articleMapper.selectByPrimaryKey(aid);
-        return article;
+        return articleMapper.selectByPrimaryKey(aid);
     }
 
     @Override
@@ -32,14 +31,13 @@ public class ArticleServiceImpl implements ArticleService {
         List<Article> list = articleMapper.getAll();
         sortHot(list);
         PageMethod.startPage(pageNum, 5);
-        PageInfo<Article> pageInfo = new PageInfo<>(list);
-        return pageInfo;
+        return new PageInfo<>(list);
 
     }
 
     @Override
     public void updateArticle(Article article) {
-        articleMapper.updateByPrimaryKey(article);
+        articleMapper.updateByPrimaryKeyWithBLOBs(article);
     }
 
     @Override
@@ -56,8 +54,7 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> getArticleByUser(Integer uid, int pageNum) {
         PageMethod.startPage(pageNum, 5);
         PageInfo<Article> pageInfo = new PageInfo<>(articleMapper.selectByUid(uid));
-        List<Article> list = pageInfo.getList();
-        return list;
+        return pageInfo.getList();
     }
 
     @Override
@@ -68,8 +65,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public PageInfo<Article> getArticleByKeyword(String keyword, int pageNum) {
         PageMethod.startPage(pageNum, 5);
-        PageInfo<Article> pageInfo = new PageInfo<>(articleMapper.selectByKeyword(keyword));
-        return pageInfo;
+        return new PageInfo<>(articleMapper.selectByKeyword(keyword));
     }
 
     @Override
@@ -79,16 +75,13 @@ public class ArticleServiceImpl implements ArticleService {
 
     private void sortHot(List<Article> list)
     {
-        Collections.sort(list, new Comparator<Article>() {
-            @Override
-            public int compare(Article o1, Article o2) {
-                if (getScore(o1) > getScore(o2))
-                    return -1;
-                else if(getScore(o1) == getScore(o2))
-                    return 0;
-                else
-                    return 1;
-            }
+        list.sort((o1, o2) -> {
+            if (getScore(o1) > getScore(o2))
+                return -1;
+            else if (getScore(o1) == getScore(o2))
+                return 0;
+            else
+                return 1;
         });
     }
 
