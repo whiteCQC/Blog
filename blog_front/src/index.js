@@ -14,6 +14,7 @@ import Profile from "./component/user/profile";
 import Concern from "./component/user/concern";
 import Fans from "./component/user/fan";
 import WriteBlog from "./component/article/writeBlog";
+import Blog from "./component/blog/blog";
 
 ReactDOM.render(
     <Provider store={store}>
@@ -29,6 +30,8 @@ ReactDOM.render(
             <Route path='/person/fan' component={Fans}/>
 
             <Route path='/write' component={WriteBlog}/>
+
+            <Route path='/blog/:uid' component={Blog}/>
         </Router>
 
     </Provider>

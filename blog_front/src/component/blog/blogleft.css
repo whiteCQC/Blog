@@ -1,0 +1,17 @@
+.BlogLeftNav{
+    position: absolute;
+    top:150px;
+    width: 160px;
+    margin-left:120px;
+}
+
+.BlogLeftNav>ul>li{
+    font-size: 26px;
+    margin-top: 10px;
+
+}
+.BlogLeftNav>ul>li>button{
+    font-size: 24px;
+    background: transparent;
+    border: 2px #ca0c16 solid;
+}

@@ -1,32 +1,48 @@
 import React, { Component } from 'react';
-import Axios from "../../axios/axios";
 import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
 
 import './left.css'
 
 class UserLeftNav extends Component {
     constructor(props) {
         super(props);
+        this.state=({
+            uid:localStorage.getItem("uid")
+        })
+        this.myBlog=this.myBlog.bind(this)
+        this.myProfile=this.myProfile.bind(this)
+        this.myConcern=this.myConcern.bind(this)
+        this.myFan=this.myFan.bind(this)
     }
-
+    myBlog(){
+        let res="/blog/" + this.state.uid;
+        this.props.history.push(res)
+    }
+    myProfile(){
+        this.props.history.push("/person/profile")
+    }
+    myConcern(){
+        this.props.history.push("/person/concern")
+    }
+    myFan(){
+        this.props.history.push("/person/fan")
+    }
     render() {
         return(
             <div className="UserLeftNav">
                 <ul>
                     <li>
-                        <a href="/person/profile">个人资料</a>
+                        <button onClick={this.myProfile}>个人资料</button>
                     </li>
                     <li>
-                        <a href="/person/store">我的收藏</a>
+                        <button onClick={this.myConcern}>我的关注</button>
                     </li>
                     <li>
-                        <a href="/person/concern">我的关注</a>
+                        <button onClick={this.myFan}>我的粉丝</button>
                     </li>
                     <li>
-                        <a href="/person/fan">我的粉丝</a>
-                    </li>
-                    <li>
-                        <a href="/person/blog">我的博客</a>
+                        <button onClick={this.myBlog}>我的博客</button>
                     </li>
                 </ul>
             </div>
@@ -34,4 +50,4 @@ class UserLeftNav extends Component {
     }
 }
 
-export default connect()(UserLeftNav)
+export default connect()(withRouter(UserLeftNav))

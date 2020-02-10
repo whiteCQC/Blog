@@ -1,12 +1,17 @@
 .UserLeftNav{
-    position: absolute;
-    top:150px;
-    width: 150px;
+     position: absolute;
+     top:150px;
+     width: 160px;
 
-}
+ }
 
 .UserLeftNav>ul>li{
     font-size: 26px;
     margin-top: 10px;
+
+}
+.UserLeftNav>ul>li>button{
+    background: transparent;
+    font-size: 24px;
     border: 2px #ca0c16 solid;
 }
