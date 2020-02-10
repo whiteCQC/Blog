@@ -10,6 +10,9 @@ public class MarkedKey {
         this.markId = markId;
     }
 
+    public MarkedKey() {
+    }
+
     public Integer getUid() {
         return uid;
     }

@@ -83,6 +83,22 @@ public class Article {
         return viewNum;
     }
 
+    @Override
+    public String toString() {
+        return "Article{" +
+                "aid=" + aid +
+                ", uid=" + uid +
+                ", articleTitle='" + articleTitle + '\'' +
+                ", date=" + date +
+                ", type=" + type +
+                ", mode=" + mode +
+                ", viewNum=" + viewNum +
+                ", spColId=" + spColId +
+                ", articleContent='" + articleContent + '\'' +
+                ", user=" + user +
+                '}';
+    }
+
     public void setViewNum(Integer viewNum) {
         this.viewNum = viewNum;
     }

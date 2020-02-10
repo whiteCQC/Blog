@@ -12,6 +12,10 @@ public class Marked extends MarkedKey {
         super(uid, markId);
     }
 
+    public Marked() {
+        super();
+    }
+
     public List<Article> getArticleList() {
         return articleList;
     }

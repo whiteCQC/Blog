@@ -18,9 +18,20 @@
     uid, mark_id, mark_name
   </sql>
   <select id="getArticleInMarked" resultMap="com.blog.mapper.ArticleMapper.BaseResultMap" parameterType="java.util.Map">
-    select a.*
-    from article a,marked_article ma
-    where a.aid = ma.aid and ma.uid=#{uid} and ma.mark_id=#{markId}
+    SELECT
+    a.*
+    FROM
+    article a
+    WHERE
+    a.aid IN (
+    SELECT
+    aid
+    FROM
+    marked_article ma
+    WHERE
+    ma.uid = #{uid}
+    AND ma.mark_id = #{markId}
+    )
   </select>
   <select id="getMaxMarkId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
     select max(mark_id)
@@ -39,7 +50,7 @@
     from marked
     where uid = #{uid,jdbcType=INTEGER}
   </select>
-  <select id="getMarkId" parameterType="java.util.Map" resultMap="BaseResultMap">
+  <select id="getMarkId" parameterType="java.util.Map" resultType="Integer">
     select mark_id
     from marked
     where uid = #{uid,jdbcType=INTEGER} and mark_name = #{markName}
