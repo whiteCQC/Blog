@@ -30,7 +30,7 @@
   <select id="getArticleInfoByUid" parameterType="java.lang.Integer" resultType="java.util.Map">
     select count(*) as article_num,sum(view_num) as total_view
     from article
-    where uid = {#uid}
+    where uid = #{uid}
   </select>
 
 
