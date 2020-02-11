@@ -1,12 +1,8 @@
 package com.blog;
 
-import com.blog.mapper.ArticleMapper;
-import com.blog.mapper.MarkedArticleMapper;
-import com.blog.mapper.MarkedMapper;
-import com.blog.mapper.UserMapper;
+import com.blog.mapper.*;
 import com.blog.model.*;
-import com.blog.service.ArticleService;
-import com.blog.service.MarkService;
+import com.blog.vo.Fan;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -127,6 +123,37 @@ class BlogApplicationTests {
         MarkedKey key = new MarkedKey(2,3);
         markedArticleMapper.deleteByMarked(key);
 
+
+    }
+
+    @Autowired
+    FollowerMapper followerMapper;
+
+    @Test
+    void followTest()
+    {
+        Follower f = new Follower();
+        f.setFollowerId(3);
+        f.setUid(1);
+        int i = followerMapper.insert(f);
+        System.out.println(i);
+        i = followerMapper.insert(f);
+        System.out.println(i);
+        followerMapper.deleteByPrimaryKey(f);
+        i = followerMapper.getFanNum(1);
+        System.out.println(i);
+        List<Fan> fans2 = followerMapper.getFansOfUser(1);
+        for(Fan fan:fans2)
+        {
+            System.out.println(fan.getAuthorName());
+            System.out.println(fan.getFollowerName());
+        }
+        List<Fan> fans1 = followerMapper.getConcernsOfUser(1);
+        for(Fan fan:fans1)
+        {
+            System.out.println(fan.getAuthorName());
+            System.out.println(fan.getFollowerName());
+        }
 
     }
 

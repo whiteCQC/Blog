@@ -1,16 +1,23 @@
 package com.blog.service.impl;
 
 
+import com.blog.mapper.FollowerMapper;
 import com.blog.mapper.UserMapper;
+import com.blog.model.Follower;
 import com.blog.model.User;
 import com.blog.service.UserService;
+import com.blog.vo.Fan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    FollowerMapper followerMapper;
 
     @Override
     public Boolean createUser(User user) {
@@ -46,6 +53,34 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer getFanNum(Integer uid) {
-        return null;
+        return followerMapper.getFanNum(uid);
+    }
+
+    @Override
+    public Boolean follow(Fan fan) {
+        Follower f = new Follower();
+        f.setFollowerId(fan.getFollowId());
+        f.setUid(fan.getFollowedId());
+        int i = followerMapper.insert(f);
+        return i!=0;
+    }
+
+    @Override
+    public Boolean cancelFollow(Fan fan) {
+        Follower f = new Follower();
+        f.setFollowerId(fan.getFollowId());
+        f.setUid(fan.getFollowedId());
+        int i = followerMapper.deleteByPrimaryKey(f);
+        return i!=0;
+    }
+
+    @Override
+    public List<Fan> getFans(Integer uid) {
+        return followerMapper.getFansOfUser(uid);
+    }
+
+    @Override
+    public List<Fan> getConcerns(Integer uid) {
+        return followerMapper.getConcernsOfUser(uid);
     }
 }

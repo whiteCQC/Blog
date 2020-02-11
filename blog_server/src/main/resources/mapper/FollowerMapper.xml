@@ -1,22 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.blog.mapper.FollowerMapper">
-  <resultMap id="BaseResultMap" type="com.blog.model.FollowerKey">
+  <resultMap id="BaseResultMap" type="com.blog.model.Follower">
     <id column="uid" jdbcType="INTEGER" property="uid" />
     <id column="follower_id" jdbcType="INTEGER" property="followerId" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="com.blog.model.FollowerKey">
+
+  <delete id="deleteByPrimaryKey" parameterType="com.blog.model.Follower">
     delete from follower
     where uid = #{uid,jdbcType=INTEGER}
       and follower_id = #{followerId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.blog.model.FollowerKey">
-    insert into follower (uid, follower_id)
+  <insert id="insert" parameterType="com.blog.model.Follower">
+    insert ignore into follower (uid, follower_id)
     values (#{uid,jdbcType=INTEGER}, #{followerId,jdbcType=INTEGER})
   </insert>
   <select id="getFanNum" parameterType="java.lang.Integer" resultType="Integer">
     select count(*)
     from follower
-    where uid = {#uid}
+    where uid = #{uid}
   </select>
+  <select id="getConcernsOfUser" parameterType="java.lang.Integer" resultType="com.blog.vo.Fan">
+    SELECT
+      uname as authorName,
+      u.uid as followedId
+    FROM
+      follower f
+      JOIN USER u ON f.uid = u.uid
+    WHERE
+      f.follower_id = #{uid}
+  </select>
+  <select id="getFansOfUser" parameterType="java.lang.Integer" resultType="com.blog.vo.Fan">
+    SELECT
+      uname as followerName,
+      u.uid as followId
+    FROM
+      follower f
+      JOIN USER u ON f.follower_id = u.uid
+    WHERE
+      f.uid = #{uid}
+  </select>
+
+
 </mapper>

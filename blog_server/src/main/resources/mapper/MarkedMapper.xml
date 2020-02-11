@@ -19,18 +19,18 @@
   </sql>
   <select id="getArticleInMarked" resultMap="com.blog.mapper.ArticleMapper.BaseResultMap" parameterType="java.util.Map">
     SELECT
-    a.*
+      a.*
     FROM
-    article a
+      article a
     WHERE
-    a.aid IN (
-    SELECT
-    aid
-    FROM
-    marked_article ma
-    WHERE
-    ma.uid = #{uid}
-    AND ma.mark_id = #{markId}
+      a.aid IN (
+       SELECT
+          aid
+        FROM
+          marked_article ma
+        WHERE
+          ma.uid = #{uid}
+          AND ma.mark_id = #{markId}
     )
   </select>
   <select id="getMaxMarkId" resultType="java.lang.Integer" parameterType="java.lang.Integer">

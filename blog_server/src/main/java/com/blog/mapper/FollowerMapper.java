@@ -1,14 +1,18 @@
 package com.blog.mapper;
 
 import com.blog.model.Follower;
-import com.blog.model.FollowerKey;
+import com.blog.vo.Fan;
+
+import java.util.List;
 
 public interface FollowerMapper {
-    int deleteByPrimaryKey(FollowerKey key);
+    int deleteByPrimaryKey(Follower key);
 
-    int insert(FollowerKey record);
+    int insert(Follower record);
 
-    Follower selectByUid(Integer uid);
+    List<Fan> getFansOfUser(Integer uid);//得到用户的粉丝
+
+    List<Fan> getConcernsOfUser(Integer uid);//得到用户关注列表
 
     int getFanNum(Integer uid);
 

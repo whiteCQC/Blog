@@ -1,12 +1,18 @@
 package com.blog.controller;
 
 import com.blog.bean.Result;
-import com.blog.model.User;
+import com.blog.service.UserService;
 import com.blog.vo.Fan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
 
 @RestController
 public class FanController {
+    @Autowired
+    UserService userService;
 
     /**
      * 关注博主,传入{用户ID和被关注博主的ID}
@@ -14,8 +20,10 @@ public class FanController {
      */
     @PostMapping("/FanAdd")
     public Result FanFollow(@RequestBody Fan fan){
-        //TODO
-        return null;
+        if(userService.follow(fan))
+            return Result.success();
+        else
+            return Result.error("关注失败");
     }
 
     /**
@@ -25,9 +33,10 @@ public class FanController {
      */
     @PostMapping("/FanCancel")
     public Result CancelFollow(@RequestBody Fan fan){
-        //TODO
-
-        return null;
+        if(userService.cancelFollow(fan))
+            return Result.success();
+        else
+            return Result.error("取消失败");
     }
 
     /**
@@ -36,8 +45,11 @@ public class FanController {
      */
     @GetMapping("/viewFans")
     public Result ViewFans(@RequestParam(value = "uid") int userId){
-        //TODO
-        return null;
+        //fan里面只有followerName和followId有信息
+        List<Fan> fans = userService.getFans(userId);
+        HashMap< String, Object > map = new HashMap<>();
+        map.put("fans",fans);
+        return Result.success(map);
     }
 
     /**
@@ -46,7 +58,10 @@ public class FanController {
      */
     @GetMapping("/viewConcerns")
     public Result ViewConcerns(@RequestParam(value = "uid") int userId){
-        //TODO
-        return null;
+        //fan里面只有authorName和followedId有信息
+        List<Fan> fans = userService.getConcerns(userId);
+        HashMap< String, Object > map = new HashMap<>();
+        map.put("fans",fans);
+        return Result.success(map);
     }
 }
