@@ -7,13 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
 @RestController
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private HttpServletRequest request;
 
     /**
      *
@@ -27,6 +34,8 @@ public class UserController {
             HashMap<String, Object> map = new HashMap<>();
             map.put("uid",user.getUid());
             map.put("uname",user.getUname());
+            String token = request.getHeader("token");
+            map.put("token",token);
             return Result.success(map);
         }
         else
@@ -56,6 +65,8 @@ public class UserController {
                 HashMap < String, Object > map = new HashMap<>();
                 map.put("uid", user.getUid());
                 map.put("uname",user.getUname());
+                String token = request.getHeader("token");
+                map.put("token",token);
                 return Result.success(map);
             }
             else
