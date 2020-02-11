@@ -58,7 +58,7 @@ export function fetchRegister (data,dispatch){
     const user = JSON.parse(data)
     Axios.post('/register', {
         email: user.email,
-        uname:user.name,
+        uname:user.uname,
         password: user.password
     }).then(({data}) => {
         if (data.code === 200) {
