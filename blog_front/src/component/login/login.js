@@ -8,7 +8,11 @@ const Login = ({ dispatch }) => {
     let email,password
     return(
      localStorage.getItem("token")==null?
-        <div className="loginFrame">
+        <div className="login-form">
+            <h1>用户登录</h1>
+            <div className="login-head">
+                <img src="../image/user.png"/>
+            </div>
             <form onSubmit={e => {
                 e.preventDefault()
                 if (!email.value.trim()||!password.value.trim()) {
@@ -19,29 +23,23 @@ const Login = ({ dispatch }) => {
                     password:password.value
                 })
                 dispatch(UserLogin(userInfo))
-
-
             }}>
-                <h1>用户登录</h1>
+
+
+                <input className="inputForLogin" ref={node => email = node} placeholder="邮箱账号"/>
+                <input className="inputForLogin" type="password" ref={node => password = node}
+                       maxLength="18" placeholder="用户密码"/>
+
+                <button type="submit" className="login-submit">登录</button>
                 <div>
-                    <span className="labelForLogin">用户名</span>
-                    <span>
-                        <input className="inputForLogin" ref={node => email = node}>
-                        </input>
-                    </span>
+                    <p>没有账号？点击这里 <a href="/register" className="toRegister">注册</a></p>
                 </div>
-                <div>
-                    <span className="labelForLogin">密&nbsp;&nbsp;&nbsp;码</span>
-                    <span>
-                        <input className="inputForLogin" type="password" ref={node => password = node}>
-                        </input>
-                    </span>
-                </div>
-                <button type="submit">登录</button>
-                <p>没有账号？点击这里</p>
-                <a href="/register">注册</a>
+
             </form>
-            <a href='/'>返回</a>
+            <div className="return">
+                <a href='/' >返回</a>
+            </div>
+
         </div>
         :
          <Redirect push to="/"/>

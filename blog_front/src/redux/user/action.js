@@ -1,5 +1,4 @@
 import Axios from "../../axios/axios";
-import {openNotificationWithIcon} from '../../component/notification/index';
 
 // 注册
 const register = (data) => {
@@ -34,7 +33,7 @@ export const UserRegister = (data) =>{
 // 登录
 function fetchLogin (data,dispatch){
     const user = JSON.parse(data)
-    Axios.post('/loginTest', {
+    Axios.post('/login', {
         email: user.email,
         password: user.password
     }).then(({data}) => {
@@ -47,19 +46,19 @@ function fetchLogin (data,dispatch){
 
             window.location.reload()
         } else {
-            openNotificationWithIcon("error", "Error", data.description)
+            alert(data.description)
         }
     }).catch(error => {
-        openNotificationWithIcon("error", "Error", error.message)
+        alert(error.message)
     })
 
 }
 
 export function fetchRegister (data,dispatch){
     const user = JSON.parse(data)
-    Axios.post('/registerTest', {
+    Axios.post('/register', {
         email: user.email,
-        uname:user.name,
+        uname:user.uname,
         password: user.password
     }).then(({data}) => {
         if (data.code === 200) {
@@ -71,10 +70,10 @@ export function fetchRegister (data,dispatch){
 
             window.location.reload()
         } else {
-            openNotificationWithIcon("error", "Error", data.description)
+            alert(data.description)
         }
     }).catch(error => {
-        openNotificationWithIcon("error", "Error", error.message)
+        alert(error.message)
     })
 
 }

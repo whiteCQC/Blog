@@ -56,7 +56,7 @@ public class UserController {
         }
         else
         {
-            if(user.getPassword().equals(userInfo.getEmail()))
+            if(user.getPassword().equals(userInfo.getPassword()))
             {
                 HashMap < String, Object > map = new HashMap<>();
                 map.put("uid", user.getUid());
