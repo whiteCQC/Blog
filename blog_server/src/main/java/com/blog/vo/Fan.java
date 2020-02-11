@@ -37,4 +37,5 @@ public class Fan {
     public void setFollowedId(int followedId) {
         this.followedId = followedId;
     }
+
 }

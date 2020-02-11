@@ -84,7 +84,6 @@ public class ArticleController {
      */
     @GetMapping("/article/detail")
     public Result ArticleDetail(@RequestParam(value = "aid")int aid){
-        //未测试
         Article article = articleService.getArticleById(aid);
         Author author = new Author();
         int uid = article.getUid();
