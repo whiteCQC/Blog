@@ -10,7 +10,11 @@ const Register= ({ dispatch }) => {
     let email,pw1,pw2,name
     return(
         localStorage.getItem("token")==null?
-            <div>
+            <div className="register-form">
+                <h1>用户注册</h1>
+                <div className="register-head">
+                    <img src="../image/user.png"/>
+                </div>
                 <form onSubmit={e => {
                     e.preventDefault()
                     if (!email.value.trim()||!pw1.value.trim()||!name.value.trim()) {
@@ -27,39 +31,15 @@ const Register= ({ dispatch }) => {
                         uname:name.value
                     })
                     dispatch(UserRegister(userInfo))
-
-
                 }}>
-                    <h3>用户登录</h3>
+                    <input className="inputForRegister" ref={node => email = node} placeholder="邮箱账号"/>
+                    <input className="inputForRegister" ref={node => name = node} maxLength="20" placeholder="用户昵称"/>
+                    <input className="inputForRegister" type="password" ref={node => pw1 = node} maxLength="18" placeholder="用户密码"/>
+                    <input className="inputForRegister" type="password" ref={node => pw2 = node} maxLength="18" placeholder="密码确认"/>
+
                     <div>
-                        <span>邮箱：</span>
-                        <span>
-                        <input ref={node => email = node}>
-                        </input>
-                    </span>
+                        <button type="submit" className="register-submit">注册</button>
                     </div>
-                    <div>
-                        <span>用户名：</span>
-                        <span>
-                        <input ref={node => name = node}>
-                        </input>
-                    </span>
-                    </div>
-                    <div>
-                        <span>密码：</span>
-                        <span>
-                        <input type="password" ref={node => pw1 = node}>
-                        </input>
-                    </span>
-                    </div>
-                    <div>
-                        <span>密码确认：</span>
-                        <span>
-                        <input type="password" ref={node => pw2 = node}>
-                        </input>
-                    </span>
-                    </div>
-                    <button type="submit">注册</button>
                 </form>
                 <a href='/'>返回</a>
             </div>

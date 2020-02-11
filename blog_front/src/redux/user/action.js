@@ -34,7 +34,7 @@ export const UserRegister = (data) =>{
 // 登录
 function fetchLogin (data,dispatch){
     const user = JSON.parse(data)
-    Axios.post('/loginTest', {
+    Axios.post('/login', {
         email: user.email,
         password: user.password
     }).then(({data}) => {
@@ -57,7 +57,7 @@ function fetchLogin (data,dispatch){
 
 export function fetchRegister (data,dispatch){
     const user = JSON.parse(data)
-    Axios.post('/registerTest', {
+    Axios.post('/register', {
         email: user.email,
         uname:user.name,
         password: user.password
