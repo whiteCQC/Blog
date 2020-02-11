@@ -1,5 +1,4 @@
 import Axios from "../../axios/axios";
-import {openNotificationWithIcon} from '../../component/notification/index';
 
 // 注册
 const register = (data) => {
@@ -47,10 +46,10 @@ function fetchLogin (data,dispatch){
 
             window.location.reload()
         } else {
-            openNotificationWithIcon("error", "Error", data.description)
+            alert(data.description)
         }
     }).catch(error => {
-        openNotificationWithIcon("error", "Error", error.message)
+        alert(error.message)
     })
 
 }
@@ -71,10 +70,10 @@ export function fetchRegister (data,dispatch){
 
             window.location.reload()
         } else {
-            openNotificationWithIcon("error", "Error", data.description)
+            alert(data.description)
         }
     }).catch(error => {
-        openNotificationWithIcon("error", "Error", error.message)
+        alert(error.message)
     })
 
 }
