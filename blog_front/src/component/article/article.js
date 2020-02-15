@@ -25,7 +25,7 @@ class ArticleBody extends Component{
         //console.log(this.props)
         let aid=this.props.match.params.aid
         //console.log("aid:"+aid);
-        Axios.get("/article/detailTest", {
+        Axios.get("/article/detail", {
             params: { 'aid': aid }
         }).then(({data}) => {
             if(data.code === 200){

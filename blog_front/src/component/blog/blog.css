@@ -6,3 +6,20 @@
     height: 600px;
     border: #ca0c16 solid 1px;
 }
+.buttonHeaders{
+    margin-top: 20px;
+    margin-left: 30px;
+
+}
+.buttonHeaders>button{
+    margin-left: 10px;
+}
+.blogArticles>ul>li{
+    margin-right: 20px;
+    padding: 18px 24px 13px 24px;
+    background: #fff;
+    border: 1px solid #C8C8C8;
+    position: relative;
+    height: 100px;
+    margin-top: 10px;
+}

@@ -17,7 +17,7 @@ class Profile extends Component{
     }
     componentDidMount (){
         let uid=localStorage.getItem("uid");
-        Axios.post("/userInfoTest",{
+        Axios.post("/userInfo",{
             uid:uid
         }).then(({data}) => {
             if(data.code === 200){

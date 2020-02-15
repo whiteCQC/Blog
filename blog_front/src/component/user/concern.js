@@ -15,7 +15,7 @@ class Concern extends Component {
     }
     componentDidMount () {
         let uid = localStorage.getItem("uid");
-        Axios.get("/viewConcernsTest",{
+        Axios.get("/viewConcerns",{
             params:{
                 uid:uid
             }

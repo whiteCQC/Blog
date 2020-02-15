@@ -24,7 +24,7 @@ class WriteBlog extends Component{
             alert("文章内容不能为空")
         }
         else{
-            Axios.post("/article/createTest",{
+            Axios.post("/article/create",{
                 uid:localStorage.getItem("uid"),
                 type:this.state.type,
                 mode:this.state.mode,
