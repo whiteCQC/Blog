@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import SingleArticle from "./singleArticle";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 class MyBlog extends Component{
     constructor(props) {
@@ -53,9 +55,24 @@ class MyBlog extends Component{
     edit(){
         alert("编辑")
     }
-    del(){
-        alert("删除")
-    }
+    del= (aid) => {
+        confirmAlert({
+            title: '提交确认',
+            message: '真的要删除此文章吗？',
+            buttons: [
+                {
+                    label: '确认',
+                    onClick: () => {
+                        //TODO 删除文章
+                    }
+                },
+                {
+                    label: '放弃',
+                    onClick: () => {}
+                }
+            ]
+        });
+    };
     render() {
         return(
             <div className="blogRight">
@@ -77,6 +94,7 @@ class MyBlog extends Component{
                         )}
                     </ul>
                 </div>
+
             </div>
         )
     }
