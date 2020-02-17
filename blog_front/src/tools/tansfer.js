@@ -1,21 +1,21 @@
 export const dateTransfer=(strDate)=> {
-    var date = new Date(strDate);
+    const date = new Date(strDate);
     return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()+" "+date.getHours()+":"+
         date.getMinutes()+":"+date.getSeconds()
 }
 
 export const dateTransferSimple=(strDate)=> {
-    var date = new Date(strDate);
+    let date = new Date(strDate);
     return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
 }
 
 export const cutstr = (str, len)=> {
-    var str_length = 0;
-    var str_len = 0;
+    let str_length = 0;
+    let str_len = 0;
     let str_cut;
-    str_cut = new String();
+    str_cut = String();
     str_len = str.length;
-    for (var i = 0; i < str_len; i++) {
+    for (let i = 0; i < str_len; i++) {
         let a;
         a = str.charAt(i);
         str_length++;

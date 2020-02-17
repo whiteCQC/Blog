@@ -17,7 +17,7 @@ class ToWrite extends Component{
     render() {
         return(
             <div className="toWrite">
-                <a onClick={this.ToWrite}>写文章</a>
+                <button onClick={this.ToWrite}>写文章</button>
             </div>
         )
 

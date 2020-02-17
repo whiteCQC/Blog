@@ -13,7 +13,7 @@ const Register= ({ dispatch }) => {
             <div className="register-form">
                 <h1>用户注册</h1>
                 <div className="register-head">
-                    <img src="../image/user.png"/>
+                    <img src="../image/user.png" alt='用户'/>
                 </div>
                 <form onSubmit={e => {
                     e.preventDefault()

@@ -3,6 +3,9 @@
     position: absolute;
     cursor: pointer;
 }
-.toWrite>a{
+.toWrite>button{
+    font-size: 16px;
     color: #ca0c16;
+    background-color:transparent;
+    border-style:none;
 }

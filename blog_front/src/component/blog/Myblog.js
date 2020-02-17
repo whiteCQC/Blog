@@ -18,23 +18,27 @@ class MyBlog extends Component{
         this.edit=this.edit.bind(this)
         this.del=this.del.bind(this)
     }
-    componentWillReceiveProps(nextProps){
-        this.setState({
-            articles:nextProps.articles,
-            articlesAll:nextProps.articles,
-        })
-        let pub=[],pri=[]
-        nextProps.articles.map((a)=>{
-            if(a.mode===0){
-                pub.push(a)
-            }else{
-                pri.push(a)
+    static getDerivedStateFromProps(nextProps,preState){
+        const oldData =JSON.stringify(preState)
+        const newData =JSON.stringify(nextProps)
+        if(oldData!==newData){
+            let pub=[],pri=[]
+            nextProps.articles.forEach((a)=>{
+                if(a.mode===0){
+                    pub.push(a)
+                }else{
+                    pri.push(a)
+                }
+            })
+
+            return {
+                articlesPub:pub,
+                articlesPri:pri,
+                articles:nextProps.articles,
+                articlesAll:nextProps.articles
             }
-        })
-        this.setState({
-            articlesPub:pub,
-            articlesPri:pri
-        })
+        }
+        return null
     }
 
     allArticle(){

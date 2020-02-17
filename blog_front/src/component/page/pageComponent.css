@@ -4,10 +4,12 @@
 .next disable{
     disabled:"disabled"
 }
-.paginationDiv>a{
+.paginationDiv>button{
     border: #ca0c16 solid 2px;
     float: left;
     cursor:pointer;
+    background-color: transparent;
+    font-size: 18px;
 }
 .pageButton{
     text-align: center;

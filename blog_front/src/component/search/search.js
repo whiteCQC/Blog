@@ -18,11 +18,16 @@ class Search extends Component{
         this.props.history.push(res)
         window.location.reload()
     }
+    handleInput= (e)=>{
+        this.setState({
+            searchText:e.target.value
+        })
+    }
 
     render(){
         return(
             <div className="search">
-                <input ref={node=>this.state.searchText=node} type="text" placeholder="请输入..."/>
+                <input onClick={this.handleInput} type="text" placeholder="请输入..."/>
                 <button onClick={this.handleSearch}><i>搜索</i></button>
             </div>
         )

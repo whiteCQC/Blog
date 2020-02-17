@@ -9,16 +9,22 @@ class OtherBlog extends Component{
         }
 
     }
-    componentWillReceiveProps(nextProps){
-        let pub=[]
-        nextProps.articles.map((a)=>{
-            if(a.mode===0){
-                pub.push(a)
+    static getDerivedStateFromProps(nextProps,preState){
+        const oldData =JSON.stringify(preState)
+        const newData =JSON.stringify(nextProps)
+        if(oldData!==newData){
+            let pub=[]
+            nextProps.articles.forEach((a)=>{
+                if(a.mode===0){
+                    pub.push(a)
+                }
+            })
+            return {
+                articles:pub
             }
-        })
-        this.setState({
-            articles:pub
-        })
+        }
+        return null
+
     }
     render() {
         return(

@@ -2,14 +2,11 @@ import React,{Component} from "react";
 import './RightUser.css'
 
 class RightUser extends Component{
-    constructor(props) {
-        super(props);
-    }
     render() {
         return(
             <div className="RightUser">
                 <div>
-                    <img src="../image/avatar0.jpg"/>
+                    <img src="../image/avatar0.jpg" alt='头像'/>
                 </div>
                 <div className="userName">
                     <span >{this.props.user.uname}</span>

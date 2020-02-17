@@ -49,7 +49,7 @@ class Concern extends Component {
                         <ul>
                             {this.state.fans.map((fan,index) =>
                                 <li key={fan.uid}>
-                                    <img src="../image/avatar0.jpg" />
+                                    <img src="../image/avatar0.jpg" alt="头像"/>
                                     <span className="fanName">{fan.uname}</span>
                                     <button className="cancelFollow">取消关注</button>
                                 </li>
