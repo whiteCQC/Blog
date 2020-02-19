@@ -17,6 +17,13 @@
     width: 25px;
     border: #ca0c16 solid 2px;
     cursor:pointer;
+
+}
+.NumButton{
+    float: left;
+    cursor:pointer;
+    background-color: transparent;
+    font-size: 18px;
 }
 .paginationDiv{
     float: left;

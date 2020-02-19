@@ -14,7 +14,7 @@ class BlogLeft extends Component{
     handleCollect= (e)=>{
 
     }
-    handleArticle= (e)=>{
+    handleArticle(){
 
     }
     handleCol= (e)=>{

@@ -43,7 +43,8 @@ class PageComponent extends  Component{
                               pageNum.map(function(curPageNum){
                                   return(
                                       <div className="pageButton" key={curPageNum.num}>
-                                          <button onClick = {_this.props.pageClick.bind(_this,curPageNum.num)}>
+                                          <button onClick = {_this.props.pageClick.bind(_this,curPageNum.num)}
+                                          className="NumButton">
                                               {curPageNum.num}</button>
                                       </div>
                                   )

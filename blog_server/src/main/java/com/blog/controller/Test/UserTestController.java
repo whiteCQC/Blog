@@ -42,7 +42,7 @@ public class UserTestController {
 
         HashMap < String, Object > map = new HashMap<>();
         map.put("uid", "10");
-        map.put("uname","十");
+        map.put("uname","萝卜青菜");
         map.put("token",null);
         return Result.success(map);
     }
@@ -65,7 +65,7 @@ public class UserTestController {
     public Result GetUserInfo(@RequestBody User userInfo){
         User u=new User();
         u.setUid(1);
-        u.setUname("安慕希");
+        u.setUname("萝卜青菜");
         u.setBirth(new Date());
         u.setEmail("666666@163.com");
         u.setGender("未知");

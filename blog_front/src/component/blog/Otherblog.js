@@ -10,8 +10,8 @@ class OtherBlog extends Component{
 
     }
     static getDerivedStateFromProps(nextProps,preState){
-        const oldData =JSON.stringify(preState)
-        const newData =JSON.stringify(nextProps)
+        const oldData =JSON.stringify(preState.articlesAll)
+        const newData =JSON.stringify(nextProps.articles)
         if(oldData!==newData){
             let pub=[]
             nextProps.articles.forEach((a)=>{

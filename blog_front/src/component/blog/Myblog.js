@@ -19,8 +19,8 @@ class MyBlog extends Component{
         this.del=this.del.bind(this)
     }
     static getDerivedStateFromProps(nextProps,preState){
-        const oldData =JSON.stringify(preState)
-        const newData =JSON.stringify(nextProps)
+        const oldData =JSON.stringify(preState.articlesAll)
+        const newData =JSON.stringify(nextProps.articles)
         if(oldData!==newData){
             let pub=[],pri=[]
             nextProps.articles.forEach((a)=>{

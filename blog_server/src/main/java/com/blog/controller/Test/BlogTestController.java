@@ -19,8 +19,8 @@ public class BlogTestController {
     public Result viewPersonalBlog(@RequestParam(value = "uid")int uid){
         HashMap< String, Object > map = new HashMap<>();
         User u=new User();
-        u.setUname("订书钉");
-        u.setEmail("123456798@126.com");
+        u.setUname("萝卜青菜");
+        u.setEmail("666666@163.com");
         map.put("userInfo", u);
 
         map.put("markInfo", null);
