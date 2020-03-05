@@ -1,8 +1,9 @@
 .UserLeftNav{
-     position: absolute;
-     top:150px;
-     width: 160px;
-
+    position: absolute;
+    top:150px;
+    width: 160px;
+    display: inline-block;
+    margin-left: 280px;
  }
 
 .UserLeftNav>ul>li{
