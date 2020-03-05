@@ -1,6 +1,7 @@
 .logNav{
     margin-left: 1600px;
     position: absolute;
+    width: 300px;
 }
 .logNav>a{
     margin-left: 10px;

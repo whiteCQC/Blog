@@ -2,10 +2,12 @@
     margin-left: 1500px;
     position: absolute;
     cursor: pointer;
+    width: 100px;
 }
 .toWrite>button{
     font-size: 16px;
     color: #ca0c16;
     background-color:transparent;
     border-style:none;
+    cursor:pointer;
 }

@@ -16,8 +16,12 @@
     margin-left: 100px;
     padding-top: 50px;
 }
-.UserRight>a{
+.UserRight>button{
     float: right;
     margin-right: 50px;
     color: blue;
+    background-color: transparent;
+    border-style: none;
+    cursor: pointer;
+    font-size: 20px;
 }
