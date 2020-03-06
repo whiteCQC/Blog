@@ -68,7 +68,7 @@ public class UserTestController {
         u.setUname("萝卜青菜");
         u.setBirth(new Date());
         u.setEmail("666666@163.com");
-        u.setGender("未知");
+        u.setGender("保密");
 
         return Result.success(u);
 
