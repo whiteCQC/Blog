@@ -48,7 +48,6 @@
 }
 .radio-group{
     display: inline-block;
-    line-height: 1;
     vertical-align: middle;
     margin-left: 20px;
 }
@@ -58,17 +57,9 @@
 }
 .radio-button{
     opacity: 0;
-    outline: 0;
     position: absolute;
-    z-index: -1;
-    left: -999px;
 }
-.radio-button-inner:checked{
-    color: #fff;
-    box-shadow: -1px 0 0 0 #20a0ff;
-    background-color: #22a1d6!important;
-    border-color: #22a1d6!important;
-}
+
 .radio-button-inner{
     box-shadow: none!important;
     margin-right: 20px;
@@ -88,4 +79,11 @@
     display: inline-block;
     line-height: 1;
     vertical-align: middle;
+}
+.email-info{
+    margin-left: 20px;
+}
+.birth-date-picker{
+    margin-left: 20px;
+    display: inline-block;
 }

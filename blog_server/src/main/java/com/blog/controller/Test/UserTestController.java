@@ -63,6 +63,7 @@ public class UserTestController {
 
     @PostMapping("/userInfoTest")
     public Result GetUserInfo(@RequestBody User userInfo){
+        System.out.println(userInfo.getUid());
         User u=new User();
         u.setUid(1);
         u.setUname("萝卜青菜");
@@ -73,6 +74,12 @@ public class UserTestController {
         return Result.success(u);
 
 
+    }
+    @PostMapping("/userInfoChangeTest")
+    public Result userInfoChange(@RequestBody User user){
+        System.out.println(user.getUname());
+        System.out.println(user.getBirth());
+        return Result.success();
     }
 
 }

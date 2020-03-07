@@ -89,4 +89,15 @@ public class UserController {
         }
 
     }
+
+    /**
+     *
+     * @param user uid,修改内容包含用户昵称、性别、出生日期
+     * @return 修改用户信息
+     */
+    @PostMapping("/userInfoChange")
+    public Result userInfoChange(@RequestBody User user){
+        //TODO
+        return null;
+    }
 }
