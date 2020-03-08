@@ -6,7 +6,7 @@ import {Nav} from "../header/header";
 import {followExecute} from "../../redux/interaction/action";
 import {connect} from "react-redux";
 
-import {dateTransfer} from '../../tools/tansfer'
+import {dateTransfer, NumberTransferForLargeNum} from '../../tools/tansfer'
 
 class ArticleBody extends Component{
     constructor (props) {
@@ -20,12 +20,13 @@ class ArticleBody extends Component{
             fanNum:""
         }
         this.handleFollow=this.handleFollow.bind(this)
+        this.handleStore=this.handleStore.bind(this)
     }
     componentDidMount (){
         //console.log(this.props)
         let aid=this.props.match.params.aid
         //console.log("aid:"+aid);
-        Axios.get("/article/detail", {
+        Axios.get("/article/detailTest", {
             params: { 'aid': aid }
         }).then(({data}) => {
             if(data.code === 200){
@@ -58,6 +59,10 @@ class ArticleBody extends Component{
         }
     }
 
+    handleStore(){
+
+    }
+
     render() {
         return(
             <div>
@@ -66,7 +71,7 @@ class ArticleBody extends Component{
                     {/* 文章作者基本信息 */}
                     <div className="authorInfo">
                         <h3>作者:{this.state.author.uname}</h3>
-                        <table border="0">
+                        <table border="0" className="UserInfoTable" cellPadding="10">
                             <tbody>
                             <tr>
                                 <th>文章数</th>
@@ -76,7 +81,7 @@ class ArticleBody extends Component{
                             <tr>
                                 <td>{this.state.articleNum}</td>
                                 <td>{this.state.fanNum}</td>
-                                <td>{this.state.totalView}</td>
+                                <td>{NumberTransferForLargeNum(this.state.totalView)}</td>
                             </tr>
                             </tbody>
 
@@ -90,7 +95,7 @@ class ArticleBody extends Component{
                         {/* 文章区域 */}
                         <div className="articlePart">
                             <span className="title">{this.state.article.articleTitle}</span>
-                            <button>收藏</button>
+                            <button className="button-store" onClick={this.handleStore}>收藏</button>
                             <div>
                                 <span>最后修改于:{dateTransfer(this.state.article.date)}</span>
                                 <span  className="viewNum">阅读{this.state.article.viewNum}</span>
@@ -100,10 +105,8 @@ class ArticleBody extends Component{
 
                         {/* 评论区域 */}
                         <div id="Comments">
-                            <form>
-                                <textarea id="CommentTextArea"/>
-                                <button id="submitComment">提交</button>
-                            </form>
+                                <textarea id="CommentTextArea" placeholder="请自觉遵守互联网相关政策法规，严禁发布色情、暴力、反动的言论。"/>
+                                <button id="submitComment">发表评论</button>
                             <div className="articleComments">
 
                             </div>

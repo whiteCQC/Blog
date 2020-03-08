@@ -36,7 +36,7 @@ class PageComponent extends  Component{
         return(
             <div>
                 <div className="paginationDiv">
-                    <button className={this.props.current === 1? 'prev disable' : 'prev'}
+                    <button className={this.props.current === 1? 'prev-disable' : 'prev'}
                        onClick={this.props.goPrev.bind(this)}>上一页 </button>
                     <span>
                           {
@@ -51,10 +51,10 @@ class PageComponent extends  Component{
                               })
                           }
                     </span>
-                    <button className={this.props.current === this.props.total? 'next disable' : 'next'}
+                    <button className={this.props.current === this.props.totalPage? 'next-disable' : 'next'}
                        onClick={this.props.goNext.bind(this)}> 下一页 </button>
 
-                    <div className="rightDiv">
+                    <div className="rightPageDiv">
                         共 <span className="num-total">  {_this.props.totalPage}</span>页
                     </div>
                 </div>

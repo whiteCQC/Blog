@@ -100,4 +100,15 @@ public class UserController {
         //TODO
         return null;
     }
+
+    /**
+     *
+     * @param user uid,密码
+     * @return 修改用户密码
+     */
+    @PostMapping("/userPasswordChange")
+    public Result userPasswordChange(@RequestBody User user){
+        //TODO
+        return null;
+    }
 }

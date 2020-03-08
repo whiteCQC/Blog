@@ -113,4 +113,15 @@ public class ArticleController {
         articleService.updateArticle(article);
         return Result.success();
     }
+
+    /**
+     *
+     * @param article ,文章id
+     * @return 删除文章,返回新的文章list（articleInfo）
+     */
+    @PostMapping("/article/del")
+    public Result ArticleDel(@RequestBody Article article){
+        //TODO
+        return null;
+    }
 }

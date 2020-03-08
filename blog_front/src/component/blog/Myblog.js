@@ -67,7 +67,7 @@ class MyBlog extends Component{
                 {
                     label: '确认',
                     onClick: () => {
-                        //TODO 删除文章
+                        this.props.ArticleDel(aid)
                     }
                 },
                 {
@@ -90,7 +90,7 @@ class MyBlog extends Component{
                         {this.state.articles.map((article,index) =>
                             <li key={article.aid}>
                                 <SingleArticle article={article} selectArticle={this.props.selectArticle}/>
-                                <div>
+                                <div className="change-article">
                                     <button onClick={this.edit.bind(this,article.aid)}>编辑</button>
                                     <button onClick={this.del.bind(this,article.aid)}>删除</button>
                                 </div>

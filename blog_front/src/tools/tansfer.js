@@ -34,3 +34,16 @@ export const cutstr = (str, len)=> {
         return str;
     }
 }
+
+export const NumberTransferForLargeNum=(num)=>{
+    if(num<10000)
+        return num;
+    else{
+        let ten_thousand=num/10000
+        if(ten_thousand<10000)
+            return Math.round(ten_thousand*10)/10 +"万+"
+        else{
+            return Math.round(ten_thousand/1000)+"亿+"
+        }
+    }
+}

@@ -8,6 +8,7 @@ import BlogLeft from "./blogleft";
 import RightUser from "./RightUser";
 import MyBlog from "./Myblog";
 import OtherBlog from "./Otherblog";
+import {openNotificationWithIcon} from "../notification";
 
 class Blog extends Component{
     constructor(props) {
@@ -47,6 +48,22 @@ class Blog extends Component{
         let res = "/article/" + articleId
         this.props.history.push(res)
     }
+    ArticleDel=(aid)=>{
+        Axios.post("/article/delTest",{
+            aid:aid
+        }).then(({data}) => {
+            if(data.code === 200){
+                this.setState({
+                    articles:data.detail.articleInfo
+                })
+                openNotificationWithIcon("success","Success","成功删除")
+            }else{
+                openNotificationWithIcon("error","Error",data.description)
+            }
+        }).catch( error => {
+            openNotificationWithIcon("error","Error",error.message)
+        })
+    }
 
     render() {
         return(
@@ -54,7 +71,7 @@ class Blog extends Component{
                 <Nav/>
                 <BlogLeft/>
                 <BlogRight flag={this.state.flag} selectArticle={this.selectArticle}
-                           articles={this.state.articles}/>
+                           articles={this.state.articles} ArticleDel={this.ArticleDel}/>
                 <RightUser user={this.state.user} />
             </div>
         )
@@ -63,7 +80,9 @@ class Blog extends Component{
 
 function BlogRight(props){
     if(props.flag){
-        return <MyBlog articles={props.articles} selectArticle={props.selectArticle}/>
+        return <MyBlog articles={props.articles} selectArticle={props.selectArticle}
+                       ArticleDel={props.ArticleDel}
+                />
     }else{
         return <OtherBlog articles={props.articles} selectArticle={props.selectArticle} />
     }
