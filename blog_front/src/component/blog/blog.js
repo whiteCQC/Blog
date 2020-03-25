@@ -71,7 +71,9 @@ class Blog extends Component{
                 <Nav/>
                 <BlogLeft/>
                 <BlogRight flag={this.state.flag} selectArticle={this.selectArticle}
-                           articles={this.state.articles} ArticleDel={this.ArticleDel}/>
+                           articles={this.state.articles} ArticleDel={this.ArticleDel}
+                           history={this.props.history}
+                />
                 <RightUser user={this.state.user} />
             </div>
         )
@@ -81,7 +83,7 @@ class Blog extends Component{
 function BlogRight(props){
     if(props.flag){
         return <MyBlog articles={props.articles} selectArticle={props.selectArticle}
-                       ArticleDel={props.ArticleDel}
+                       ArticleDel={props.ArticleDel} history={props.history}
                 />
     }else{
         return <OtherBlog articles={props.articles} selectArticle={props.selectArticle} />

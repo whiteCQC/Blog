@@ -6,7 +6,7 @@ class RightUser extends Component{
         return(
             <div className="RightUser">
                 <div>
-                    <img src="../image/avatar0.jpg" alt='头像'/>
+                    <img className="avatar" src="../image/avatar.jpg" alt='头像'/>
                 </div>
                 <div className="userName">
                     <span >{this.props.user.uname}</span>

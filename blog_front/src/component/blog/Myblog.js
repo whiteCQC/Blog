@@ -56,8 +56,10 @@ class MyBlog extends Component{
             articles:this.state.articlesPri
         })
     }
-    edit(){
-        alert("编辑")
+    edit(aid){
+        this.props.history.push("/write", {
+            aid: aid
+        });
     }
     del= (aid) => {
         confirmAlert({

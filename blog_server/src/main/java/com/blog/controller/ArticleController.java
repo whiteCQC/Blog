@@ -124,4 +124,16 @@ public class ArticleController {
         //TODO
         return null;
     }
+
+    /**
+     *
+     * @param aid 文章id
+     * @return 仅获取对应article的信息（即不包含浏览人数等其他信息）
+     */
+    @GetMapping("/article/simple")
+    public Result GetSimpleArticle(@RequestParam(value = "aid")int aid){
+        //TODO
+        return Result.success();
+    }
+
 }
