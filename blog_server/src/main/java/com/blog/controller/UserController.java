@@ -97,8 +97,8 @@ public class UserController {
      */
     @PostMapping("/userInfoChange")
     public Result userInfoChange(@RequestBody User user){
-        //TODO
-        return null;
+        userService.updateUser(user);
+        return Result.success("修改成功");
     }
 
     /**
@@ -108,7 +108,7 @@ public class UserController {
      */
     @PostMapping("/userPasswordChange")
     public Result userPasswordChange(@RequestBody User user){
-        //TODO
-        return null;
+        userService.updateUser(user);
+        return Result.success("密码修改成功");
     }
 }

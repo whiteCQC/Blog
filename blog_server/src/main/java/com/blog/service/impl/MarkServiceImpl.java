@@ -30,13 +30,21 @@ public class MarkServiceImpl implements MarkService {
     @Override
     public boolean addMarked(Marked marked) {
         //保证名称不重复和用户内部markId自增
+
         List<Marked> markedList = markedMapper.selectByUid(marked.getUid());
         if(notContainMarkedName(markedList,marked))
         {
-            Integer markId = markedMapper.getMaxMarkId(marked.getUid());
-            marked.setMarkId(markId+1);
-            markedMapper.insert(marked);
-            return true;
+            try {
+                Integer markId = markedMapper.getMaxMarkId(marked.getUid());
+                marked.setMarkId(markId+1);
+                markedMapper.insert(marked);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
         else
             return false;

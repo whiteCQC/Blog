@@ -85,11 +85,14 @@ public class ArticleController {
     @GetMapping("/article/detail")
     public Result ArticleDetail(@RequestParam(value = "aid")int aid){
         Article article = articleService.getArticleById(aid);
+        if(article == null)
+        {
+            return Result.error("文章不存在");
+        }
         Author author = new Author();
         int uid = article.getUid();
         Map<String, Integer> authorArticleInfo = articleService.getArticleInfoByUser(uid);
         User user = userService.getAuthor(aid);
-
         author.setArticleNum(authorArticleInfo.get("article_num"));
         author.setTotalView(authorArticleInfo.get("total_view"));
         author.setFanNum(userService.getFanNum(uid));
@@ -117,11 +120,11 @@ public class ArticleController {
     /**
      *
      * @param article ,文章id
-     * @return 删除文章,返回新的文章list（articleInfo）
+     * @return 删除文章,返回新的文章list（articleInfo）  需要用户ID才能返回新的文章LIST
      */
     @PostMapping("/article/del")
     public Result ArticleDel(@RequestBody Article article){
-        //TODO
-        return null;
+        articleService.deleteArticle(article.getAid());
+        return Result.success("删除成功");
     }
 }

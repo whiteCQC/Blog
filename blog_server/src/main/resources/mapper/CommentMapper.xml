@@ -1,0 +1,26 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.mapper.CommentMapper">
+<resultMap id="comment" type="com.blog.model.Comment">
+    <id column="aid" jdbcType="INTEGER" property="uid" />
+    <id column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="comment_content" jdbcType="VARCHAR" property="commentContent"/>
+    <result column="comment_date" jdbcType="DATETIME" property="commentDate" />
+    <result column="comment_of_cid" jdbcType="INTEGER" property="commentOfCid"/>
+</resultMap>
+    <sql id="all">
+        aid, cid, uid, comment_of_cid, comment_content, comment_date
+    </sql>
+    <insert id="insertComment" parameterType="com.blog.model.Comment">
+        insert into comment (aid, cid, uid, comment_of_cid, comment_content, comment_date
+        )
+        values (#{aid}, #{cid}, #{uid},
+        #{commentOfCid}, #{commentContent}, #{commentDate},
+
+        )
+    </insert>
+    <delete id="deleteComment" parameterType="com.blog.model.CommentKey">
+        delete from comment
+        where comment.aid = #{aid} and comment.cid = #{cid}
+    </delete>
+
+</mapper>

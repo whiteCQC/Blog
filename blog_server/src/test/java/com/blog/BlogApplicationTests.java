@@ -3,6 +3,8 @@ package com.blog;
 import com.blog.mapper.*;
 import com.blog.model.*;
 import com.blog.vo.Fan;
+import org.assertj.core.api.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,6 +28,7 @@ class BlogApplicationTests {
 
     @Test
     void articleTest() {
+        
 
         Article article = articleMapper.selectByPrimaryKey(1);
 
@@ -58,19 +61,12 @@ class BlogApplicationTests {
 
     @Test
     void userTest() {
-        User u1 = userMapper.selectByPrimaryKey(1);
-        System.out.println(u1.getEmail());
-
-        User u2 = userMapper.selectByEmail("dxy@123.com");
-        System.out.println(u2.getUid());
-
-        u1.setPassword("45678");
-
-        userMapper.updateByPrimaryKey(u1);
-
-        User u3 = userMapper.getAuthor(2);
-
-        System.out.println(u3.getUid());
+        User user = new User();
+        user.setUname("今天");
+        user.setPassword("ddadff");
+        user.setBirth(new Date());
+        user.setEmail("ddddd");
+        user.setGender("g");
 
     }
 

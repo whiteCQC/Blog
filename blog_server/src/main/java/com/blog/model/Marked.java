@@ -8,8 +8,9 @@ public class Marked extends MarkedKey {
 
     private List<Article> articleList;
 
-    public Marked(Integer uid, Integer markId) {
+    public Marked(Integer uid, Integer markId, String markName) {
         super(uid, markId);
+        this.markName = markName;
     }
 
     public Marked() {
