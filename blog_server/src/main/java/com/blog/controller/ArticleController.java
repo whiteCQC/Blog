@@ -89,6 +89,7 @@ public class ArticleController {
         {
             return Result.error("文章不存在");
         }
+        articleService.updateViewNum(aid);
         Author author = new Author();
         int uid = article.getUid();
         Map<String, Integer> authorArticleInfo = articleService.getArticleInfoByUser(uid);

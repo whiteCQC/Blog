@@ -3,7 +3,7 @@ package com.blog.model;
 public class SpecialColumn {
     private int spColId;
 
-    private int aid;
+    private int uid;
 
     private String spColName;
 
@@ -15,12 +15,12 @@ public class SpecialColumn {
         this.spColId = spColId;
     }
 
-    public int getAid() {
-        return aid;
+    public int getUid() {
+        return uid;
     }
 
-    public void setAid(int aid) {
-        this.aid = aid;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public String getSpColName() {

@@ -1,10 +1,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.blog.mapper.CommentMapper">
 <resultMap id="comment" type="com.blog.model.Comment">
-    <id column="aid" jdbcType="INTEGER" property="uid" />
+    <id column="aid" jdbcType="INTEGER" property="aid" />
     <id column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="comment_content" jdbcType="VARCHAR" property="commentContent"/>
-    <result column="comment_date" jdbcType="DATETIME" property="commentDate" />
+    <result column="comment_date" jdbcType="TIMESTAMP" property="commentDate" />
     <result column="comment_of_cid" jdbcType="INTEGER" property="commentOfCid"/>
 </resultMap>
     <sql id="all">

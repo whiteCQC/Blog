@@ -68,6 +68,7 @@ class BlogApplicationTests {
         user.setEmail("ddddd");
         user.setGender("g");
 
+
     }
 
     @Test
