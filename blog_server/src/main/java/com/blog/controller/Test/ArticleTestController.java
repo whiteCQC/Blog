@@ -158,4 +158,26 @@ public class ArticleTestController {
         return Result.success(map);
     }
 
+    /**
+     *
+     * @param aid 文章id
+     * @return 仅获取对应article的信息（即不包含浏览人数等其他信息）
+     */
+    @GetMapping("/article/simpleTest")
+    public Result GetSimpleArticle(@RequestParam(value = "aid")int aid){
+        //TODO
+        HashMap< String, Object > map = new HashMap<>();
+        Article article=new Article();
+        article.setAid(1);
+
+        article.setArticleTitle("百度新闻——海量中文资讯平台");
+        article.setArticleContent("百度新闻是包含海量资讯的新闻服务平台,真实反映每时每刻的新闻热点。" +
+                "您可以搜索新闻事件、热点话题、人物动态、产品资讯等,快速了解它们的最新进展。");
+        article.setUid(1);
+        article.setMode(1);
+        article.setSpColId(0);
+        article.setType(1);
+        map.put("article",article);
+        return Result.success(map);
+    }
 }

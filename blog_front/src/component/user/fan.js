@@ -15,7 +15,7 @@ class Fans extends Component {
     }
     componentDidMount () {
         let uid = localStorage.getItem("uid");
-        Axios.get("/viewFans",{
+        Axios.get("/viewFansTest",{
             params:{
                 uid:uid
             }
@@ -48,7 +48,7 @@ class Fans extends Component {
                         <ul>
                             {this.state.fans.map((fan,index) =>
                                 <li key={fan.uid}>
-                                    <img src="../image/avatar0.jpg" alt="头像"/>
+                                    <img className="avatar" src="../image/avatar.jpg" alt="头像"/>
                                     <span className="fanName">{fan.uname}</span>
                                 </li>
                             )}

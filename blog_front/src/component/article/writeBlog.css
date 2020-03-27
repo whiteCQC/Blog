@@ -28,7 +28,11 @@
     margin-left: 5px;
     font-size: 20px;
 }
-#submitText{
+.submitText{
+    border-radius: 4px;
+    color: #fff;
+    background: #00a1d6;
+    border-color: #20a0ff;
     float: right;
     margin-top: 20px;
     font-size: 18px;

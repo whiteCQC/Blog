@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import Axios from "../../axios/axios";
 
 import './cocern.css'
+import {openNotificationWithIcon} from "../notification";
 
 class Concern extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class Concern extends Component {
     }
     componentDidMount () {
         let uid = localStorage.getItem("uid");
-        Axios.get("/viewConcerns",{
+        Axios.get("/viewConcernsTest",{
             params:{
                 uid:uid
             }
@@ -31,6 +32,26 @@ class Concern extends Component {
             alert(error.message)
         })
     }
+
+    FanCancel(followedId){
+        let uid = localStorage.getItem("uid");
+        Axios.post("/FanCancelTest",{
+            followId:uid,
+            followedId:followedId
+        }).then(({data}) => {
+            if(data.code === 200){
+                this.setState({
+                    fans: data.detail,
+                });
+                openNotificationWithIcon("success","Success","已取消关注")
+            }else{
+                openNotificationWithIcon("error","Error",data.description)
+            }
+        }).catch( error => {
+            openNotificationWithIcon("error","Error",error.message)
+        })
+    }
+
     render() {
         let tip=''
         if(this.state.fans.length===0){
@@ -49,9 +70,9 @@ class Concern extends Component {
                         <ul>
                             {this.state.fans.map((fan,index) =>
                                 <li key={fan.uid}>
-                                    <img src="../image/avatar0.jpg" alt="头像"/>
+                                    <img className="avatar" src="../image/avatar.jpg" alt="头像"/>
                                     <span className="fanName">{fan.uname}</span>
-                                    <button className="cancelFollow">取消关注</button>
+                                    <button className="cancelFollow" onClick={this.FanCancel.bind(this,fan.uid)}>取消关注</button>
                                 </li>
                             )}
                         </ul>
