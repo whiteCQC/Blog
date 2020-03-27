@@ -35,13 +35,12 @@ public class MarkServiceImpl implements MarkService {
         if(notContainMarkedName(markedList,marked))
         {
             try {
-                Integer markId = markedMapper.getMaxMarkId(marked.getUid());
-                marked.setMarkId(markId+1);
                 markedMapper.insert(marked);
                 return true;
             }
             catch (Exception e)
             {
+                //e.printStackTrace();
                 return false;
             }
 

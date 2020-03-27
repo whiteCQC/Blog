@@ -69,8 +69,7 @@
   <insert id="insert" parameterType="com.blog.model.Marked">
     insert into marked (uid, mark_id, mark_name
       )
-    values (#{uid,jdbcType=INTEGER}, #{markId,jdbcType=INTEGER}, #{markName,jdbcType=VARCHAR}
-      )
+    select #{uid},IFNULL(max(mark_id),0)+1,#{markName} from marked where uid=#{uid}
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.blog.model.Marked">
     update marked

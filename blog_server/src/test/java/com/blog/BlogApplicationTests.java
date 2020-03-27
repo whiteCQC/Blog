@@ -2,6 +2,8 @@ package com.blog;
 
 import com.blog.mapper.*;
 import com.blog.model.*;
+import com.blog.service.CommentService;
+import com.blog.service.MarkService;
 import com.blog.vo.Fan;
 import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Assertions;
@@ -24,6 +26,22 @@ class BlogApplicationTests {
     MarkedMapper markedMapper;
     @Autowired
     MarkedArticleMapper markedArticleMapper;
+    @Autowired
+    CommentService commentService;
+
+    @Autowired
+    MarkService markService;
+
+    @Test
+    void test1()
+    {
+        Marked marked= new Marked();
+        marked.setUid(1);
+        marked.setMarkName("收藏夹3");
+        boolean flag = markService.addMarked(marked);
+        System.out.println(flag);
+
+    }
 
 
     @Test

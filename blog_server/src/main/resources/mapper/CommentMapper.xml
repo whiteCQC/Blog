@@ -14,10 +14,17 @@
     <insert id="insertComment" parameterType="com.blog.model.Comment">
         insert into comment (aid, cid, uid, comment_of_cid, comment_content, comment_date
         )
+        <if test="cid!=null and cid!=0">
         values (#{aid}, #{cid}, #{uid},
-        #{commentOfCid}, #{commentContent}, #{commentDate},
+        #{commentOfCid}, #{commentContent}, #{commentDate})
+        </if>
+        <if test="cid == null or cid==0">
+        select #{aid}, IFNULL(Max(cid),0)+1, #{uid}, #{commentOfCid}, #{commentContent}, #{commentDate}
+            from comment
+            where aid = #{aid}
+        </if>
 
-        )
+
     </insert>
     <delete id="deleteComment" parameterType="com.blog.model.CommentKey">
         delete from comment

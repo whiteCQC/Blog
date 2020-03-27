@@ -19,6 +19,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     FollowerMapper followerMapper;
 
+
     @Override
     public Boolean createUser(User user) {
         User u = userMapper.selectByEmail(user.getEmail());
