@@ -25,7 +25,7 @@ public interface ArticleService {
 
     PageInfo<Article> getArticleByKeyword (String keyword, int pageNum);  //搜索返回不含具体内容的文章
 
-    Map<String,Integer> getArticleInfoByUser(Integer uid);
+    Map<String,Number> getArticleInfoByUser(Integer uid);
 
 
 

@@ -2,18 +2,16 @@ package com.blog;
 
 import com.blog.mapper.*;
 import com.blog.model.*;
+import com.blog.service.ArticleService;
 import com.blog.service.CommentService;
 import com.blog.service.MarkService;
+import com.blog.service.UserService;
 import com.blog.vo.Fan;
-import org.assertj.core.api.Assert;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SpringBootTest
 class BlogApplicationTests {
@@ -23,11 +21,15 @@ class BlogApplicationTests {
     @Autowired
     ArticleMapper articleMapper;
     @Autowired
+    ArticleService articleService;
+    @Autowired
     MarkedMapper markedMapper;
     @Autowired
     MarkedArticleMapper markedArticleMapper;
     @Autowired
     CommentService commentService;
+    @Autowired
+    UserService userService;
 
     @Autowired
     MarkService markService;
@@ -35,59 +37,11 @@ class BlogApplicationTests {
     @Test
     void test1()
     {
-        Marked marked= new Marked();
-        marked.setUid(1);
-        marked.setMarkName("收藏夹3");
-        boolean flag = markService.addMarked(marked);
-        System.out.println(flag);
-
-    }
-
-
-    @Test
-    void articleTest() {
-        
-
-        Article article = articleMapper.selectByPrimaryKey(1);
-
-        List<Article>  l1 = articleMapper.selectByUid(2);
-
-        List<Article> l2 = articleMapper.getNewArticle(2);
-        for (Article a: l2) {
-            System.out.println(a.getUid()+a.getArticleTitle());
-
-        }
-
-        List<Article> l3 = articleMapper.getAll();
-
-
-        article.setViewNum(200);
-        article.setAid(1);
-        article.setDate(new Date());
-        article.setArticleTitle("百度新闻——海量中文资讯平台");
-        article.setArticleContent("百度新闻是包含海量资讯的新闻服务平台,真实反映每时每刻的新闻热点。" +
-                "您可以搜索新闻事件、热点话题、人物动态、产品资讯等,快速了解它们的最新进展。");
-        article.setUid(1);
-
-        articleMapper.updateByPrimaryKeyWithBLOBs(article);
-
-        Map<String, Integer> map =  articleMapper.getArticleInfoByUid(1);
-
-        System.out.println(map);
-
-    }
-
-    @Test
-    void userTest() {
-        User user = new User();
-        user.setUname("今天");
-        user.setPassword("ddadff");
-        user.setBirth(new Date());
-        user.setEmail("ddddd");
-        user.setGender("g");
 
 
     }
+
+
 
     @Test
     void markTest()

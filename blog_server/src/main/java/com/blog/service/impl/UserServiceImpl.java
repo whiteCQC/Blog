@@ -6,6 +6,7 @@ import com.blog.mapper.UserMapper;
 import com.blog.model.Follower;
 import com.blog.model.User;
 import com.blog.service.UserService;
+import com.blog.util.PasswordUtil;
 import com.blog.vo.Fan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ public class UserServiceImpl implements UserService {
     public Boolean createUser(User user) {
         User u = userMapper.selectByEmail(user.getEmail());
         if(u == null) {
+            user.setPassword(PasswordUtil.toMD5(user.getPassword()));
             userMapper.insert(user);
             return true;
         }
@@ -60,8 +62,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean follow(Fan fan) {
         Follower f = new Follower();
-        f.setFollowerId(fan.getFollowId());
-        f.setUid(fan.getFollowedId());
+        f.setFollowerId(fan.getFollowerId());
+        f.setUid(fan.getAuthorId());
         int i = followerMapper.insert(f);
         return i!=0;
     }
@@ -69,8 +71,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean cancelFollow(Fan fan) {
         Follower f = new Follower();
-        f.setFollowerId(fan.getFollowId());
-        f.setUid(fan.getFollowedId());
+        f.setFollowerId(fan.getFollowerId());
+        f.setUid(fan.getAuthorId());
         int i = followerMapper.deleteByPrimaryKey(f);
         return i!=0;
     }

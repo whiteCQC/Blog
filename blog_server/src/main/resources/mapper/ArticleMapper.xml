@@ -94,7 +94,7 @@
         date = #{date,jdbcType=TIMESTAMP},
       </if>
 
-      <if test="type!=null ">
+      <if test="type!=null">
         type = #{type,jdbcType=INTEGER},
       </if>
 

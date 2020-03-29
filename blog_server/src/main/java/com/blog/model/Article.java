@@ -11,9 +11,9 @@ public class Article {
 
     private Date date;
 
-    private Integer type;
+    private Integer type; //0原创 1转载
 
-    private Integer mode;
+    private Integer mode; //0公开 1私密
 
     private Integer viewNum;
 

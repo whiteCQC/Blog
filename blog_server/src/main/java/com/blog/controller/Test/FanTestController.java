@@ -13,7 +13,7 @@ import java.util.List;
 public class FanTestController {
     @PostMapping("/FanAddTest")
     public Result FanFollow(@RequestBody Fan fan){
-        System.out.println(fan.getFollowId()+","+fan.getFollowedId());
+        System.out.println(fan.getFollowerId()+","+fan.getAuthorId());
         return Result.success();
     }
 

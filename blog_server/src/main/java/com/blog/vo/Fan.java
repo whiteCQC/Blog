@@ -1,9 +1,12 @@
 package com.blog.vo;
 
 public class Fan {
-    private int followId;//关注者
-    private int followedId;//被关注者
+    private int followerId;//关注者
+
+    private int authorId;//被关注者
+
     private String authorName;//被关注者名
+
     private String followerName;//关注者名
 
     public String getAuthorName() {
@@ -22,20 +25,20 @@ public class Fan {
         this.followerName = followerName;
     }
 
-    public int getFollowId() {
-        return followId;
+    public int getFollowerId() {
+        return followerId;
     }
 
-    public void setFollowId(int followId) {
-        this.followId = followId;
+    public void setFollowerId(int followerId) {
+        this.followerId = followerId;
     }
 
-    public int getFollowedId() {
-        return followedId;
+    public int getAuthorId() {
+        return authorId;
     }
 
-    public void setFollowedId(int followedId) {
-        this.followedId = followedId;
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
     }
 
 }

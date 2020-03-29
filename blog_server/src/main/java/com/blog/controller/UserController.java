@@ -3,6 +3,7 @@ package com.blog.controller;
 import com.blog.bean.Result;
 import com.blog.model.User;
 import com.blog.service.UserService;
+import com.blog.util.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,7 +57,7 @@ public class UserController {
         }
         else
         {
-            if(user.getPassword().equals(userInfo.getPassword()))
+            if(user.getPassword().equals(PasswordUtil.toMD5(userInfo.getPassword())))
             {
                 HashMap < String, Object > map = new HashMap<>();
                 map.put("uid", user.getUid());
@@ -78,7 +79,7 @@ public class UserController {
      * @return 返回用户的信息
      */
     @PostMapping("/userInfo")
-    public Result GetUserInfo(@RequestBody User userInfo){
+    public Result getUserInfo(@RequestBody User userInfo){
 
         User user = userService.getUserById(userInfo.getUid());
         if(user == null){

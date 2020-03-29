@@ -3,7 +3,6 @@ package com.blog.service.impl;
 import com.blog.mapper.ArticleMapper;
 import com.blog.model.Article;
 import com.blog.service.ArticleService;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.page.PageMethod;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,20 +68,14 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Map<String, Integer> getArticleInfoByUser(Integer uid) {
+    public Map<String, Number> getArticleInfoByUser(Integer uid) {
         return articleMapper.getArticleInfoByUid(uid);
+
     }
 
     private void sortHot(List<Article> list)
     {
-        list.sort((o1, o2) -> {
-            if (getScore(o1) > getScore(o2))
-                return -1;
-            else if (getScore(o1) == getScore(o2))
-                return 0;
-            else
-                return 1;
-        });
+        list.sort((o1, o2) -> Integer.compare(getScore(o2), getScore(o1)));
     }
 
     private int getScore(Article a)

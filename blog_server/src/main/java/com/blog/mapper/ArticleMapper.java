@@ -28,5 +28,5 @@ public interface ArticleMapper {
 
     List<Article> selectByKeyword(String keyword);
 
-    Map<String, Integer> getArticleInfoByUid(Integer uid);
+    Map<String, Number> getArticleInfoByUid(Integer uid);
 }

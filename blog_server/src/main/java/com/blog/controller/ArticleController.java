@@ -62,7 +62,7 @@ public class ArticleController {
      * @return
      */
     @GetMapping("/article/hot")
-    public Result HotArticle(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum){
+    public Result hotArticle(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum){
         PageInfo<Article> pageInfo = articleService.getHotArticle(pageNum);
         List<Article> list = pageInfo.getList();
         Long total= pageInfo.getTotal();//结果的总页数
@@ -83,7 +83,7 @@ public class ArticleController {
      *                                     最新的前五篇文章名以及aid  newArticles
      */
     @GetMapping("/article/detail")
-    public Result ArticleDetail(@RequestParam(value = "aid")int aid){
+    public Result articleDetail(@RequestParam(value = "aid")int aid){
         Article article = articleService.getArticleById(aid);
         if(article == null)
         {
@@ -92,10 +92,11 @@ public class ArticleController {
         articleService.updateViewNum(aid);
         Author author = new Author();
         int uid = article.getUid();
-        Map<String, Integer> authorArticleInfo = articleService.getArticleInfoByUser(uid);
+        Map<String, Number> authorArticleInfo = articleService.getArticleInfoByUser(uid);
         User user = userService.getAuthor(aid);
-        author.setArticleNum(authorArticleInfo.get("article_num"));
-        author.setTotalView(authorArticleInfo.get("total_view"));
+        System.out.println(authorArticleInfo);
+        author.setArticleNum(authorArticleInfo.get("article_num").intValue());
+        author.setTotalView(authorArticleInfo.get("total_view").intValue());
         author.setFanNum(userService.getFanNum(uid));
         author.setUid(user.getUid());
         author.setName(user.getUname());
@@ -113,7 +114,7 @@ public class ArticleController {
      * @return 修改文章，（仅作者和点击数不可能变化）
      */
     @PostMapping("/article/modify")
-    public Result ArticleModify(@RequestBody Article article){
+    public Result articleModify(@RequestBody Article article){
         articleService.updateArticle(article);
         return Result.success();
     }
@@ -124,7 +125,7 @@ public class ArticleController {
      * @return 删除文章,返回新的文章list（articleInfo）  需要用户ID才能返回新的文章LIST
      */
     @PostMapping("/article/del")
-    public Result ArticleDel(@RequestBody Article article){
+    public Result articleDel(@RequestBody Article article){
         articleService.deleteArticle(article.getAid());
         return Result.success("删除成功");
     }
@@ -135,9 +136,11 @@ public class ArticleController {
      * @return 仅获取对应article的信息（即不包含浏览人数等其他信息）
      */
     @GetMapping("/article/simple")
-    public Result GetSimpleArticle(@RequestParam(value = "aid")int aid){
-        //TODO
-        return Result.success();
+    public Result getSimpleArticle(@RequestParam(value = "aid")int aid){
+        Article article = articleService.getArticleById(aid);
+        HashMap< String, Object > map = new HashMap<>();
+        map.put("article", article);
+        return Result.success(article);
     }
 
 }
