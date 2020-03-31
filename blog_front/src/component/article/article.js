@@ -7,25 +7,35 @@ import {followExecute} from "../../redux/interaction/action";
 import {connect} from "react-redux";
 
 import {dateTransfer, NumberTransferForLargeNum} from '../../tools/tansfer'
+import {Modal,Spin,Radio} from "antd";
 
 class ArticleBody extends Component{
     constructor (props) {
         super(props);
         this.state = {
-            article:{},
-            author:{},
-            articleNum:"",
-            totalView:"",
-            newArticles:"",
-            fanNum:""
+            article: {},
+            author: {},
+            articleNum: "",
+            totalView: "",
+            newArticles: "",
+            fanNum: "",
+
+            self_article: false,
+            modalFavoriteVisible: false,
+            markedList: [],
+            markedId:0,
         }
+
         this.handleFollow=this.handleFollow.bind(this)
         this.handleStore=this.handleStore.bind(this)
+        this.confirmMarked=this.confirmMarked.bind(this)
     }
     componentDidMount (){
         //console.log(this.props)
-        let aid=this.props.match.params.aid
+        let aid=this.props.match.params.aid;
         //console.log("aid:"+aid);
+        let loginUid = localStorage.getItem("uid")!==null? localStorage.getItem("uid") :-1 ;
+
         Axios.get("/article/detailTest", {
             params: { 'aid': aid }
         }).then(({data}) => {
@@ -36,7 +46,8 @@ class ArticleBody extends Component{
                     totalView:data.detail.totalView,
                     articleNum:data.detail.articleNum,
                     newArticles:data.detail.newArticles,
-                    fanNum:data.detail.fanNum
+                    fanNum:data.detail.fanNum,
+                    self_article:loginUid===data.detail.article.uid,
                 });
             }else{
                 openNotificationWithIcon("error","Error",data.description)
@@ -44,6 +55,20 @@ class ArticleBody extends Component{
         }).catch( error => {
             openNotificationWithIcon("error","Error",error.message)
         })
+
+        if(localStorage.getItem("uid")!==null){
+            Axios.get("/user/MarkedTest", {
+                params: { 'uid': loginUid }
+            }).then(({data}) => {
+                if(data.code === 200){
+                    this.setState({
+                        markedList:data.detail.markedList,
+                    });
+                }else{
+                    openNotificationWithIcon("error","Error",data.description)
+                }
+            })
+        }
     }
     handleFollow(){
         //console.log("follow:"+this.state.article.aid)
@@ -60,10 +85,46 @@ class ArticleBody extends Component{
     }
 
     handleStore(){
+        if(localStorage.getItem("token")==null){
+            alert("请先登录");
+        }else{
+            this.setState({
+                modalFavoriteVisible:true,
+            })
+        }
+    }
+    changeMarkedSelect=(e)=>{
+        this.setState({
+            markedId:e.target.value
+        })
+    }
 
+    confirmMarked(){
+        console.log(localStorage.getItem("uid"),this.state.markedId,this.state.article.aid)
+        Axios.post("/user/MarkArticleTest",{
+            uid:localStorage.getItem("uid"),
+            markId:this.state.markedId,
+            aid:this.state.article.aid
+        }).then(({data}) => {
+            if(data.code === 200){
+                openNotificationWithIcon("success","Success","收藏成功")
+            }else{
+                openNotificationWithIcon("error","Error",data.description)
+            }
+        }).catch( error => {
+            openNotificationWithIcon("error","Error",error.message)
+        })
     }
 
     render() {
+        if(this.state.article.uid==='undefined'){
+            return <Spin/>
+        }
+        const radioStyle = {
+            display: 'block',
+            height: '40px',
+            lineHeight: '40px',
+        };
         return(
             <div>
                 <Nav/>
@@ -86,7 +147,7 @@ class ArticleBody extends Component{
                             </tbody>
 
                         </table>
-                        <button className="follow" onClick={this.handleFollow}>
+                        <button className="follow" onClick={this.handleFollow} hidden={this.state.self_article}>
                             关注
                         </button>
                     </div>
@@ -95,7 +156,7 @@ class ArticleBody extends Component{
                         {/* 文章区域 */}
                         <div className="articlePart">
                             <span className="title">{this.state.article.articleTitle}</span>
-                            <button className="button-store" onClick={this.handleStore}>收藏</button>
+                            <button className="button-store" onClick={this.handleStore} hidden={this.state.self_article}>收藏</button>
                             <div>
                                 <span>最后修改于:{dateTransfer(this.state.article.date)}</span>
                                 <span  className="viewNum">阅读{this.state.article.viewNum}</span>
@@ -113,10 +174,28 @@ class ArticleBody extends Component{
                         </div>
                     </div>
                 </div>
+                <Modal visible={this.state.modalFavoriteVisible} title="收藏夹选择"
+                       onCancel={()=>{
+                           this.setState({modalFavoriteVisible: false})
+                       }}
+                       onOk={this.confirmMarked}
+                >
+                    <div className="group-list">
+                        <Radio.Group defaultValue={0}>
+                            {this.state.markedList.map((marked)=>
+                                <Radio style={radioStyle}
+                                    value={marked.markId} onChange={this.changeMarkedSelect} key={marked.markId}>
+                                    {marked.markName}
+                                </Radio>
+                            )}
+                        </Radio.Group>
+                    </div>
+                </Modal>
             </div>
 
         )
     }
 }
+
 
 export default connect()(ArticleBody)

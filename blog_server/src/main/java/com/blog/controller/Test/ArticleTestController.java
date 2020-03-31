@@ -2,7 +2,9 @@ package com.blog.controller.Test;
 
 import com.blog.bean.Result;
 import com.blog.model.Article;
+import com.blog.model.MarkedArticle;
 import com.blog.model.User;
+import com.blog.vo.MarkedVo;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
@@ -179,5 +181,36 @@ public class ArticleTestController {
         article.setType(1);
         map.put("article",article);
         return Result.success(map);
+    }
+
+    /**
+     *
+     * @param uid
+     * @return 获得该用户的所有收藏夹（有MarkedVO，包含用户ID，收藏夹ID，收藏夹名）markedList
+     */
+    @GetMapping("/user/MarkedTest")
+    public Result getMarked(@RequestParam(value = "uid")int uid){
+        HashMap< String, Object > map = new HashMap<>();
+
+        List<MarkedVo> markedList=new ArrayList<>();
+        markedList.add(new MarkedVo(uid,"默认收藏夹",0));
+        markedList.add(new MarkedVo(uid,"收藏夹1",1));
+        markedList.add(new MarkedVo(uid,"收藏夹2",2));
+        markedList.add(new MarkedVo(uid,"收藏夹3",3));
+        map.put("markedList",markedList);
+        return Result.success(map);
+    }
+
+    /**
+     *
+     * @param markedArticle
+     * @return 文章收藏
+     */
+    @PostMapping("/user/MarkArticleTest")
+    public Result MarkArticle(MarkedArticle markedArticle){
+        System.out.println(markedArticle.getAid());
+        System.out.println(markedArticle.getMarkId());
+        System.out.println(markedArticle.getUid());
+        return Result.success();
     }
 }

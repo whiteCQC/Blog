@@ -2,6 +2,7 @@ package com.blog.controller;
 
 import com.blog.bean.Result;
 import com.blog.model.Article;
+import com.blog.model.MarkedArticle;
 import com.blog.model.User;
 import com.blog.service.ArticleService;
 import com.blog.service.UserService;
@@ -141,6 +142,29 @@ public class ArticleController {
         HashMap< String, Object > map = new HashMap<>();
         map.put("article", article);
         return Result.success(article);
+    }
+
+
+    /**
+     *
+     * @param uid
+     * @return 获得该用户的所有收藏夹（有MarkedVO，包含用户ID，收藏夹ID，收藏夹名）markedList
+     */
+    @GetMapping("/user/Marked")
+    public Result getMarked(@RequestParam(value = "uid")int uid){
+        //TODO
+        return Result.success();
+    }
+
+    /**
+     *
+     * @param markedArticle
+     * @return 文章收藏，若已收藏过了，则需要当error回复，且有具体信息（该文章已经收藏过）
+     */
+    @PostMapping("/user/MarkArticle")
+    public Result MarkArticle(MarkedArticle markedArticle){
+        //TODO
+        return Result.success();
     }
 
 }
