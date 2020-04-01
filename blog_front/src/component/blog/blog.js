@@ -8,7 +8,12 @@ import BlogLeft from "./blogleft";
 import RightUser from "./RightUser";
 import MyBlog from "./Myblog";
 import OtherBlog from "./Otherblog";
+import Marked from "./Marked";
+import Column from "./Column";
 import {openNotificationWithIcon} from "../notification";
+
+import {Spin} from "antd";
+
 
 class Blog extends Component{
     constructor(props) {
@@ -19,8 +24,11 @@ class Blog extends Component{
             uid:this.props.match.params.uid,
             user:"",
             articles:[],
+
+            blogChoice:0,//左边菜单的选择
         }
         this.selectArticle=this.selectArticle.bind(this)
+        this.BlogContentChoiceChange=this.BlogContentChoiceChange.bind(this)
     }
     componentDidMount (){
         let uid=this.props.match.params.uid
@@ -45,7 +53,7 @@ class Blog extends Component{
         })
     }
     selectArticle(articleId){
-        let res = "/article/" + articleId
+        let res = "/article/" + articleId;
         this.props.history.push(res)
     }
     ArticleDel=(aid)=>{
@@ -65,12 +73,21 @@ class Blog extends Component{
         })
     }
 
+    BlogContentChoiceChange(choice){
+        this.setState({
+            blogChoice:choice
+        })
+
+    }
     render() {
+        if(this.state.user==='')
+            return <Spin/>;
         return(
             <div>
                 <Nav/>
-                <BlogLeft/>
-                <BlogRight flag={this.state.flag} selectArticle={this.selectArticle}
+                <BlogLeft BlogContentChoiceChange={this.BlogContentChoiceChange} />
+                <BlogRight blogChoice={this.state.blogChoice}
+                           flag={this.state.flag} selectArticle={this.selectArticle}
                            articles={this.state.articles} ArticleDel={this.ArticleDel}
                            history={this.props.history}
                 />
@@ -81,13 +98,21 @@ class Blog extends Component{
 }
 
 function BlogRight(props){
-    if(props.flag){
-        return <MyBlog articles={props.articles} selectArticle={props.selectArticle}
-                       ArticleDel={props.ArticleDel} history={props.history}
-                />
-    }else{
-        return <OtherBlog articles={props.articles} selectArticle={props.selectArticle} />
+    switch (props.blogChoice) {
+        case 0:    if(props.flag){
+                        return <MyBlog articles={props.articles} selectArticle={props.selectArticle}
+                                       ArticleDel={props.ArticleDel} history={props.history}
+                        />
+                    }else{
+                        return <OtherBlog articles={props.articles} selectArticle={props.selectArticle} />
+                    }
+        case 1:     return <Marked />
+
+        case 2:     return <Column />
+
+        default:    return <div>出错了</div>
     }
+
 }
 
 

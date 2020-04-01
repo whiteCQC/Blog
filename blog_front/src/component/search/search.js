@@ -13,7 +13,7 @@ class Search extends Component{
         this.handleSearch=this.handleSearch.bind(this)
     }
     handleSearch(){
-        let keywords = cutstr(this.state.searchText.value,30)
+        let keywords = cutstr(this.state.searchText,30)
         let res= "/search/" + keywords
         this.props.history.push(res)
         window.location.reload()
@@ -27,7 +27,7 @@ class Search extends Component{
     render(){
         return(
             <div className="search">
-                <input onClick={this.handleInput} type="text" placeholder="请输入..."/>
+                <input onChange={this.handleInput} type="text" placeholder="请输入..."/>
                 <button onClick={this.handleSearch}><i>搜索</i></button>
             </div>
         )
