@@ -57,12 +57,12 @@ class ArticleBody extends Component{
         })
 
         if(localStorage.getItem("uid")!==null){
-            Axios.get("/user/MarkedTest", {
+            Axios.get("/blog/personal/markedTest", {
                 params: { 'uid': loginUid }
             }).then(({data}) => {
                 if(data.code === 200){
                     this.setState({
-                        markedList:data.detail.markedList,
+                        markedList:data.detail,
                     });
                 }else{
                     openNotificationWithIcon("error","Error",data.description)
@@ -101,13 +101,13 @@ class ArticleBody extends Component{
 
     confirmMarked(){
         console.log(localStorage.getItem("uid"),this.state.markedId,this.state.article.aid)
-        Axios.post("/user/MarkArticleTest",{
+        Axios.post("/blog/personal/marked/addArticleTest",{
             uid:localStorage.getItem("uid"),
             markId:this.state.markedId,
             aid:this.state.article.aid
         }).then(({data}) => {
             if(data.code === 200){
-                openNotificationWithIcon("success","Success","收藏成功")
+                openNotificationWithIcon("success","Success",data.description)
             }else{
                 openNotificationWithIcon("error","Error",data.description)
             }

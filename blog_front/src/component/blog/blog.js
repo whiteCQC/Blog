@@ -89,6 +89,7 @@ class Blog extends Component{
                 <BlogRight blogChoice={this.state.blogChoice}
                            flag={this.state.flag} selectArticle={this.selectArticle}
                            articles={this.state.articles} ArticleDel={this.ArticleDel}
+                           uid={this.state.uid}
                            history={this.props.history}
                 />
                 <RightUser user={this.state.user} />
@@ -106,9 +107,9 @@ function BlogRight(props){
                     }else{
                         return <OtherBlog articles={props.articles} selectArticle={props.selectArticle} />
                     }
-        case 1:     return <Marked />
+        case 1:     return <Marked uid={props.uid}/>
 
-        case 2:     return <Column />
+        case 2:     return <Column uid={props.uid}/>
 
         default:    return <div>出错了</div>
     }

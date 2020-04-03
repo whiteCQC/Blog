@@ -3,10 +3,9 @@ package com.blog.controller.Test;
 import com.blog.bean.Result;
 import com.blog.model.Article;
 import com.blog.model.Marked;
+import com.blog.model.MarkedArticle;
 import com.blog.model.User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,5 +47,52 @@ public class BlogTestController {
 
         return Result.success(map);
     }
+    /**
+     *
+     * @param uid
+     * @return 获得该用户的所有收藏夹（有MarkedVO，包含用户ID，收藏夹ID，收藏夹名）markedList
+     */
+    @GetMapping("/blog/personal/markedTest")
+    public Result viewMarked(@RequestParam(value = "uid")int uid){
+        List<Marked> markedList=new ArrayList<>();
+        markedList.add(new Marked(uid,0,"默认收藏夹"));
+        markedList.add(new Marked(uid,1,"收藏夹1"));
+        markedList.add(new Marked(uid,2,"收藏夹2"));
+        markedList.add(new Marked(uid,3,"收藏夹3"));
+        return Result.success(markedList);
+    }
 
+    @PostMapping("/blog/personal/marked/addArticleTest")
+    public Result AddMarkedArticle(@RequestBody MarkedArticle marked_article){
+        System.out.println(marked_article.getUid());
+        return Result.success("收藏成功");
+    }
+
+
+    /**
+     *
+     * @param uid
+     * @param markid
+     * @return 获得指定用户的某个收藏夹下的文章信息（不包括文章正文）
+     */
+    @GetMapping("/blog/personal/marked/article")
+    public Result viewMarkedArticle(@RequestParam(value = "uid")int uid,@RequestParam("markid")int markid){
+        Marked m1=new Marked(1,0,"默认收藏夹");
+        List<Article> list1=new ArrayList<>();
+        for(int i=0;i<10;i++)
+            list1.add(generateArticle());
+        m1.setArticleList(list1);
+        return Result.success(m1);
+    }
+
+    private Article generateArticle(){
+        Article a=new Article();
+        int id=(int)(Math.random()*100);
+        a.setAid(id);
+        a.setArticleTitle("文章"+id);
+        a.setArticleContent("内容"+id);
+        a.setDate(new Date());
+        a.setViewNum(id*100);
+        return a;
+    }
 }
