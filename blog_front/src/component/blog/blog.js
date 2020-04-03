@@ -46,10 +46,10 @@ class Blog extends Component{
                     articles:data.detail.articleInfo,
                 });
             }else{
-                alert(data.description)
+                openNotificationWithIcon("error","Error",data.description)
             }
         }).catch( error => {
-            alert(error.message)
+            openNotificationWithIcon("error","Error",error.message)
         })
     }
     selectArticle(articleId){
@@ -107,7 +107,7 @@ function BlogRight(props){
                     }else{
                         return <OtherBlog articles={props.articles} selectArticle={props.selectArticle} />
                     }
-        case 1:     return <Marked uid={props.uid}/>
+        case 1:     return <Marked uid={props.uid} history={props.history} selectArticle={props.selectArticle}/>
 
         case 2:     return <Column uid={props.uid}/>
 

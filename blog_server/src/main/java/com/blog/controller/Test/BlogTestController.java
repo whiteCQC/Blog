@@ -75,7 +75,7 @@ public class BlogTestController {
      * @param markid
      * @return 获得指定用户的某个收藏夹下的文章信息（不包括文章正文）
      */
-    @GetMapping("/blog/personal/marked/article")
+    @GetMapping("/blog/personal/marked/articleTest")
     public Result viewMarkedArticle(@RequestParam(value = "uid")int uid,@RequestParam("markid")int markid){
         Marked m1=new Marked(1,0,"默认收藏夹");
         List<Article> list1=new ArrayList<>();
@@ -94,5 +94,11 @@ public class BlogTestController {
         a.setDate(new Date());
         a.setViewNum(id*100);
         return a;
+    }
+
+    @PostMapping("/blog/personal/marked/deleteArticleTest")
+    public Result DeleteMarkedArticle(@RequestBody MarkedArticle marked_article){
+        System.out.println("删除:"+marked_article.getMarkId());
+        return Result.success("删除成功");
     }
 }
