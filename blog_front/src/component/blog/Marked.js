@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import Axios from "../../axios/axios";
 
-import {Spin,Select} from "antd";
+import {Spin, Select, Popconfirm, Modal, Radio} from "antd";
 import {openNotificationWithIcon} from "../notification";
 
 import './Marked.css'
@@ -16,9 +16,21 @@ class Marked extends Component{
             articles:"",
             curMarkedID:0,
             uid:props.uid,
+
+            changeMarked:false,
+            changeMarkedId:0,
+            changeAid:"",
+
+            newMarked:false,
+            newMarkedName:"",
         }
-        this.changeMarked=this.changeMarked.bind(this)
-        this.cancelMarked=this.cancelMarked.bind(this)
+        this.changeMarked=this.changeMarked.bind(this);
+        this.cancelMarked=this.cancelMarked.bind(this);
+        this.delMarked=this.delMarked.bind(this);
+        this.handleAdd=this.handleAdd.bind(this);
+        this.confirmNewMarked=this.confirmNewMarked.bind(this);
+        this.moveArticleMarked=this.moveArticleMarked.bind(this);
+        this.confirmMove=this.confirmMove.bind(this);
     }
 
     componentDidMount (){
@@ -106,6 +118,109 @@ class Marked extends Component{
         });
     }
 
+    delMarked(){
+        if(this.state.curMarkedID===0){
+            openNotificationWithIcon("error","Error","默认文件夹无法删除")
+        }else{
+            Axios.post("/blog/personal/marked/deleteMarked",{
+                uid:this.state.uid,
+                markId:this.state.curMarkedID,
+            }).then(({data}) => {
+                if(data.code === 200){
+                    this.setState({
+                        curMarkedID:0
+                    });
+                    openNotificationWithIcon("success","Success",data.description)
+                }else{
+                    openNotificationWithIcon("error","Error",data.description)
+                }
+            }).catch( error => {
+                openNotificationWithIcon("error","Error",error.message)
+            })
+        }
+    }
+
+    handleAdd(){
+        this.setState({
+            newMarked:true,
+        })
+    }
+
+    confirmNewMarked(){
+        let name=this.state.newMarkedName;
+        if(name.length<2)
+            openNotificationWithIcon("error","Error","收藏夹名过短")
+        else if(name.length>10)
+            openNotificationWithIcon("error","Error","收藏夹名过长")
+        else{
+            Axios.post("/blog/personal/marked/addMarkedTest",{
+                uid:this.state.uid,
+                markName:name,
+            }).then(({data}) => {
+                if(data.code === 200){
+                    let tempList=this.state.markedList
+                    tempList.push(data.detail)
+                    this.setState({
+                        markedList:tempList
+                    })
+                    openNotificationWithIcon("success","Success",data.description)
+                }else{
+                    openNotificationWithIcon("error","Error",data.description)
+                }
+            }).catch( error => {
+                openNotificationWithIcon("error","Error",error.message)
+            })
+        }
+
+    }
+
+    newMarkedName=(e)=>{
+        this.setState({
+            newMarkedName:e.target.value
+        })
+    }
+
+    moveArticleMarked(aid){
+        this.setState({
+            changeMarked:true,
+            changeAid:aid,
+        })
+    }
+
+    changeMarkedSelect(mid){
+        this.setState({
+            changeMarkedId:mid
+        })
+    }
+
+    confirmMove(){
+        if(this.state.curMarkedID===this.state.changeMarkedId){
+            openNotificationWithIcon("error","Error","收藏夹没有变化")
+        }
+        else{
+            Axios.post("/blog/personal/marked/moveArticle",{
+                uid:this.state.uid,
+                aid:this.state.changeAid,
+                oldMarkedId:this.state.curMarkedID,
+                newMarkedId:this.state.changeMarkedId,
+            }).then(({data}) => {
+                if(data.code === 200){
+                    let tempList=this.state.markedList
+                    tempList.push(data.detail)
+                    this.setState({
+                        markedList:tempList
+                    })
+                    openNotificationWithIcon("success","Success",data.description)
+                }else{
+                    openNotificationWithIcon("error","Error",data.description)
+                }
+            }).catch( error => {
+                openNotificationWithIcon("error","Error",error.message)
+            })
+            this.setState({changeMarked: false})
+        }
+
+    }
 
     render() {
         if(this.state.markedList===""){
@@ -113,6 +228,12 @@ class Marked extends Component{
         }
 
         const { Option } = Select;
+        const radioStyle = {
+            display: 'block',
+            height: '40px',
+            lineHeight: '40px',
+        };
+
         return(
             <div className="blogRight">
                 <h1 className="title">我的收藏</h1>
@@ -127,14 +248,51 @@ class Marked extends Component{
                         <Option value={marked.markId} key={marked.markId}>{marked.markName}</Option>
                     )}
                 </Select>
-                <button className="del-Marked">删除当前收藏夹</button>
-                <button className="new-Marked">新建收藏夹</button>
+                <Popconfirm title="确定删除该收藏夹吗？" onConfirm={this.delMarked}
+                            okText="确认"
+                            cancelText="取消"
+                >
+                    <button className="del-Marked">删除当前收藏夹</button>
+                </Popconfirm>
+
+                <button className="new-Marked" onClick={this.handleAdd}>新建收藏夹</button>
                 <div className="articleList-Marked">
                     <MarkedArticles articles={this.state.articles} selectArticle={this.props.selectArticle}
                                     cancelMarked={this.cancelMarked}
+                                    moveArticleMarked={this.moveArticleMarked}
                     />
 
                 </div>
+
+                <Modal visible={this.state.changeMarked} title="收藏夹选择"
+                       onCancel={()=>{
+                           this.setState({changeMarked: false})
+                       }}
+                       onOk={this.confirmMove}
+                >
+                    <div className="group-list">
+                        <Radio.Group defaultValue={0}>
+                            {this.state.markedList.map((marked)=>
+                                <Radio style={radioStyle}
+                                       value={marked.markId} onChange={this.changeMarkedSelect.bind(this,marked.markId)}
+                                       key={marked.markId}>
+                                    {marked.markName}
+                                </Radio>
+                            )}
+                        </Radio.Group>
+                    </div>
+                </Modal>
+
+                <Modal visible={this.state.newMarked} title="新建收藏夹"
+                       onCancel={()=>{
+                           this.setState({newMarked: false})
+                       }}
+                       onOk={this.confirmNewMarked}
+                >
+                    <input placeholder="文件夹名称" type="text"
+                           onChange={this.newMarkedName}
+                    />
+                </Modal>
             </div>
         )
 
@@ -151,7 +309,7 @@ function MarkedArticles(props){
                             <SingleArticle article={article} selectArticle={props.selectArticle}/>
                             <div className="change-article">
                                 <button onClick={props.cancelMarked.bind(this,article.aid)}> 取消收藏</button>
-                                <button > 移动文章</button>
+                                <button onClick={props.moveArticleMarked.bind(this,article.aid)}> 移动文章</button>
                             </div>
                         </li>
                     )}

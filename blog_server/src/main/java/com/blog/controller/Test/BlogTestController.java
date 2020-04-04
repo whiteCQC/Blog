@@ -5,6 +5,7 @@ import com.blog.model.Article;
 import com.blog.model.Marked;
 import com.blog.model.MarkedArticle;
 import com.blog.model.User;
+import com.sun.net.httpserver.Authenticator;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -100,5 +101,11 @@ public class BlogTestController {
     public Result DeleteMarkedArticle(@RequestBody MarkedArticle marked_article){
         System.out.println("删除:"+marked_article.getMarkId());
         return Result.success("删除成功");
+    }
+
+    @PostMapping("/blog/personal/marked/addMarkedTest")
+    public Result AddMarked(@RequestBody Marked marked){
+        System.out.println(marked.getMarkName());
+        return Result.success();
     }
 }

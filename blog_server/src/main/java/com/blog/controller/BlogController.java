@@ -8,6 +8,7 @@ import com.blog.model.User;
 import com.blog.service.ArticleService;
 import com.blog.service.MarkService;
 import com.blog.service.UserService;
+import com.blog.vo.MarkedMoveVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,7 +67,7 @@ public class BlogController {
     /**
      *
      * @param marked
-     * @return 添加新的收藏夹(包括uid和收藏夹名称，名称不可以和现有的重复)
+     * @return 添加新的收藏夹(包括uid和收藏夹名称，名称不可以和现有的重复),成功返回新的marked
      */
     @PostMapping("/blog/personal/marked/addMarked")
     public Result AddMarked(@RequestBody Marked marked){
@@ -84,7 +85,7 @@ public class BlogController {
     /**
      *
      * @param marked
-     * @return 删除收藏夹(包括uid和收藏夹名称，将会连带该收藏夹下的收藏记录一起删除)
+     * @return 删除收藏夹(包括uid和收藏夹id，将会连带该收藏夹下的收藏记录一起删除)
      */
     @PostMapping("/blog/personal/marked/deleteMarked")
     public Result DeleteMarked(@RequestBody Marked marked){
@@ -114,5 +115,20 @@ public class BlogController {
     public Result DeleteMarkedArticle(@RequestBody MarkedArticle marked_article){
         markService.deleteMarkedArticle(marked_article);
         return Result.success("删除成功");
+    }
+
+
+    /**
+     *
+     * @return 移动收藏的文章
+     */
+    @PostMapping("/blog/personal/marked/moveArticle")
+    public Result MoveMarkedArticle(@RequestBody MarkedMoveVo markedMoveVo){
+        //TODO
+        System.out.print(markedMoveVo.getUid()+" ");
+        System.out.print(markedMoveVo.getAid()+" ");
+        System.out.print(markedMoveVo.getOldMarkedId()+" ");
+        System.out.println(markedMoveVo.getNewMarkedId());
+        return Result.success("移动成功");
     }
 }

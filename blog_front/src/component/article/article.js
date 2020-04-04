@@ -100,7 +100,7 @@ class ArticleBody extends Component{
     }
 
     confirmMarked(){
-        console.log(localStorage.getItem("uid"),this.state.markedId,this.state.article.aid)
+        //console.log(localStorage.getItem("uid"),this.state.markedId,this.state.article.aid)
         Axios.post("/blog/personal/marked/addArticleTest",{
             uid:localStorage.getItem("uid"),
             markId:this.state.markedId,
@@ -156,7 +156,10 @@ class ArticleBody extends Component{
                         {/* 文章区域 */}
                         <div className="articlePart">
                             <span className="title">{this.state.article.articleTitle}</span>
-                            <button className="button-store" onClick={this.handleStore} hidden={this.state.self_article}>收藏</button>
+                            <button className="button-store" onClick={this.handleStore}
+                                    hidden={this.state.self_article}>
+                                收藏
+                            </button>
                             <div>
                                 <span>最后修改于:{dateTransfer(this.state.article.date)}</span>
                                 <span  className="viewNum">阅读{this.state.article.viewNum}</span>
