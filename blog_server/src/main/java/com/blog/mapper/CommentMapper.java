@@ -5,5 +5,6 @@ import com.blog.model.CommentKey;
 
 public interface CommentMapper {
     int insertComment (Comment comment);
+
     int deleteComment (CommentKey key);
 }

@@ -7,6 +7,7 @@ import com.blog.model.Marked;
 import com.blog.model.MarkedArticle;
 import com.blog.model.MarkedKey;
 import com.blog.service.MarkService;
+import com.blog.vo.MarkedMoveVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class MarkServiceImpl implements MarkService {
     }
 
     @Override
-    public boolean addMarked(Marked marked) {
+    public Marked addMarked(Marked marked) {
         //保证名称不重复和用户内部markId自增
 
         List<Marked> markedList = markedMapper.selectByUid(marked.getUid());
@@ -36,25 +37,28 @@ public class MarkServiceImpl implements MarkService {
         {
             try {
                 markedMapper.insert(marked);
-                return true;
+                return markedMapper.getMarked(marked.getUid(),marked.getMarkName());
             }
             catch (Exception e)
             {
                 //e.printStackTrace();
-                return false;
+                return null;
             }
-
         }
         else
-            return false;
+            return null;
 
     }
 
     @Override
-    public void deleteMarked(Integer uid, String markName) {
-        Integer markId = markedMapper.getMarkId(uid, markName);
+    public void moveMarkedArticle(MarkedMoveVo markedMoveVo) {
+        markedMapper.moveMarkedArticle(markedMoveVo);
+    }
+
+    @Override
+    public void deleteMarked(Integer uid, Integer markId) {
         markedArticleMapper.deleteByMarked(new MarkedKey(uid, markId));
-        markedMapper.deleteByName(uid, markName);
+        markedMapper.deleteByName(uid, markId);
 
     }
 

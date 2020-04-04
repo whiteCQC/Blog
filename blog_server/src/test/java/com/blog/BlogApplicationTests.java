@@ -37,6 +37,7 @@ class BlogApplicationTests {
     @Test
     void test1()
     {
+        
 
 
     }
@@ -46,33 +47,6 @@ class BlogApplicationTests {
     @Test
     void markTest()
     {
-
-        markedMapper.deleteByName(2, "测试");
-
-        Marked marked = new Marked();
-        marked.setMarkId(8);
-        marked.setMarkName("我的");
-        marked.setUid(2);
-        markedMapper.insert(marked);
-        marked.setMarkId(3);
-        markedMapper.updateByPrimaryKey(marked);
-
-        List <Marked> l1 = markedMapper.selectByUid(2);
-        for ( Marked m : l1)
-        {
-            System.out.println(m.getMarkName());
-        }
-        Marked m = markedMapper.getMarkedArticles(1, 1);
-        for (Article a:m.getArticleList())
-        {
-            System.out.println(a.getArticleTitle());
-        }
-
-        int id = markedMapper.getMaxMarkId(2);
-        System.out.println(id);
-
-        id = markedMapper.getMarkId(1, "默认收藏夹");
-        System.out.println(id);
 
     }
 

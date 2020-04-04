@@ -24,4 +24,10 @@
     values (#{markId,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{aid,jdbcType=INTEGER}
       )
   </update>
+  <update id="moveMarkedArticle" parameterType="com.blog.vo.MarkedMoveVo">
+    update marked_article
+    set mark_id = #{newMarkedId}
+    where  where mark_id = #{oldMarkId,jdbcType=INTEGER}
+    and uid = #{uid,jdbcType=INTEGER} and aid = #{aid}
+  </update>
 </mapper>

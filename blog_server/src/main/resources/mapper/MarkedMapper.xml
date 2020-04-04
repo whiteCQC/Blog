@@ -63,8 +63,12 @@
   <delete id="deleteByName" parameterType="java.util.Map">
     delete from marked
     where uid = #{uid}
-    and mark_name = #{markName}
+    and mark_id = #{markId}
   </delete>
+  <select id="getMarked" parameterType="java.util.Map" resultType="com.blog.model.Marked">
+    select * from marked
+    where uid = #{uid} and mark_name = #{markName}
+  </select>
 
   <insert id="insert" parameterType="com.blog.model.Marked">
     insert into marked (uid, mark_id, mark_name
