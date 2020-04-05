@@ -49,7 +49,7 @@ public class CommentController {
     /**
      *
      * @param aid
-     * @return 获取文章的评论
+     * @return 获取文章的评论(用CommentVo,因为需要用户的昵称)
      */
     @GetMapping("/getComments")
     public Result GetComments(@RequestParam(value = "aid")int aid){

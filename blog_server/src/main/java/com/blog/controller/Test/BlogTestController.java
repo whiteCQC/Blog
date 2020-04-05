@@ -1,10 +1,7 @@
 package com.blog.controller.Test;
 
 import com.blog.bean.Result;
-import com.blog.model.Article;
-import com.blog.model.Marked;
-import com.blog.model.MarkedArticle;
-import com.blog.model.User;
+import com.blog.model.*;
 import com.sun.net.httpserver.Authenticator;
 import org.springframework.web.bind.annotation.*;
 
@@ -106,6 +103,25 @@ public class BlogTestController {
     @PostMapping("/blog/personal/marked/addMarkedTest")
     public Result AddMarked(@RequestBody Marked marked){
         System.out.println(marked.getMarkName());
+        return Result.success();
+    }
+
+
+
+    @GetMapping("/getCommentsTest")
+    public Result GetComments(@RequestParam(value = "aid")int aid){
+        //TODO
+        List<Comment> list=new ArrayList<>();
+        Comment c1=new Comment();
+        c1.setCommentContent("评论内容");
+        c1.setCommentDate(new Date());
+
+        list.add(c1);
+        return Result.success(list);
+    }
+
+    @PostMapping("/commentSubmitTest")
+    public Result CommentSubmit(@RequestBody Comment comment){
         return Result.success();
     }
 }
