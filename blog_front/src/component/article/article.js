@@ -6,8 +6,8 @@ import {Nav} from "../header/header";
 import {followExecute} from "../../redux/interaction/action";
 import {connect} from "react-redux";
 
-import {dateTransfer, NumberTransferForLargeNum} from '../../tools/tansfer'
-import {Modal,Spin,Radio,Comment} from "antd";
+import {dateTransfer, dateTransferSimple, NumberTransferForLargeNum} from '../../tools/tansfer'
+import {Modal,Spin,Radio,Comment,Avatar} from "antd";
 
 class ArticleBody extends Component{
     constructor (props) {
@@ -20,6 +20,9 @@ class ArticleBody extends Component{
             newArticles: "",
             fanNum: "",
 
+            comments:[],
+            commentToSubmit:"",
+
             self_article: false,
             modalFavoriteVisible: false,
             markedList: [],
@@ -29,6 +32,8 @@ class ArticleBody extends Component{
         this.handleFollow=this.handleFollow.bind(this)
         this.handleStore=this.handleStore.bind(this)
         this.confirmMarked=this.confirmMarked.bind(this)
+        this.CommentChange=this.CommentChange.bind(this)
+        this.submitComment=this.submitComment.bind(this)
     }
     componentDidMount (){
         //console.log(this.props)
@@ -56,7 +61,19 @@ class ArticleBody extends Component{
             openNotificationWithIcon("error","Error",error.message)
         });
 
-
+        Axios.get("/getCommentsTest1", {
+            params: { 'aid': aid }
+        }).then(({data}) => {
+            if(data.code === 200){
+                this.setState({
+                    comments: data.detail,
+                });
+            }else{
+                openNotificationWithIcon("error","Error",data.description)
+            }
+        }).catch( error => {
+            openNotificationWithIcon("error","Error",error.message)
+        });
 
         if(localStorage.getItem("uid")!==null){
             Axios.get("/blog/personal/markedTest", {
@@ -118,6 +135,40 @@ class ArticleBody extends Component{
         })
     }
 
+    CommentChange(e){
+        this.setState({
+            commentToSubmit:e.target.value
+        })
+    }
+    submitComment(){
+        let content=this.state.commentToSubmit;
+        if(content.length<6)
+            openNotificationWithIcon("error","Error","评论内容过短");
+        else if(content.length>100)
+            openNotificationWithIcon("error","Error","评论内容过长");
+        else{
+            Axios.post("/commentSubmitTest",{
+                uid:localStorage.getItem("uid"),
+                commentContent:content,
+                aid:this.state.article.aid
+            }).then(({data}) => {
+                if(data.code === 200){
+                    let comments=this.state.comments
+                    comments.push(data.detail);
+                    this.setState({
+                        commentContent:"",
+                        comments:comments
+                    });
+                    openNotificationWithIcon("success","Success",data.description)
+                }else{
+                    openNotificationWithIcon("error","Error",data.description)
+                }
+            }).catch( error => {
+                openNotificationWithIcon("error","Error",error.message)
+            })
+        }
+    }
+
     render() {
         if(this.state.article.uid==='undefined'){
             return <Spin/>
@@ -171,10 +222,33 @@ class ArticleBody extends Component{
 
                         {/* 评论区域 */}
                         <div id="Comments">
-                                <textarea id="CommentTextArea" placeholder="请自觉遵守互联网相关政策法规，严禁发布色情、暴力、反动的言论。"/>
-                                <button id="submitComment">发表评论</button>
+                                <textarea id="CommentTextArea" placeholder="请自觉遵守互联网相关政策法规，严禁发布色情、暴力、反动的言论。"
+                                          onChange={this.CommentChange}
+                                />
+                                <button id="submitComment" onClick={this.submitComment}>发表评论</button>
                             <div className="articleComments">
+                                {
+                                    this.state.comments.map((comment,index)=>
+                                        <Comment author={<p>{comment.userName}</p>}
+                                                 avatar={
+                                                     <Avatar
+                                                         src="../image/avatar.jpg"
+                                                         alt={comment.userName}
+                                                     />
+                                                 }
+                                                 content={
+                                                     <p>
+                                                         {comment.commentContent}
+                                                     </p>
+                                                         }
+                                                 datetime={<p>{dateTransferSimple(comment.commentDate)}</p>}
+                                                 key={index}
+                                        >
 
+
+                                        </Comment>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>

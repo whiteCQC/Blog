@@ -2,6 +2,7 @@ package com.blog.controller.Test;
 
 import com.blog.bean.Result;
 import com.blog.model.*;
+import com.blog.vo.CommentVo;
 import com.sun.net.httpserver.Authenticator;
 import org.springframework.web.bind.annotation.*;
 
@@ -108,20 +109,30 @@ public class BlogTestController {
 
 
 
-    @GetMapping("/getCommentsTest")
+    @GetMapping("/getCommentsTest1")
     public Result GetComments(@RequestParam(value = "aid")int aid){
         //TODO
-        List<Comment> list=new ArrayList<>();
-        Comment c1=new Comment();
-        c1.setCommentContent("评论内容");
-        c1.setCommentDate(new Date());
+        List<CommentVo> list=new ArrayList<>();
+        CommentVo c1=new CommentVo(1,0,
+                "这是一条评论呀，啦啦啦啦",new Date(),"咸菜烧饼");
+        CommentVo c2=new CommentVo(1,0,
+                "这也是一条评论呀，啦啦啦啦",new Date(),"咸菜馒头");
 
-        list.add(c1);
+        list.add(c1);list.add(c2);
+        return Result.success(list);
+    }
+
+    @GetMapping("/getCommentsTest2")
+    public Result GetComments2(@RequestParam(value = "aid")int aid){
+        //TODO
+        List<CommentVo> list=new ArrayList<>();
         return Result.success(list);
     }
 
     @PostMapping("/commentSubmitTest")
     public Result CommentSubmit(@RequestBody Comment comment){
-        return Result.success();
+        CommentVo c1=new CommentVo(1,0,
+                "这是一条评论呀，啦啦啦啦",new Date(),"咸菜烧饼");
+        return Result.success(c1);
     }
 }

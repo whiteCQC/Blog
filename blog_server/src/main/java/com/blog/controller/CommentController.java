@@ -14,7 +14,7 @@ public class CommentController {
 
     /**
      *
-     * @param comment(评论内容，文章id，评论者id)
+     * @param comment(评论内容，文章id，评论者id),成功需要返回该条Comment信息
      * @return 评论提交
      */
     @PostMapping("/commentSubmit")
