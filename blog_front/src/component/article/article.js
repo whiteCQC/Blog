@@ -7,7 +7,7 @@ import {followExecute} from "../../redux/interaction/action";
 import {connect} from "react-redux";
 
 import {dateTransfer, NumberTransferForLargeNum} from '../../tools/tansfer'
-import {Modal,Spin,Radio} from "antd";
+import {Modal,Spin,Radio,Comment} from "antd";
 
 class ArticleBody extends Component{
     constructor (props) {
@@ -54,7 +54,9 @@ class ArticleBody extends Component{
             }
         }).catch( error => {
             openNotificationWithIcon("error","Error",error.message)
-        })
+        });
+
+
 
         if(localStorage.getItem("uid")!==null){
             Axios.get("/blog/personal/markedTest", {

@@ -4,9 +4,7 @@ import com.blog.bean.Result;
 import com.blog.service.CommentService;
 import com.blog.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CommentController {
@@ -43,6 +41,18 @@ public class CommentController {
      */
     @PostMapping("/commentDelete")
     public Result CommentDelete(@RequestBody Comment comment){
+        //TODO
+
+        return null;
+    }
+
+    /**
+     *
+     * @param aid
+     * @return 获取文章的评论
+     */
+    @GetMapping("/getComments")
+    public Result GetComments(@RequestParam(value = "aid")int aid){
         //TODO
 
         return null;
