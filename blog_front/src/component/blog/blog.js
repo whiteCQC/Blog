@@ -107,9 +107,9 @@ function BlogRight(props){
                     }else{
                         return <OtherBlog articles={props.articles} selectArticle={props.selectArticle} />
                     }
-        case 1:     return <Marked uid={props.uid} history={props.history} selectArticle={props.selectArticle}/>
+        case 1:     return <Marked uid={props.uid} selectArticle={props.selectArticle}/>
 
-        case 2:     return <Column uid={props.uid}/>
+        case 2:     return <Column uid={props.uid} selectArticle={props.selectArticle}/>
 
         default:    return <div>出错了</div>
     }

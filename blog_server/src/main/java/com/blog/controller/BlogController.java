@@ -1,10 +1,7 @@
 package com.blog.controller;
 
 import com.blog.bean.Result;
-import com.blog.model.Article;
-import com.blog.model.Marked;
-import com.blog.model.MarkedArticle;
-import com.blog.model.User;
+import com.blog.model.*;
 import com.blog.service.ArticleService;
 import com.blog.service.MarkService;
 import com.blog.service.UserService;
@@ -12,6 +9,7 @@ import com.blog.vo.MarkedMoveVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -128,4 +126,17 @@ public class BlogController {
         markService.moveMarkedArticle(markedMoveVo);
         return Result.success("移动成功");
     }
+
+
+    /**
+     *
+     * @param uid
+     * @return 获得指定用户的专栏信息
+     */
+    @GetMapping("/blog/personal/Columns")
+    public Result viewSColumn(@RequestParam(value = "uid")int uid){
+        //TODO
+        return null;
+    }
+
 }

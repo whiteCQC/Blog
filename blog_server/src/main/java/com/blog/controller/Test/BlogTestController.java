@@ -135,4 +135,34 @@ public class BlogTestController {
                 "这是一条评论呀，啦啦啦啦",new Date(),"咸菜烧饼");
         return Result.success(c1);
     }
+
+    @GetMapping("/blog/personal/ColumnsTest")
+    public Result viewSColumn(@RequestParam(value = "uid")int uid){
+        //TODO
+        List<SpecialColumn>  list=new ArrayList<>();
+        SpecialColumn s1=new SpecialColumn();
+        s1.setUid(1);
+        s1.setSpColId(0);
+        s1.setSpColName("未分类");
+        List<Article> a1=new ArrayList<>();
+        a1.add(generateArticle());
+        a1.add(generateArticle());
+        s1.setArticleList(a1);
+
+
+        SpecialColumn s2=new SpecialColumn();
+        s2.setUid(1);
+        s2.setSpColId(1);
+        s2.setSpColName("专栏1");
+        List<Article> a2=new ArrayList<>();
+        a2.add(generateArticle());
+        a2.add(generateArticle());
+        a2.add(generateArticle());
+        s2.setArticleList(a2);
+
+        list.add(s1);
+        list.add(s2);
+
+        return Result.success(list);
+    }
 }
