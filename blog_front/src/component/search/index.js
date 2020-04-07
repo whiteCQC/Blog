@@ -33,7 +33,7 @@ class SearchResult extends Component{
     }
     pageClickWithKeywords(keywords,pageNum){
         console.log("pageClick:"+pageNum)
-        Axios.get("/article/searchTest2",{
+        Axios.get("/article/search",{
             params:{
                 keywords:keywords,
                 pageNum:pageNum

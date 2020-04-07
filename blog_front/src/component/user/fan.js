@@ -15,7 +15,7 @@ class Fans extends Component {
     }
     componentDidMount () {
         let uid = localStorage.getItem("uid");
-        Axios.get("/viewFansTest",{
+        Axios.get("/viewFans",{
             params:{
                 uid:uid
             }

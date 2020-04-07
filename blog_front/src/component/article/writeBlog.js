@@ -19,20 +19,22 @@ class WriteBlog extends Component{
         }
 
         this.submitText=this.submitText.bind(this)
+        this.changeText=this.changeText.bind(this)
     }
     componentDidMount (){
         if(typeof this.props.location.state!=='undefined'){
             const aid=this.props.location.state.aid
-            Axios.get("/article/simpleTest", {
+            Axios.get("/article/simple", {
                 params: { 'aid': aid }
             }).then(({data}) => {
                 if(data.code === 200){
+                    console.log(data.detail)
                     this.setState({
-                        title:data.detail.article.articleTitle,
-                        mode: data.detail.article.mode,
-                        type: data.detail.article.type,
-                        Sp_col: data.detail.article.spColId,
-                        text: data.detail.article.articleContent,
+                        title:data.detail.articleTitle,
+                        mode: data.detail.mode,
+                        type: data.detail.type,
+                        Sp_col: data.detail.spColId,
+                        text: data.detail.articleContent,
                         change:true,
                     });
                 }else{
@@ -60,7 +62,8 @@ class WriteBlog extends Component{
             }).then(({data}) => {
                 if(data.code === 200){
                     alert("发布成功")
-
+                    let res = "/blog/" + localStorage.getItem("uid")
+                    this.props.history.push(res)
                     //跳转个人博客
                 }else{
                     alert(data.description)
@@ -85,7 +88,8 @@ class WriteBlog extends Component{
             }).then(({data}) => {
                 if(data.code === 200){
                     alert("修改成功")
-
+                    let res = "/blog/" + localStorage.getItem("uid")
+                    this.props.history.push(res)
                     //跳转个人博客
                 }else{
                     alert(data.description)

@@ -34,7 +34,7 @@ class Marked extends Component{
     }
 
     componentDidMount (){
-        Axios.get("/blog/personal/markedTest", {
+        Axios.get("/blog/personal/marked", {
             params: { 'uid': this.props.uid }
         }).then(({data}) => {
             if(data.code === 200){
@@ -59,7 +59,7 @@ class Marked extends Component{
     }
 
     updateArticlesByMarked(uid,mid){
-        Axios.get("/blog/personal/marked/articleTest", {
+        Axios.get("/blog/personal/marked/article", {
             params: {
                 'uid': uid,
                 'markid':mid,
@@ -85,7 +85,7 @@ class Marked extends Component{
                 {
                     label: '确认',
                     onClick: () => {
-                        Axios.post("/blog/personal/marked/deleteArticleTest",{
+                        Axios.post("/blog/personal/marked/deleteArticle",{
                             uid:this.state.uid,
                             markId:this.state.curMarkedID,
                             aid:aid,
@@ -153,7 +153,7 @@ class Marked extends Component{
         else if(name.length>10)
             openNotificationWithIcon("error","Error","收藏夹名过长")
         else{
-            Axios.post("/blog/personal/marked/addMarkedTest",{
+            Axios.post("/blog/personal/marked/addMarked",{
                 uid:this.state.uid,
                 markName:name,
             }).then(({data}) => {
