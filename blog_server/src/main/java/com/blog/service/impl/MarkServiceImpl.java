@@ -31,7 +31,6 @@ public class MarkServiceImpl implements MarkService {
     @Override
     public Marked addMarked(Marked marked) {
         //保证名称不重复和用户内部markId自增
-
         List<Marked> markedList = markedMapper.selectByUid(marked.getUid());
         if(notContainMarkedName(markedList,marked))
         {

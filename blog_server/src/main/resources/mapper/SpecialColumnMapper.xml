@@ -15,7 +15,6 @@
     <select id="getSpecialColumnsByUid" resultMap="BaseResultMap" parameterType="java.util.Map">
         select * from special_column
         where uid = #{uid}
-
     </select>
     <select id="getSPWithArticle" parameterType="java.util.Map" resultMap="ResultWithArticle">
         select * from special_column

@@ -70,7 +70,7 @@
     where uid = #{uid} and mark_name = #{markName}
   </select>
 
-  <insert id="insert" parameterType="com.blog.model.Marked">
+  <insert id="insert" parameterType="com.blog.model.Marked" >
     insert into marked (uid, mark_id, mark_name
       )
     select #{uid},IFNULL(max(mark_id),0)+1,#{markName} from marked where uid=#{uid}

@@ -37,8 +37,12 @@ class BlogApplicationTests {
     @Test
     void test1()
     {
-        
-
+        Marked marked = new Marked();
+        marked.setMarkName("插入测试3");
+        marked.setUid(1);
+        System.out.println("前" + marked.getMarkId());
+        marked = markService.addMarked(marked);
+        System.out.println("后" + marked.getMarkId());
 
     }
 

@@ -23,9 +23,17 @@
             from comment
             where aid = #{aid}
         </if>
-
-
     </insert>
+    <select id="getMaxCid" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+        select max(cid) from comment
+        where aid = #{aid}
+    </select>
+    <select id="getCommentsOfArticle" resultType="com.blog.vo.CommentVo" parameterType="java.lang.Integer">
+        select c.uid as uid, comment_of_cid as commentOfCid, comment_content as commentContent,
+            comment_date as commentDate, uname as userName
+        from comment c inner join user u on c.uid = u.uid
+        where aid = #{aid}
+    </select>
     <delete id="deleteComment" parameterType="com.blog.model.CommentKey">
         delete from comment
         where comment.aid = #{aid} and comment.cid = #{cid}

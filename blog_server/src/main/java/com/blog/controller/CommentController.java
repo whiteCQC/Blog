@@ -3,8 +3,11 @@ package com.blog.controller;
 import com.blog.bean.Result;
 import com.blog.service.CommentService;
 import com.blog.model.Comment;
+import com.blog.vo.CommentVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class CommentController {
@@ -18,9 +21,8 @@ public class CommentController {
      * @return 评论提交
      */
     @PostMapping("/commentSubmit")
-    public Result CommentSubmit(@RequestBody Comment comment){
-        commentService.commitComment(comment);
-        return Result.success();
+    public Result commentSubmit(@RequestBody Comment comment){
+        return Result.success(commentService.commitComment(comment));
     }
 
     /**
@@ -29,7 +31,7 @@ public class CommentController {
      * @return 评论回复
      */
     @PostMapping("/commentReply")
-    public Result CommentReply(@RequestBody Comment comment){
+    public Result commentReply(@RequestBody Comment comment){
         commentService.commitComment(comment);
         return Result.success();
     }
@@ -40,10 +42,9 @@ public class CommentController {
      * @return 评论删除
      */
     @PostMapping("/commentDelete")
-    public Result CommentDelete(@RequestBody Comment comment){
-        //TODO
-
-        return null;
+    public Result commentDelete(@RequestBody Comment comment){
+        commentService.deleteComment(comment);
+        return Result.success("删除成功");
     }
 
     /**
@@ -52,9 +53,8 @@ public class CommentController {
      * @return 获取文章的评论(用CommentVo,因为需要用户的昵称)
      */
     @GetMapping("/getComments")
-    public Result GetComments(@RequestParam(value = "aid")int aid){
-        //TODO
-
-        return null;
+    public Result getComments(@RequestParam(value = "aid")int aid){
+        List<CommentVo> comments = commentService.getComments(aid);
+        return Result.success(comments);
     }
 }

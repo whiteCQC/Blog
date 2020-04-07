@@ -4,12 +4,13 @@ import com.blog.bean.Result;
 import com.blog.model.*;
 import com.blog.service.ArticleService;
 import com.blog.service.MarkService;
+import com.blog.service.SpecialColumnService;
 import com.blog.service.UserService;
 import com.blog.vo.MarkedMoveVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,6 +22,8 @@ public class BlogController {
     ArticleService articleService;
     @Autowired
     MarkService markService;
+    @Autowired
+    SpecialColumnService specialColumnService;
 
 
     /**
@@ -127,7 +130,6 @@ public class BlogController {
         return Result.success("移动成功");
     }
 
-
     /**
      *
      * @param uid
@@ -135,8 +137,7 @@ public class BlogController {
      */
     @GetMapping("/blog/personal/Columns")
     public Result viewSColumn(@RequestParam(value = "uid")int uid){
-        //TODO
-        return null;
+        return Result.success(specialColumnService.getSpecialColumnsByUid(uid));
     }
 
 }

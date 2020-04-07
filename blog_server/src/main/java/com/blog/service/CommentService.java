@@ -1,15 +1,16 @@
 package com.blog.service;
 
 import com.blog.model.Comment;
-import com.blog.model.CommentKey;
+import com.blog.vo.CommentVo;
+
+import java.util.List;
 
 public interface CommentService {
 
-    void commitComment(Comment comment);
+    Comment commitComment(Comment comment);
 
-    void deleteComment(CommentKey commentKey);
+    void deleteComment(Comment comment);
 
-
-
+    List<CommentVo> getComments(Integer aid);
 
 }
