@@ -17,7 +17,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment commitComment(Comment comment) {
-        int cid = commentMapper.getMaxCid(comment.getAid());
+        int cid = commentMapper.getMaxCid(comment.getAid())+1;
         comment.setCid(cid);
         commentMapper.insertComment(comment);
         return comment;
