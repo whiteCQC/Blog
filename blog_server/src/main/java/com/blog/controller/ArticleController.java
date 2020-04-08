@@ -47,7 +47,7 @@ public class ArticleController {
         PageInfo<Article> pageInfo = articleService.getArticleByKeyword(keyword, pageNum);
         HashMap< String, Object > map = new HashMap<>();
         List<Article> list = pageInfo.getList();
-        Long total= pageInfo.getTotal();//结果的总页数
+        int total= pageInfo.getPages();//结果的总页数
         map.put("total", total);
         map.put("list", list);
         return Result.success(map);
@@ -62,12 +62,11 @@ public class ArticleController {
     public Result hotArticle(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum){
         PageInfo<Article> pageInfo = articleService.getHotArticle(pageNum);
         List<Article> list = pageInfo.getList();
-        Long total= pageInfo.getTotal();//结果的总页数
+        int total= pageInfo.getPages();//结果的总页数
         HashMap< String, Object > map = new HashMap<>();
         map.put("total", total);
         map.put("list", list);
         return Result.success(map);
-
     }
 
     /**

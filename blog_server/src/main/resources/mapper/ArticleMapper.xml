@@ -10,6 +10,7 @@
     <result column="mode" jdbcType="INTEGER" property="mode" />
     <result column="view_num" jdbcType="INTEGER" property="viewNum" />
     <result column="sp_col_id" jdbcType="INTEGER" property="spColId" />
+    <association property="user" column="{uid = uid}" select="getUser"/>
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.blog.model.Article">
     <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent" />
@@ -20,6 +21,10 @@
   <sql id="Blob_Column_List">
     article_content
   </sql>
+  <select id="getUser" parameterType="java.util.Map" resultType="com.blog.model.User">
+    select uname as uname from user
+    where uid = #{uid}
+  </select>
 
   <select id="getAll" resultMap="BaseResultMap">
     select

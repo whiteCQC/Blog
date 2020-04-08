@@ -3,6 +3,7 @@ package com.blog.service.impl;
 import com.blog.mapper.ArticleMapper;
 import com.blog.model.Article;
 import com.blog.service.ArticleService;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.page.PageMethod;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public PageInfo<Article> getHotArticle(Integer pageNum) {
+        PageHelper.startPage(pageNum, 5);
         List<Article> list = articleMapper.getAll();
         sortHot(list);
-        PageMethod.startPage(pageNum, 5);
         return new PageInfo<>(list);
 
     }

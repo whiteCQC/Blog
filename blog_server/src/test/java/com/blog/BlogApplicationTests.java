@@ -7,6 +7,7 @@ import com.blog.service.CommentService;
 import com.blog.service.MarkService;
 import com.blog.service.UserService;
 import com.blog.vo.Fan;
+import com.github.pagehelper.PageInfo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -51,6 +52,13 @@ class BlogApplicationTests {
     @Test
     void markTest()
     {
+        PageInfo<Article> pageInfo = articleService.getHotArticle(1);
+        List<Article> list = pageInfo.getList();
+        Long total= pageInfo.getTotal();//结果的总页数
+        for (Article article : list) {
+            System.out.println(article);
+        }
+        System.out.println(total);
 
     }
 

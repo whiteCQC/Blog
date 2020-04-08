@@ -26,7 +26,7 @@
       u.uid as followedId
     FROM
       follower f
-      JOIN USER u ON f.uid = u.uid
+      JOIN user u ON f.uid = u.uid
     WHERE
       f.follower_id = #{uid}
   </select>
@@ -36,7 +36,7 @@
       u.uid as followId
     FROM
       follower f
-      JOIN USER u ON f.follower_id = u.uid
+      JOIN user u ON f.follower_id = u.uid
     WHERE
       f.uid = #{uid}
   </select>
