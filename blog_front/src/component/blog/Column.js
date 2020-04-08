@@ -9,7 +9,8 @@ class Column extends Component{
         super(props);
         this.state={
             ColumnList:"",
-            columnChoose:0,
+            columnChoose:-1,
+            columnIndex:0,
         }
         this.changeColumn=this.changeColumn.bind(this)
     }
@@ -20,8 +21,10 @@ class Column extends Component{
         }).then(({data}) => {
             if(data.code === 200){
                 this.setState({
-                    ColumnList:data.detail
+                    ColumnList:data.detail,
+                    columnChoose:data.detail[0].spColId,
                 });
+
             }else{
                 openNotificationWithIcon("error","Error",data.description)
             }
@@ -37,11 +40,11 @@ class Column extends Component{
     }
 
     render() {
-        if(this.state.ColumnList==="")
+        if(this.state.ColumnList===""){
             return <Spin/>
+        }
 
         const { Option } = Select;
-console.log(this.state.ColumnList)
         return(
             <div className="blogRight">
                 <h1 className="title">我的专栏</h1>
@@ -59,8 +62,9 @@ console.log(this.state.ColumnList)
                 <button className="del-Marked">删除当前专栏</button>
                 <button className="new-Marked">新建专栏</button>
                 <div className="articleList-Marked">
-                    <ColumnArticles  articles={this.state.ColumnList[this.state.columnChoose].articleList}
+                    <ColumnArticles  articles={this.state.ColumnList}
                                      selectArticle={this.props.selectArticle}
+                                     columnIndex={this.state.columnIndex}
                     />
                 </div>
 
@@ -71,11 +75,12 @@ console.log(this.state.ColumnList)
 }
 
 function ColumnArticles(props){
-    if(props.articles==="")
-        return <span>暂无文章</span>;
+    let articles=props.articles[props.columnIndex].articleList
+    if(articles===""||articles===undefined||!articles)
+        return <span className="myTips">该专栏暂无文章</span>;
     else {
         return <ul>
-            {props.articles.map((article,index) =>
+            {articles.map((article,index) =>
                 <li key={article.aid}>
                     <SingleArticle article={article} selectArticle={props.selectArticle}/>
                     <div className="change-article">

@@ -8,6 +8,7 @@ import { DatePicker } from 'antd';
 import {openNotificationWithIcon} from "../notification/index";
 import moment from 'moment';
 import './profile.css'
+import Spin from "antd/es/spin";
 
 class Profile extends Component{
     constructor (props) {
@@ -81,6 +82,8 @@ class Profile extends Component{
     }
 
     render() {
+        if(this.state.user==="")
+            return <Spin/>
         return(
             <div>
                 <Nav/>
@@ -146,8 +149,8 @@ function Sex(props){
                 <span className="radio-button-inner" style={props.sex==='女'?CheckedStyle:unCheckedStyle}>女</span>
             </label>
             <label className="el-radio-button">
-                <input type="radio" name="sex" className="radio-button" value="保密" checked={props.sex==='保密'} onChange={props.SexChange}/>
-                <span className="radio-button-inner" style={props.sex==='保密'?CheckedStyle:unCheckedStyle}>保密</span>
+                <input type="radio" name="sex" className="radio-button" value="null" checked={!props.sex} onChange={props.SexChange}/>
+                <span className="radio-button-inner" style={!props.sex?CheckedStyle:unCheckedStyle}>保密</span>
             </label>
         </div>
     )

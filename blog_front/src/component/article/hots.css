@@ -8,6 +8,14 @@ ul li{
     top:150px;
     width: 800px;
 }
+#hotArticle>h1,#searchArticle>h1{
+    margin-left: 40px;
+    color: white;
+    background-color: #00a1d6;
+    text-align: center;
+    letter-spacing:5px;
+
+}
 
 #hotArticle>ul>li{
     padding: 18px 24px 13px 24px;

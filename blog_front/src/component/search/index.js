@@ -8,6 +8,8 @@ import {withRouter} from "react-router-dom";
 
 import './index.css'
 import PageComponent from "../page/pageComponent";
+import {dateTransfer} from "../../tools/tansfer";
+import ViewNum from "../../image/eye.jpg"
 
 class SearchResult extends Component{
     constructor (props) {
@@ -86,6 +88,7 @@ class SearchResult extends Component{
                 <Nav/>
 
                 <div id="searchArticle">
+                    <h1>搜索结果</h1>
                     <ul>
                         {this.state.indexList.map((article,index) =>
                             <li key={article.aid} onClick={this.selectArticle.bind(this,article.aid)}>
@@ -113,9 +116,9 @@ const SingleSearch = ({article},index)=>(
         <h2>
             {article.articleTitle}
         </h2>
-        <p><span>{article.articleContent}</span></p>
+        <p><span>{dateTransfer(article.date)}</span></p>
         <div className="viewNum">
-            <img src="../image/eye.jpg" alt="浏览人数"/>{article.viewNum}
+            <img src={ViewNum} alt="浏览人数"/>{article.viewNum}
         </div>
     </div>
 )

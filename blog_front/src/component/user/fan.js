@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import Axios from "../../axios/axios";
 
 import './fan.css'
-
+import User from "../../image/avatar.jpg"
 class Fans extends Component {
     constructor(props) {
         super(props);
@@ -48,7 +48,7 @@ class Fans extends Component {
                         <ul>
                             {this.state.fans.map((fan,index) =>
                                 <li key={fan.uid}>
-                                    <img className="avatar" src="../image/avatar.jpg" alt="头像"/>
+                                    <img className="avatar" src={User} alt="头像"/>
                                     <span className="fanName">{fan.uname}</span>
                                 </li>
                             )}

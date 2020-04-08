@@ -5,7 +5,7 @@ import {UserRegister} from "../../redux/user/action";
 import {openNotificationWithIcon} from "../notification";
 
 import './register.css'
-
+import User from "../../image/avatar.jpg"
 const Register= ({ dispatch }) => {
     let email,pw1,pw2,name
     return(
@@ -13,7 +13,7 @@ const Register= ({ dispatch }) => {
             <div className="register-form">
                 <h1>用户注册</h1>
                 <div className="register-head">
-                    <img src="../image/avatar.jpg" alt='用户' height="150" width="150"/>
+                    <img src={User} alt='用户' height="150" width="150"/>
                 </div>
                 <form onSubmit={e => {
                     e.preventDefault()

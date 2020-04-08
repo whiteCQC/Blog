@@ -4,6 +4,10 @@ import {withRouter} from "react-router-dom";
 
 import './hots.css';
 import PageComponent from "../page/pageComponent";
+import {dateTransfer} from "../../tools/tansfer";
+import {Spin} from "antd";
+
+import ViewNum from "../../image/eye.jpg"
 
 class Hots extends Component{
     constructor (props) {
@@ -64,15 +68,17 @@ class Hots extends Component{
         }
     }
     render(){
+        if(this.state.totalPage==='')
+            return <Spin/>
         return(
             <div>
                 <div id="hotArticle">
+                    <h1>热门推荐</h1>
                     <ul>
                         {this.state.articles.map((article,index) =>
                             <li key={article.aid} onClick={this.selectHot.bind(this,article.aid)}>
                                 <SingleHot article={article}  />
                             </li>
-
                         )}
                     </ul>
                 </div>
@@ -97,9 +103,9 @@ const SingleHot = ({article},index)=>(
                 <span className="hotLogo">HOT</span>
                 {article.articleTitle}
             </h2>
-            <p><span>{article.articleContent}</span></p>
+            <p><span>{dateTransfer(article.date)}</span></p>
             <div className="viewNum">
-                <img src="image/eye.jpg" alt="浏览人数"/>{article.viewNum}
+                <img src={ViewNum} alt="浏览人数"/>{article.viewNum}
             </div>
         </div>
 )

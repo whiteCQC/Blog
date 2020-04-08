@@ -44,14 +44,15 @@ class ArticleBody extends Component{
         Axios.get("/article/detail", {
             params: { 'aid': aid }
         }).then(({data}) => {
+            console.log(data.detail)
             if(data.code === 200){
                 this.setState({
                     article: data.detail.article,
                     author:data.detail.author,
-                    totalView:data.detail.totalView,
-                    articleNum:data.detail.articleNum,
-                    newArticles:data.detail.newArticles,
-                    fanNum:data.detail.fanNum,
+                    totalView:data.detail.author.totalView,
+                    articleNum:data.detail.author.articleNum,
+                    newArticles:data.detail.author.newArticles,
+                    fanNum:data.detail.author.fanNum,
                     self_article:loginUid===data.detail.article.uid,
                 });
             }else{
@@ -170,7 +171,7 @@ class ArticleBody extends Component{
     }
 
     render() {
-        if(this.state.article.uid==='undefined'){
+        if(this.state.totalView===""){
             return <Spin/>
         }
         const radioStyle = {
@@ -184,7 +185,7 @@ class ArticleBody extends Component{
                 <div className="articleBody">
                     {/* 文章作者基本信息 */}
                     <div className="authorInfo">
-                        <h3>作者:{this.state.author.uname}</h3>
+                        <h3>作者:{this.state.author.name}</h3>
                         <table border="0" className="UserInfoTable" cellPadding="10">
                             <tbody>
                             <tr>
@@ -208,7 +209,7 @@ class ArticleBody extends Component{
                     <div className="articleRight">
                         {/* 文章区域 */}
                         <div className="articlePart">
-                            <span className="title">{this.state.article.articleTitle}</span>
+                            <span className="article-title">{this.state.article.articleTitle}</span>
                             <button className="button-store" onClick={this.handleStore}
                                     hidden={this.state.self_article}>
                                 收藏

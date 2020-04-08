@@ -23,7 +23,7 @@ class MyBlog extends Component{
 
     componentDidMount (){
         let pub=[],pri=[];
-        console.log(this.props)
+        //console.log(this.props)
         this.props.articles.map((a)=>{
             if(a.mode===0){
                 pub.push(a)

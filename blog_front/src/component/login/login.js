@@ -4,6 +4,8 @@ import {UserLogin} from "../../redux/user/action";
 import {Redirect} from "react-router-dom";
 import "./login.css"
 
+import User from "../../image/avatar.jpg"
+
 const Login = ({ dispatch }) => {
     let email,password
     return(
@@ -11,7 +13,7 @@ const Login = ({ dispatch }) => {
         <div className="login-form">
             <h1>用户登录</h1>
             <div className="login-head">
-                <img src="../image/avatar.jpg" alt="用户" height="150" width="150"/>
+                <img src={User} alt="用户" height="150" width="150"/>
             </div>
             <form onSubmit={e => {
                 e.preventDefault()

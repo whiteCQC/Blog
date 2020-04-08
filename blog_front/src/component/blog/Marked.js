@@ -14,11 +14,11 @@ class Marked extends Component{
         this.state={
             markedList:"",
             articles:"",
-            curMarkedID:0,
+            curMarkedID:1,
             uid:props.uid,
 
             changeMarked:false,
-            changeMarkedId:0,
+            changeMarkedId:1,
             changeAid:"",
 
             newMarked:false,
@@ -48,7 +48,7 @@ class Marked extends Component{
             openNotificationWithIcon("error","Error",error.message)
         });
 
-        this.updateArticlesByMarked(this.props.uid,0);
+        this.updateArticlesByMarked(this.props.uid,1);
     }
 
     changeMarked(value){
@@ -300,8 +300,9 @@ class Marked extends Component{
 }
 
 function MarkedArticles(props){
-    if(props.articles==="")
-        return <span>暂无收藏</span>;
+    console.log(props)
+    if(props.articles===""||props.articles===undefined)
+        return <span className="myTips">当前收藏夹暂无文章</span>;
     else {
         return <ul>
                     {props.articles.map((article,index) =>

@@ -6,7 +6,7 @@ import Axios from "../../axios/axios";
 
 import './cocern.css'
 import {openNotificationWithIcon} from "../notification";
-
+import User from "../../image/avatar.jpg"
 class Concern extends Component {
     constructor(props) {
         super(props);
@@ -70,7 +70,7 @@ class Concern extends Component {
                         <ul>
                             {this.state.fans.map((fan,index) =>
                                 <li key={fan.uid}>
-                                    <img className="avatar" src="../image/avatar.jpg" alt="头像"/>
+                                    <img className="avatar" src={User} alt="头像"/>
                                     <span className="fanName">{fan.uname}</span>
                                     <button className="cancelFollow" onClick={this.FanCancel.bind(this,fan.uid)}>取消关注</button>
                                 </li>

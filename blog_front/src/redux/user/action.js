@@ -37,12 +37,14 @@ function fetchLogin (data,dispatch){
         email: user.email,
         password: user.password
     }).then(({data}) => {
+        console.log(data)
         if (data.code === 200) {
             localStorage.setItem("token", data.detail.token);
             localStorage.setItem("uid", data.detail.uid);
             localStorage.setItem("uname", data.detail.uname);
             Axios.defaults.headers.common['Authorization'] = data.detail.token
             dispatch(login(data.detail))
+
 
             window.location.reload()
         } else {
