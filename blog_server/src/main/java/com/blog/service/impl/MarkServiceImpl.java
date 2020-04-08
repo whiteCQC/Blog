@@ -51,7 +51,7 @@ public class MarkServiceImpl implements MarkService {
 
     @Override
     public void moveMarkedArticle(MarkedMoveVo markedMoveVo) {
-        markedMapper.moveMarkedArticle(markedMoveVo);
+        markedArticleMapper.moveMarkedArticle(markedMoveVo);
     }
 
     @Override

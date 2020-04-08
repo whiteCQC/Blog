@@ -3,13 +3,22 @@ package com.blog.model;
 import java.util.List;
 
 public class SpecialColumn {
-    private int spColId;
+    private Integer spColId;
 
-    private int uid;
+    private Integer uid;
 
     private String spColName;
 
     private List<Article> articleList;
+
+    @Override
+    public String toString() {
+        return "SpecialColumn{" +
+                "spColId=" + spColId +
+                ", uid=" + uid +
+                ", spColName='" + spColName + '\'' +
+                '}';
+    }
 
     public List<Article> getArticleList() {
         return articleList;
@@ -19,19 +28,19 @@ public class SpecialColumn {
         this.articleList = articleList;
     }
 
-    public int getSpColId() {
+    public Integer getSpColId() {
         return spColId;
     }
 
-    public void setSpColId(int spColId) {
+    public void setSpColId(Integer spColId) {
         this.spColId = spColId;
     }
 
-    public int getUid() {
+    public Integer getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(Integer uid) {
         this.uid = uid;
     }
 

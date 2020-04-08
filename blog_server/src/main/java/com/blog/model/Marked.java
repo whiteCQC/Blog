@@ -32,4 +32,13 @@ public class Marked extends MarkedKey {
     public void setMarkName(String markName) {
         this.markName = markName;
     }
+
+    @Override
+    public String toString() {
+        return "Marked{" +
+                "markName='" + markName + '\'' +
+                ", markid=" + this.getMarkId() +
+                ", uid=" + this.getUid() +
+                '}';
+    }
 }

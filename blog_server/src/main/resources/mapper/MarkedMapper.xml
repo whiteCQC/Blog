@@ -65,7 +65,7 @@
     where uid = #{uid}
     and mark_id = #{markId}
   </delete>
-  <select id="getMarked" parameterType="java.util.Map" resultType="com.blog.model.Marked">
+  <select id="getMarked" parameterType="java.util.Map" resultMap="BaseResultMap">
     select * from marked
     where uid = #{uid} and mark_name = #{markName}
   </select>

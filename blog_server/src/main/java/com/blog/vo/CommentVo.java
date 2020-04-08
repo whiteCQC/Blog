@@ -3,9 +3,9 @@ package com.blog.vo;
 import java.util.Date;
 
 public class CommentVo {
-    private int uid;
+    private Integer uid;
 
-    private int commentOfCid;
+    private Integer commentOfCid;
 
     private String commentContent;
 
@@ -13,7 +13,7 @@ public class CommentVo {
 
     private String userName;
 
-    public CommentVo(int uid, int commentOfCid, String commentContent, Date commentDate, String userName) {
+    public CommentVo(Integer uid, Integer commentOfCid, String commentContent, Date commentDate, String userName) {
         this.uid = uid;
         this.commentOfCid = commentOfCid;
         this.commentContent = commentContent;
@@ -21,19 +21,19 @@ public class CommentVo {
         this.userName = userName;
     }
 
-    public int getUid() {
+    public Integer getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(Integer uid) {
         this.uid = uid;
     }
 
-    public int getCommentOfCid() {
+    public Integer getCommentOfCid() {
         return commentOfCid;
     }
 
-    public void setCommentOfCid(int commentOfCid) {
+    public void setCommentOfCid(Integer commentOfCid) {
         this.commentOfCid = commentOfCid;
     }
 
@@ -59,5 +59,16 @@ public class CommentVo {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    @Override
+    public String toString() {
+        return "CommentVo{" +
+                "uid=" + uid +
+                ", commentOfCid=" + commentOfCid +
+                ", commentContent='" + commentContent + '\'' +
+                ", commentDate=" + commentDate +
+                ", userName='" + userName + '\'' +
+                '}';
     }
 }

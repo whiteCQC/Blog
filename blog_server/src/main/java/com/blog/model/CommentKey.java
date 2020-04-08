@@ -1,12 +1,12 @@
 package com.blog.model;
 
 public class CommentKey {
-    private int aid;
+    private Integer aid;
 
-    private int cid;
+    private Integer cid;
 
 
-    public CommentKey(int aid, int cid) {
+    public CommentKey(Integer aid, Integer cid) {
         this.aid = aid;
         this.cid = cid;
     }
@@ -14,19 +14,19 @@ public class CommentKey {
     public CommentKey() {
     }
 
-    public int getAid() {
+    public Integer getAid() {
         return aid;
     }
 
-    public void setAid(int aid) {
+    public void setAid(Integer aid) {
         this.aid = aid;
     }
 
-    public int getCid() {
+    public Integer getCid() {
         return cid;
     }
 
-    public void setCid(int cid) {
+    public void setCid(Integer cid) {
         this.cid = cid;
     }
 }

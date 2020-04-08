@@ -21,8 +21,6 @@ public interface MarkedMapper {
 
     Marked getMarked(Integer uid, String markName);
 
-    int moveMarkedArticle(MarkedMoveVo markedMoveVo);
-
     int getMaxMarkId(Integer uid);
 
     int getMarkId(Integer uid, String markName);

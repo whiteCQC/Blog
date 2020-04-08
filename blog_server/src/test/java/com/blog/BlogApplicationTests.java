@@ -1,12 +1,12 @@
 package com.blog;
 
+import com.blog.bean.Result;
 import com.blog.mapper.*;
 import com.blog.model.*;
-import com.blog.service.ArticleService;
-import com.blog.service.CommentService;
-import com.blog.service.MarkService;
-import com.blog.service.UserService;
+import com.blog.service.*;
+import com.blog.vo.CommentVo;
 import com.blog.vo.Fan;
+import com.blog.vo.MarkedMoveVo;
 import com.github.pagehelper.PageInfo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +35,9 @@ class BlogApplicationTests {
     @Autowired
     MarkService markService;
 
+    @Autowired
+    SpecialColumnService specialColumnService;
+
     @Test
     void test1()
     {
@@ -52,18 +55,17 @@ class BlogApplicationTests {
     @Test
     void markTest()
     {
-//        PageInfo<Article> pageInfo = articleService.getHotArticle(1);
-//        List<Article> list = pageInfo.getList();
-//        Long total= pageInfo.getTotal();//结果的总页数
-//        for (Article article : list) {
-//            System.out.println(article);
-//        }
-//        System.out.println(total);
-        List<Fan> fans = userService.getConcerns(1);
-        for (Fan fan : fans) {
-            System.out.println(fan);
+//        MarkedArticle markedArticle = new MarkedArticle();
+//        markedArticle.setUid(1);
+//        markedArticle.setMarkId(1);
+//        markedArticle.setAid(1);
+//        System.out.println((markService.addMarkedArticle(markedArticle)));
+//        markedArticle.setAid(2);
+//        System.out.println((markService.addMarkedArticle(markedArticle)));
+//        MarkedMoveVo markedMoveVo = new MarkedMoveVo(1,2,1,4);
+//
+//        markService.moveMarkedArticle(markedMoveVo);
 
-        }
     }
 
     @Test

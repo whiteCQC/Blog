@@ -59,7 +59,7 @@
         password = #{password,jdbcType=VARCHAR},
       </if>
       <if test="gender!=null and gender != '' ">
-        password = #{password,jdbcType=VARCHAR},
+        gender = #{gender,jdbcType=VARCHAR},
       </if>
       <if test="email!=null and email != '' ">
         email = #{email,jdbcType=VARCHAR},

@@ -19,7 +19,7 @@ public class FanController {
      * @return 成功与否
      */
     @PostMapping("/FanAdd")
-    public Result FanFollow(@RequestBody Fan fan){
+    public Result fanFollow(@RequestBody Fan fan){
         if(userService.follow(fan))
             return Result.success();
         else
@@ -32,7 +32,7 @@ public class FanController {
      * @return 成功与否
      */
     @PostMapping("/FanCancel")
-    public Result CancelFollow(@RequestBody Fan fan){
+    public Result cancelFollow(@RequestBody Fan fan){
         if(userService.cancelFollow(fan))
             return Result.success();
         else
@@ -44,7 +44,7 @@ public class FanController {
      * @return 对应用户的所拥有的粉丝基本信息{每个粉丝的ID，用户名}，list对应key：fans
      */
     @GetMapping("/viewFans")
-    public Result ViewFans(@RequestParam(value = "uid") int userId){
+    public Result viewFans(@RequestParam(value = "uid") int userId){
         //fan里面只有followerName和followId有信息
         List<Fan> fans = userService.getFans(userId);
         HashMap< String, Object > map = new HashMap<>();
@@ -57,7 +57,7 @@ public class FanController {
      * @return 对应用户的所关注的用户信息{每个用户的ID，用户名}，list对应key：fans
      */
     @GetMapping("/viewConcerns")
-    public Result ViewConcerns(@RequestParam(value = "uid") int userId){
+    public Result viewConcerns(@RequestParam(value = "uid") int userId){
         //fan里面只有authorName和followedId有信息
         List<Fan> fans = userService.getConcerns(userId);
         HashMap< String, Object > map = new HashMap<>();

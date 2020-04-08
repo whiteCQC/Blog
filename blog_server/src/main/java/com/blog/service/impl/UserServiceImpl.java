@@ -46,6 +46,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User user) {
+        if(user.getPassword() != null && !user.getPassword().equals(""))
+            user.setPassword(PasswordUtil.toMD5(user.getPassword()));
         userMapper.updateByPrimaryKey(user);
     }
 
