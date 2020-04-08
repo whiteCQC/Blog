@@ -9,6 +9,16 @@ public class Fan {
 
     private String followerName;//关注者名
 
+    @Override
+    public String toString() {
+        return "Fan{" +
+                "followerId=" + followerId +
+                ", authorId=" + authorId +
+                ", authorName='" + authorName + '\'' +
+                ", followerName='" + followerName + '\'' +
+                '}';
+    }
+
     public String getAuthorName() {
         return authorName;
     }

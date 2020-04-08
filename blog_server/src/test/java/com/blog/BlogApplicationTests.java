@@ -52,14 +52,18 @@ class BlogApplicationTests {
     @Test
     void markTest()
     {
-        PageInfo<Article> pageInfo = articleService.getHotArticle(1);
-        List<Article> list = pageInfo.getList();
-        Long total= pageInfo.getTotal();//结果的总页数
-        for (Article article : list) {
-            System.out.println(article);
-        }
-        System.out.println(total);
+//        PageInfo<Article> pageInfo = articleService.getHotArticle(1);
+//        List<Article> list = pageInfo.getList();
+//        Long total= pageInfo.getTotal();//结果的总页数
+//        for (Article article : list) {
+//            System.out.println(article);
+//        }
+//        System.out.println(total);
+        List<Fan> fans = userService.getConcerns(1);
+        for (Fan fan : fans) {
+            System.out.println(fan);
 
+        }
     }
 
     @Test
