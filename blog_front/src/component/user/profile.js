@@ -22,7 +22,7 @@ class Profile extends Component{
     }
     componentDidMount (){
         let uid=localStorage.getItem("uid");
-        Axios.post("/userInfoTest",{
+        Axios.post("/userInfo",{
             uid:uid
         }).then(({data}) => {
             if(data.code === 200){
@@ -44,7 +44,7 @@ class Profile extends Component{
         if(this.state.curName===""||this.state.curBirth===""){
             openNotificationWithIcon("error","Error","信息不能为空!")
         }else{
-            Axios.post("/userInfoChangeTest",{
+            Axios.post("/userInfoChange",{
                 uid:this.state.user.uid,
                 uname:this.state.curName,
                 gender:this.state.curSex,

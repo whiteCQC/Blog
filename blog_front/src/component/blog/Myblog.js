@@ -2,15 +2,17 @@ import React, {Component} from "react";
 import SingleArticle from "./singleArticle";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import Spin from "antd/es/spin";
 
 class MyBlog extends Component{
     constructor(props) {
         super(props);
         this.state={
             articlesAll:[],
-            articles:[],
             articlesPub:[],
-            articlesPri:[]
+            articlesPri:[],
+            articles:[],
+            judge:false,
         }
         this.allArticle=this.allArticle.bind(this)
         this.publicArticle=this.publicArticle.bind(this)
@@ -18,27 +20,25 @@ class MyBlog extends Component{
         this.edit=this.edit.bind(this)
         this.del=this.del.bind(this)
     }
-    static getDerivedStateFromProps(nextProps,preState){
-        const oldData =JSON.stringify(preState.articlesAll)
-        const newData =JSON.stringify(nextProps.articles)
-        if(oldData!==newData){
-            let pub=[],pri=[]
-            nextProps.articles.forEach((a)=>{
-                if(a.mode===0){
-                    pub.push(a)
-                }else{
-                    pri.push(a)
-                }
-            })
 
-            return {
-                articlesPub:pub,
-                articlesPri:pri,
-                articles:nextProps.articles,
-                articlesAll:nextProps.articles
+    componentDidMount (){
+        let pub=[],pri=[];
+        console.log(this.props)
+        this.props.articles.map((a)=>{
+            if(a.mode===0){
+                pub.push(a)
+            }else{
+                pri.push(a)
             }
-        }
-        return null
+        })
+
+        this.setState({
+            articlesPub:pub,
+            articlesPri:pri,
+            articlesAll:this.props.articles,
+            articles:this.props.articles,
+            judge:true,
+        })
     }
 
     allArticle(){
@@ -80,6 +80,8 @@ class MyBlog extends Component{
         });
     };
     render() {
+        if(!this.state.judge)
+            return <Spin/>
         return(
             <div className="blogRight">
                 <div className="buttonHeaders">

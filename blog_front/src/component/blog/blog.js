@@ -37,7 +37,7 @@ class Blog extends Component{
                 flag:true
             })
         }
-        Axios.get("/blog/personalTest", {
+        Axios.get("/blog/personal", {
             params: { 'uid': uid }
         }).then(({data}) => {
             if(data.code === 200){
@@ -57,7 +57,7 @@ class Blog extends Component{
         this.props.history.push(res)
     }
     ArticleDel=(aid)=>{
-        Axios.post("/article/delTest",{
+        Axios.post("/article/del",{
             aid:aid
         }).then(({data}) => {
             if(data.code === 200){
@@ -65,6 +65,8 @@ class Blog extends Component{
                     articles:data.detail.articleInfo
                 })
                 openNotificationWithIcon("success","Success","成功删除")
+                setTimeout(()=>window.location.reload(),2000);
+
             }else{
                 openNotificationWithIcon("error","Error",data.description)
             }

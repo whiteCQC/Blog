@@ -11,7 +11,7 @@ const Login = ({ dispatch }) => {
         <div className="login-form">
             <h1>用户登录</h1>
             <div className="login-head">
-                <img src="../image/user.png" alt="用户"/>
+                <img src="../image/avatar.jpg" alt="用户" height="150" width="150"/>
             </div>
             <form onSubmit={e => {
                 e.preventDefault()

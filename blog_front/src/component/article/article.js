@@ -41,7 +41,7 @@ class ArticleBody extends Component{
         //console.log("aid:"+aid);
         let loginUid = localStorage.getItem("uid")!==null? localStorage.getItem("uid") :-1 ;
 
-        Axios.get("/article/detailTest", {
+        Axios.get("/article/detail", {
             params: { 'aid': aid }
         }).then(({data}) => {
             if(data.code === 200){
@@ -61,7 +61,7 @@ class ArticleBody extends Component{
             openNotificationWithIcon("error","Error",error.message)
         });
 
-        Axios.get("/getCommentsTest1", {
+        Axios.get("/getComments", {
             params: { 'aid': aid }
         }).then(({data}) => {
             if(data.code === 200){
@@ -120,7 +120,7 @@ class ArticleBody extends Component{
 
     confirmMarked(){
         //console.log(localStorage.getItem("uid"),this.state.markedId,this.state.article.aid)
-        Axios.post("/blog/personal/marked/addArticleTest",{
+        Axios.post("/blog/personal/marked/addArticle",{
             uid:localStorage.getItem("uid"),
             markId:this.state.markedId,
             aid:this.state.article.aid
@@ -147,7 +147,7 @@ class ArticleBody extends Component{
         else if(content.length>100)
             openNotificationWithIcon("error","Error","评论内容过长");
         else{
-            Axios.post("/commentSubmitTest",{
+            Axios.post("/commentSubmit",{
                 uid:localStorage.getItem("uid"),
                 commentContent:content,
                 aid:this.state.article.aid

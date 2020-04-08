@@ -15,7 +15,7 @@ class Column extends Component{
     }
 
     componentDidMount() {
-        Axios.get("/blog/personal/ColumnsTest", {
+        Axios.get("/blog/personal/Columns", {
             params: { 'uid': this.props.uid }
         }).then(({data}) => {
             if(data.code === 200){

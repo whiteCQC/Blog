@@ -28,7 +28,7 @@ class Hots extends Component{
     }
     //点击翻页
     pageClick(pageNum) {
-        Axios.get("/article/hotTest",{
+        Axios.get("/article/hot",{
             params:{
                 pageNum:pageNum
             }

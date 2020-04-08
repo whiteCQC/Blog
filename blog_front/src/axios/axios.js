@@ -2,7 +2,7 @@ import axios from 'axios';
 //import qs from 'qs';
 
 const Axios = axios.create({
-    baseURL: 'http://localhost:8081' //设置访问路径
+    baseURL: 'http://172.19.240.137:8081' //设置访问路径
 });
 Axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
 Axios.defaults.headers['Content-Type'] = 'application/json; charset=UTF-8';

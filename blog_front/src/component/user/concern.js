@@ -16,7 +16,7 @@ class Concern extends Component {
     }
     componentDidMount () {
         let uid = localStorage.getItem("uid");
-        Axios.get("/viewConcernsTest",{
+        Axios.get("/viewConcerns",{
             params:{
                 uid:uid
             }
@@ -35,7 +35,7 @@ class Concern extends Component {
 
     FanCancel(followedId){
         let uid = localStorage.getItem("uid");
-        Axios.post("/FanCancelTest",{
+        Axios.post("/FanCancel",{
             followId:uid,
             followedId:followedId
         }).then(({data}) => {

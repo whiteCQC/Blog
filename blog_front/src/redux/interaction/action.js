@@ -13,7 +13,7 @@ export const followExecute = (data)=>{
 function followFetch(data,dispatch){
     const users = JSON.parse(data)
     console.log(users)
-    Axios.post('/FanAddTest',{
+    Axios.post('/FanAdd',{
         followId:users.followId,
         followedId:users.followedId
     }).then(({data}) => {
