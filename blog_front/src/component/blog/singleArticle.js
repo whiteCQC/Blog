@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-
+import ViewNum from "../../image/eye.jpg"
+import {dateTransfer} from "../../tools/tansfer";
 export default class SingleArticle extends Component{
 
     render() {
@@ -9,9 +10,9 @@ export default class SingleArticle extends Component{
                 <h2>
                     {article.articleTitle}
                 </h2>
-                <p><span>{article.articleContent}</span></p>
+                <p><span>{dateTransfer(article.date)}</span></p>
                 <div className="viewNum">
-                    <img src="../image/eye.jpg" alt="浏览人数"/>{article.viewNum}
+                    <img src={ViewNum} alt="浏览人数"/>{article.viewNum}
                 </div>
             </div>
         )

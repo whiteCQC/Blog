@@ -65,9 +65,9 @@ class Marked extends Component{
                 'markid':mid,
             }
         }).then(({data}) => {
-            if(data.code === 200){
+            if(data.code === 200){//console.log(data.detail)
                 this.setState({
-                    articles: data.detail.articleList
+                    articles: data.detail
                 });
             }else{
                 openNotificationWithIcon("error","Error",data.description)
@@ -119,7 +119,7 @@ class Marked extends Component{
     }
 
     delMarked(){
-        if(this.state.curMarkedID===0){
+        if(this.state.curMarkedID===1){
             openNotificationWithIcon("error","Error","默认文件夹无法删除")
         }else{
             Axios.post("/blog/personal/marked/deleteMarked",{
@@ -128,7 +128,7 @@ class Marked extends Component{
             }).then(({data}) => {
                 if(data.code === 200){
                     this.setState({
-                        curMarkedID:0
+                        curMarkedID:1
                     });
                     openNotificationWithIcon("success","Success",data.description)
                 }else{
@@ -161,7 +161,8 @@ class Marked extends Component{
                     let tempList=this.state.markedList
                     tempList.push(data.detail)
                     this.setState({
-                        markedList:tempList
+                        markedList:tempList,
+                        newMarked:false,
                     })
                     openNotificationWithIcon("success","Success",data.description)
                 }else{
@@ -233,7 +234,7 @@ class Marked extends Component{
             height: '40px',
             lineHeight: '40px',
         };
-
+        //console.log(this.state.articles)
         return(
             <div className="blogRight">
                 <h1 className="title">我的收藏</h1>
@@ -300,7 +301,7 @@ class Marked extends Component{
 }
 
 function MarkedArticles(props){
-    console.log(props)
+    //console.log(props)
     if(props.articles===""||props.articles===undefined)
         return <span className="myTips">当前收藏夹暂无文章</span>;
     else {

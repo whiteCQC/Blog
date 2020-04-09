@@ -141,12 +141,12 @@ function Sex(props){
     return(
         <div className="radio-group">
             <label className="el-radio-button" >
-                <input type="radio" name="sex" className="radio-button" value="男" checked={props.sex==='男'} onChange={props.SexChange}/>
-                <span className="radio-button-inner" style={props.sex==='男'?CheckedStyle:unCheckedStyle}>男</span>
+                <input type="radio" name="sex" className="radio-button" value="M" checked={props.sex==='M'} onChange={props.SexChange}/>
+                <span className="radio-button-inner" style={props.sex==='M'?CheckedStyle:unCheckedStyle}>男</span>
             </label>
             <label className="el-radio-button">
-                <input type="radio" name="sex" className="radio-button" value="女" checked={props.sex==='女'} onChange={props.SexChange}/>
-                <span className="radio-button-inner" style={props.sex==='女'?CheckedStyle:unCheckedStyle}>女</span>
+                <input type="radio" name="sex" className="radio-button" value="F" checked={props.sex==='F'} onChange={props.SexChange}/>
+                <span className="radio-button-inner" style={props.sex==='F'?CheckedStyle:unCheckedStyle}>女</span>
             </label>
             <label className="el-radio-button">
                 <input type="radio" name="sex" className="radio-button" value="null" checked={!props.sex} onChange={props.SexChange}/>

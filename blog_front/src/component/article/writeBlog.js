@@ -16,12 +16,30 @@ class WriteBlog extends Component{
             text:'',
             title:'',
             change:false,
+
+            Sp_cols:[],
         }
 
         this.submitText=this.submitText.bind(this)
         this.changeText=this.changeText.bind(this)
     }
     componentDidMount (){
+        Axios.get("/blog/personal/Columns", {
+            params: { 'uid': localStorage.getItem("uid") }
+        }).then(({data}) => {
+            if(data.code === 200){
+                console.log(data.detail)
+                this.setState({
+                    Sp_cols:data.detail,
+                    Sp_col:data.detail[0].spColId,
+                });
+            }else{
+                openNotificationWithIcon("error","Error",data.description)
+            }
+        }).catch( error => {
+            openNotificationWithIcon("error","Error",error.message)
+        })
+
         if(typeof this.props.location.state!=='undefined'){
             const aid=this.props.location.state.aid
             Axios.get("/article/simple", {
@@ -161,7 +179,9 @@ class WriteBlog extends Component{
                     <div className="textSelect">
                         <span>专栏归类:</span>
                         <select defaultValue={this.state.Sp_col} onChange={this.Sp_col_Change}>
-                            <option value ="0">未分类</option>
+                            {this.state.Sp_cols.map((Sp,index)=>
+                                <option value ={Sp.spColId} key={Sp.spColId}>{Sp.spColName}</option>
+                            )}
                         </select>
 
                     </div>

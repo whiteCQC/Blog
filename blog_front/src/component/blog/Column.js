@@ -11,8 +11,10 @@ class Column extends Component{
             ColumnList:"",
             columnChoose:-1,
             columnIndex:0,
+            articles:[],
         }
         this.changeColumn=this.changeColumn.bind(this)
+        this.getArticlesByColumn=this.getArticlesByColumn.bind(this)
     }
 
     componentDidMount() {
@@ -24,7 +26,26 @@ class Column extends Component{
                     ColumnList:data.detail,
                     columnChoose:data.detail[0].spColId,
                 });
+                this.getArticlesByColumn(data.detail[0].spColId);
+            }else{
+                openNotificationWithIcon("error","Error",data.description)
+            }
+        }).catch( error => {
+            openNotificationWithIcon("error","Error",error.message)
+        });
 
+
+    }
+
+    getArticlesByColumn(id){
+        Axios.get("/blog/personal/ColumnArticles", {
+            params: { 'Sp_col': id }
+        }).then(({data}) => {
+            if(data.code === 200){
+                //console.log(data.detail)
+                this.setState({
+                    articles:data.detail,
+                });
             }else{
                 openNotificationWithIcon("error","Error",data.description)
             }
@@ -37,13 +58,14 @@ class Column extends Component{
         this.setState({
             columnChoose:value
         })
+        this.getArticlesByColumn(value)
     }
 
     render() {
         if(this.state.ColumnList===""){
             return <Spin/>
         }
-
+        //console.log(this.state.ColumnList)
         const { Option } = Select;
         return(
             <div className="blogRight">
@@ -62,9 +84,8 @@ class Column extends Component{
                 <button className="del-Marked">删除当前专栏</button>
                 <button className="new-Marked">新建专栏</button>
                 <div className="articleList-Marked">
-                    <ColumnArticles  articles={this.state.ColumnList}
+                    <ColumnArticles  articles={this.state.articles}
                                      selectArticle={this.props.selectArticle}
-                                     columnIndex={this.state.columnIndex}
                     />
                 </div>
 
@@ -75,12 +96,12 @@ class Column extends Component{
 }
 
 function ColumnArticles(props){
-    let articles=props.articles[props.columnIndex].articleList
-    if(articles===""||articles===undefined||!articles)
+    //console.log(props.articles)
+    if(props.articles===""||props.articles===undefined||!props.articles)
         return <span className="myTips">该专栏暂无文章</span>;
     else {
         return <ul>
-            {articles.map((article,index) =>
+            {props.articles.map((article,index) =>
                 <li key={article.aid}>
                     <SingleArticle article={article} selectArticle={props.selectArticle}/>
                     <div className="change-article">
