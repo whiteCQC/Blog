@@ -20,9 +20,9 @@
         select * from special_column
         where sp_col_id = #{sp_col_id}
     </select>
-    <select id="getArticleInSP" parameterType="java.util.Map" resultMap="ResultWithArticle">
+    <select id="getArticleInSP" parameterType="java.util.Map" resultMap="com.blog.mapper.ArticleMapper.BaseResultMap">
     select a.* from article a
-    where a.sp_col_id = #{sp_col_id}
+    where a.sp_col_id = #{spColId}
     </select>
     <insert id="addSP" parameterType="com.blog.model.SpecialColumn">
         insert into special_column (uid , sp_col_name)

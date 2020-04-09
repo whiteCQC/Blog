@@ -1,6 +1,7 @@
 package com.blog.service.impl;
 
 import com.blog.mapper.SpecialColumnMapper;
+import com.blog.model.Article;
 import com.blog.model.SpecialColumn;
 import com.blog.service.SpecialColumnService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,10 @@ public class SpecialColumnServiceImpl implements SpecialColumnService {
     @Override
     public List<SpecialColumn> getSpecialColumnsByUid(Integer uid) {
         return specialColumnMapper.getSpecialColumnsByUid(uid);
+    }
+
+    @Override
+    public List<Article> getSPArticles(Integer spColId) {
+        return specialColumnMapper.getSPWithArticle(spColId).getArticleList();
     }
 }

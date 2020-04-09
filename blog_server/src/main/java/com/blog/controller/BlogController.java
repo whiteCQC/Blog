@@ -140,4 +140,9 @@ public class BlogController {
         return Result.success(specialColumnService.getSpecialColumnsByUid(uid));
     }
 
+    @GetMapping("/blog/personal/ColumnArticles")
+    public Result viewSColumnArticles(@RequestParam(value = "Sp_col")int spColId){
+        return Result.success(specialColumnService.getSPArticles(spColId));
+    }
+
 }
