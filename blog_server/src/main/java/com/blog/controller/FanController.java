@@ -45,7 +45,7 @@ public class FanController {
      */
     @GetMapping("/viewFans")
     public Result viewFans(@RequestParam(value = "uid") int userId){
-        //fan里面只有followerName和followId有信息
+        //fan里面只有followerName和followerId有信息
         List<Fan> fans = userService.getFans(userId);
         HashMap< String, Object > map = new HashMap<>();
         map.put("fans",fans);
@@ -58,7 +58,7 @@ public class FanController {
      */
     @GetMapping("/viewConcerns")
     public Result viewConcerns(@RequestParam(value = "uid") int userId){
-        //fan里面只有authorName和followedId有信息
+        //fan里面只有authorName和authorId有信息
         List<Fan> fans = userService.getConcerns(userId);
         HashMap< String, Object > map = new HashMap<>();
         map.put("fans",fans);

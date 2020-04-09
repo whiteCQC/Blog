@@ -23,7 +23,7 @@
   <select id="getConcernsOfUser" parameterType="java.lang.Integer" resultType="com.blog.vo.Fan">
     SELECT
       uname as authorName,
-      u.uid as followedId
+      u.uid as authorId
     FROM
       follower f
       JOIN user u ON f.uid = u.uid
@@ -33,7 +33,7 @@
   <select id="getFansOfUser" parameterType="java.lang.Integer" resultType="com.blog.vo.Fan">
     SELECT
       uname as followerName,
-      u.uid as followId
+      u.uid as followerId
     FROM
       follower f
       JOIN user u ON f.follower_id = u.uid

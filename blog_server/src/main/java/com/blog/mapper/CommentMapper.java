@@ -11,7 +11,7 @@ public interface CommentMapper {
 
     int deleteComment (CommentKey key);
 
-    int getMaxCid(Integer aid);
+    Integer getMaxCid(Integer aid);
 
     List<CommentVo> getCommentsOfArticle(Integer aid);
 }

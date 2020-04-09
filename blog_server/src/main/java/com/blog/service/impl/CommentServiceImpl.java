@@ -8,6 +8,7 @@ import com.blog.vo.CommentVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -17,8 +18,16 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment commitComment(Comment comment) {
-        int cid = commentMapper.getMaxCid(comment.getAid())+1;
+        Integer max = commentMapper.getMaxCid(comment.getAid());
+        int cid;
+        if(max!=null){
+            cid = max+1;
+        }
+        else{
+            cid = 1;
+        }
         comment.setCid(cid);
+        comment.setCommentDate(new Date());
         commentMapper.insertComment(comment);
         return comment;
     }
