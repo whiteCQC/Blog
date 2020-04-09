@@ -14,8 +14,8 @@ function followFetch(data,dispatch){
     const users = JSON.parse(data)
     console.log(users)
     Axios.post('/FanAdd',{
-        followId:users.followId,
-        followedId:users.followedId
+        followerId:users.followId,
+        authorId:users.followedId
     }).then(({data}) => {
         if (data.code === 200) {
             dispatch(follow(data))

@@ -35,15 +35,14 @@ class Concern extends Component {
 
     FanCancel(followedId){
         let uid = localStorage.getItem("uid");
+        console.log(uid,followedId)
         Axios.post("/FanCancel",{
-            followId:uid,
-            followedId:followedId
+            followerId:uid,
+            authorId:followedId
         }).then(({data}) => {
             if(data.code === 200){
-                this.setState({
-                    fans: data.detail,
-                });
                 openNotificationWithIcon("success","Success","已取消关注")
+                setTimeout(()=>window.location.reload(),2000);
             }else{
                 openNotificationWithIcon("error","Error",data.description)
             }
@@ -57,7 +56,7 @@ class Concern extends Component {
         if(this.state.fans.length===0){
             tip='暂无关注'
         }
-
+        console.log(this.state.fans)
         return (
             <div>
                 <Nav/>
@@ -69,10 +68,10 @@ class Concern extends Component {
                         <span>{tip}</span>
                         <ul>
                             {this.state.fans.map((fan,index) =>
-                                <li key={fan.uid}>
+                                <li key={fan.authorId}>
                                     <img className="avatar" src={User} alt="头像"/>
-                                    <span className="fanName">{fan.uname}</span>
-                                    <button className="cancelFollow" onClick={this.FanCancel.bind(this,fan.uid)}>取消关注</button>
+                                    <span className="fanName">{fan.authorName}</span>
+                                    <button className="cancelFollow" onClick={this.FanCancel.bind(this,fan.authorId)}>取消关注</button>
                                 </li>
                             )}
                         </ul>

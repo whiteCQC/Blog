@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 
 import {dateTransfer, dateTransferSimple, NumberTransferForLargeNum} from '../../tools/tansfer'
 import {Modal,Spin,Radio,Comment,Avatar} from "antd";
+import User from "../../image/avatar.jpg"
 
 class ArticleBody extends Component{
     constructor (props) {
@@ -77,7 +78,7 @@ class ArticleBody extends Component{
         });
 
         if(localStorage.getItem("uid")!==null){
-            Axios.get("/blog/personal/markedTest", {
+            Axios.get("/blog/personal/marked", {
                 params: { 'uid': loginUid }
             }).then(({data}) => {
                 if(data.code === 200){
@@ -133,6 +134,9 @@ class ArticleBody extends Component{
             }
         }).catch( error => {
             openNotificationWithIcon("error","Error",error.message)
+        })
+        this.setState({
+            modalFavoriteVisible:false,
         })
     }
 
@@ -233,7 +237,7 @@ class ArticleBody extends Component{
                                         <Comment author={<p>{comment.userName}</p>}
                                                  avatar={
                                                      <Avatar
-                                                         src="../image/avatar.jpg"
+                                                         src={User}
                                                          alt={comment.userName}
                                                      />
                                                  }
